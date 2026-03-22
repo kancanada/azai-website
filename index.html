@@ -14,64 +14,8 @@
       color: #1a1a2e;
       line-height: 1.6;
     }
-    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
-    /* Hero */
-    header {
-      text-align: center;
-      padding: 60px 24px 40px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #FAF8F5;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-    }
-    header h1 span { color: #D4A574; }
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.85;
-      max-width: 500px;
-      margin: 0 auto 24px;
-    }
-    .badge {
-      display: inline-block;
-      background: #D4A574;
-      color: #1a1a2e;
-      padding: 12px 32px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .badge:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(212,165,116,0.3);
-    }
-
-    /* Features */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      padding: 50px 24px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .feature {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    .feature .icon { font-size: 2rem; margin-bottom: 12px; }
-    .feature h3 { font-size: 1.1rem; margin-bottom: 8px; color: #1a1a2e; }
-    .feature p { font-size: 0.9rem; color: #666; }
-
-    /* Nav links */
+    /* Nav */
     nav {
       text-align: center;
       padding: 20px 24px;
@@ -87,15 +31,231 @@
     }
     nav a:hover { text-decoration: underline; }
 
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+      color: #FAF8F5;
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,165,116,0.08) 0%, transparent 70%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+    .hero h1 span { color: #D4A574; }
+    .hero .tagline {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      max-width: 520px;
+      margin: 0 auto 12px;
+      font-weight: 300;
+    }
+    .hero .sub {
+      font-size: 0.95rem;
+      opacity: 0.5;
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #D4A574;
+      color: #1a1a2e;
+      padding: 14px 36px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212,165,116,0.3);
+    }
+
+    /* Phone Screenshots */
+    .screenshots {
+      padding: 60px 24px;
+      background: #f3f0ec;
+    }
+    .screenshots h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+    }
+    .screenshots .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+    .phone-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .phone-frame {
+      width: 240px;
+      flex-shrink: 0;
+    }
+    .phone-frame img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    .phone-frame .caption {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* Features */
+    .features {
+      padding: 70px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .feature {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-top: 3px solid #D4A574;
+    }
+    .feature h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: #1a1a2e;
+    }
+    .feature p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 70px 24px;
+      background: #1a1a2e;
+      color: #FAF8F5;
+    }
+    .how-it-works h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      letter-spacing: -0.5px;
+    }
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .step {
+      text-align: center;
+      flex: 1;
+      min-width: 180px;
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(212,165,116,0.15);
+      color: #D4A574;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 2px solid #D4A574;
+    }
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #FAF8F5;
+    }
+    .step p {
+      font-size: 0.85rem;
+      color: rgba(250,248,245,0.6);
+      line-height: 1.5;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      text-align: center;
+      padding: 60px 24px;
+      background: #FAF8F5;
+    }
+    .cta-banner h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+    }
+    .cta-banner p {
+      color: #888;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      text-align: center;
+      padding: 24px;
+      background: #f3f0ec;
+      font-size: 0.75rem;
+      color: #999;
+      line-height: 1.5;
+    }
+
     /* Footer */
     footer {
       text-align: center;
-      padding: 40px 24px;
+      padding: 32px 24px;
       color: #999;
       font-size: 0.85rem;
       border-top: 1px solid #e8e4df;
     }
     footer a { color: #D4A574; text-decoration: none; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero .tagline { font-size: 1rem; }
+      .phone-frame { width: 200px; }
+      .steps { gap: 32px; }
+    }
   </style>
 </head>
 <body>
@@ -106,39 +266,99 @@
     <a href="/support.html">Support</a>
   </nav>
 
-  <header>
-    <h1>AZAI <span>Oracle</span></h1>
-    <p>AI-powered stock and ETF analysis. Institutional-grade valuation tools in your pocket.</p>
-    <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="badge">Get it on Google Play</a>
-  </header>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>AZAI <span>Oracle</span></h1>
+      <p class="tagline">Institutional-grade stock and ETF analysis, powered by AI.</p>
+      <p class="sub">Discounted Earnings Valuation &middot; AI Insights &middot; PDF Reports</p>
+      <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="cta-btn">Get it on Google Play</a>
+    </div>
+  </section>
 
-  <div class="features">
-    <div class="feature">
-      <div class="icon">📊</div>
-      <h3>Discounted Earnings Model</h3>
-      <p>Calculates intrinsic value using EPS-based valuation with 12% discount rate, so you know if a stock is overvalued or undervalued.</p>
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <h2>See It in Action</h2>
+    <p class="subtitle">Real analysis, real data, real-time.</p>
+    <div class="phone-row">
+      <div class="phone-frame">
+        <img src="screenshot_home.png" alt="AZAI Oracle home screen with stock search">
+        <p class="caption">Search any stock or ETF</p>
+      </div>
+      <div class="phone-frame">
+        <img src="screenshot_aapl.png" alt="Apple stock analysis with intrinsic value">
+        <p class="caption">Intrinsic value at a glance</p>
+      </div>
+      <div class="phone-frame">
+        <img src="screenshot_jepq.png" alt="JEPQ ETF analysis with score breakdown">
+        <p class="caption">ETF scoring and verdicts</p>
+      </div>
     </div>
-    <div class="feature">
-      <div class="icon">🤖</div>
-      <h3>AI-Powered Analysis</h3>
-      <p>Get detailed AI commentary on every stock and ETF, covering financials, competitive position, risks, and outlook.</p>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>What You Get</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <h3>Intrinsic Value Calculations</h3>
+        <p>Know what a stock is actually worth. Our Discounted Earnings Model uses EPS-based valuation with a 12% discount rate to determine fair value.</p>
+      </div>
+      <div class="feature">
+        <h3>AI-Powered Analysis</h3>
+        <p>Detailed commentary on every stock and ETF covering financials, competitive moat, management quality, risks, and forward outlook.</p>
+      </div>
+      <div class="feature">
+        <h3>ETF Composite Scoring</h3>
+        <p>Five-factor model scores ETFs on cost efficiency, historical performance, yield, fund size, and diversification. Clear verdicts you can act on.</p>
+      </div>
+      <div class="feature">
+        <h3>Shareable PDF Reports</h3>
+        <p>Generate professional reports for any stock or ETF and share them with colleagues, clients, or your investment club.</p>
+      </div>
     </div>
-    <div class="feature">
-      <div class="icon">📈</div>
-      <h3>ETF Rating System</h3>
-      <p>Composite scoring model rates ETFs across cost, performance, yield, size, and diversification factors.</p>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Search</h3>
+        <p>Type any stock ticker or ETF symbol. Coverage spans US and Canadian markets.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Analyze</h3>
+        <p>Get instant valuation, key metrics, and AI-generated analysis in seconds.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Decide</h3>
+        <p>See if a stock is overvalued or undervalued with clear buy/sell verdicts and margin of safety.</p>
+      </div>
     </div>
-    <div class="feature">
-      <div class="icon">📄</div>
-      <h3>Shareable PDF Reports</h3>
-      <p>Generate professional PDF reports for any stock or ETF and share them with your investment network.</p>
-    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <h2>Start Making Smarter Investment Decisions</h2>
+    <p>Free to download. No account required. No ads.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="cta-btn">Download AZAI Oracle</a>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    AZAI Oracle is for informational purposes only and does not constitute financial advice.
+    All investment decisions are made at your own risk.
+    Please read our <a href="/terms.html" style="color:#D4A574;">Terms of Service</a> for full details.
   </div>
 
   <footer>
     <p>&copy; 2026 AZAI Oracle. All rights reserved.</p>
     <p style="margin-top: 8px;">
-      <a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/support.html">Support</a>
+      <a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/support.html">Support</a> &middot; asoni@kancanada.com
     </p>
   </footer>
 </body>
