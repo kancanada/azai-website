@@ -1,0 +1,285 @@
+name: Publish AZAI Picks
+
+on:
+  schedule:
+    - cron: '23 8 * * *'  # Daily at 8:23am UTC
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch picks from Google Sheets
+        run: |
+          RESPONSE=$(curl -sL "${{ secrets.WEBHOOK_URL }}")
+          echo "$RESPONSE" > /tmp/picks.json
+          echo "Fetched picks data"
+          cat /tmp/picks.json | head -200
+
+      - name: Generate pick pages
+        run: |
+          python3 << 'PYEOF'
+          import json, os, html
+          from datetime import datetime
+
+          with open('/tmp/picks.json') as f:
+              data = json.load(f)
+
+          picks = data.get('picks', [])
+          if not picks:
+              print("No new picks to publish")
+              exit(0)
+
+          os.makedirs('picks', exist_ok=True)
+          published = []
+
+          for pick in picks:
+              rd = pick['reportData']
+              ticker = rd.get('ticker', 'UNKNOWN')
+              slug = ticker.lower().replace('.', '-')
+              is_etf = rd.get('type') == 'etf'
+              name = rd.get('companyName', ticker)
+              verdict = rd.get('verdict', 'N/A')
+              timestamp = pick.get('timestamp', datetime.now().isoformat())
+
+              try:
+                  date_str = datetime.fromisoformat(timestamp.replace('Z', '+00:00')).strftime('%B %d, %Y')
+              except:
+                  date_str = timestamp[:10]
+
+              # Verdict CSS class
+              vc = 'great' if 'Great' in verdict else 'good' if 'Good' in verdict else 'fair' if 'Fair' in verdict else 'bad'
+
+              # Build metrics HTML
+              if is_etf:
+                  price = rd.get('currentPrice', 'N/A')
+                  yld = rd.get('yield', 'N/A')
+                  expense = rd.get('expenseRatio', 'N/A')
+                  score = rd.get('score', 'N/A')
+                  metrics_html = f"""
+                  <div class="metrics-row">
+                    <div class="metric"><div class="metric-label">Price</div><div class="metric-val">${price}</div></div>
+                    <div class="metric"><div class="metric-label">Yield</div><div class="metric-val">{yld}%</div></div>
+                    <div class="metric"><div class="metric-label">Expense</div><div class="metric-val">{expense}%</div></div>
+                    <div class="metric"><div class="metric-label">Score</div><div class="metric-val">{score}/100</div></div>
+                  </div>"""
+
+                  # Score breakdown
+                  sb = rd.get('scoreBreakdown', {})
+                  breakdown_html = ""
+                  if sb:
+                      breakdown_html = '<div class="breakdown"><h3>Score Breakdown</h3>'
+                      for key, label in [('costScore','Cost Efficiency'),('performanceScore','Performance'),('yieldScore','Yield'),('sizeScore','Size & Liquidity'),('diversificationScore','Diversification')]:
+                          val = sb.get(key, 0)
+                          breakdown_html += f'<div class="bar-row"><span class="bar-label">{label}</span><div class="bar-track"><div class="bar-fill" style="width:{val}%"></div></div><span class="bar-val">{val}</span></div>'
+                      breakdown_html += '</div>'
+              else:
+                  price = rd.get('currentPrice', 'N/A')
+                  iv = rd.get('intrinsicValue', 'N/A')
+                  eps_val = rd.get('eps', 'N/A')
+                  pe = rd.get('peRatio', 'N/A')
+                  bv = rd.get('bookValue', 'N/A')
+                  mos = rd.get('marginOfSafety', 'N/A')
+                  metrics_html = f"""
+                  <div class="metrics-row">
+                    <div class="metric"><div class="metric-label">Current Price</div><div class="metric-val">${price}</div></div>
+                    <div class="metric"><div class="metric-label">Intrinsic Value</div><div class="metric-val iv">${iv}</div></div>
+                    <div class="metric"><div class="metric-label">EPS</div><div class="metric-val">${eps_val}</div></div>
+                    <div class="metric"><div class="metric-label">P/E</div><div class="metric-val">{pe}</div></div>
+                  </div>
+                  <div class="metrics-row">
+                    <div class="metric"><div class="metric-label">Book Value</div><div class="metric-val">${bv}</div></div>
+                    <div class="metric"><div class="metric-label">Margin of Safety</div><div class="metric-val">{mos}%</div></div>
+                  </div>"""
+                  breakdown_html = ""
+
+              # AI analysis sections
+              ai = rd.get('aiAnalysis', {})
+              ai_html = ""
+              if ai:
+                  section_titles = {
+                      'whatTheyDo': 'What They Do',
+                      'moneyMachine': 'The Money Machine',
+                      'worthBuying': 'Worth Buying at This Price?',
+                      'futureOutlook': 'Future Outlook',
+                      'risks': 'Key Risks',
+                      'bottomLine': 'Bottom Line',
+                      'overview': 'Overview',
+                      'strategy': 'Strategy',
+                      'holdings': 'Top Holdings',
+                      'performance': 'Performance',
+                      'costs': 'Costs',
+                      'suitability': 'Suitability',
+                  }
+                  for key, title in section_titles.items():
+                      if key in ai and ai[key]:
+                          ai_html += f'<div class="ai-section"><h3>{title}</h3><p>{html.escape(str(ai[key]))}</p></div>'
+
+              page_title = f"{ticker} {'ETF' if is_etf else 'Stock'} Analysis - {verdict} | AZAI Oracle"
+              page_desc = f"AZAI Oracle analysis of {name} ({ticker}). Verdict: {verdict}. {'ETF composite score and breakdown.' if is_etf else f'Intrinsic value ${iv}.'}"
+
+              page_html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{page_title}</title>
+            <meta name="description" content="{page_desc}">
+            <meta name="robots" content="index, follow">
+            <link rel="canonical" href="https://azai.ca/picks/{slug}.html">
+            <meta property="og:title" content="{page_title}">
+            <meta property="og:description" content="{page_desc}">
+            <meta property="og:url" content="https://azai.ca/picks/{slug}.html">
+            <meta property="og:type" content="article">
+            <script type="application/ld+json">
+            {{
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": "{ticker} Analysis - {verdict}",
+              "description": "{page_desc}",
+              "datePublished": "{timestamp}",
+              "publisher": {{ "@type": "Organization", "name": "AZAI Oracle" }},
+              "url": "https://azai.ca/picks/{slug}.html"
+            }}
+            </script>
+            <link rel="icon" type="image/png" href="/favicon.png">
+            <style>
+              * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+              body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }}
+              nav {{ display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }}
+              .nav-logo {{ display: flex; align-items: center; gap: 10px; text-decoration: none; }}
+              .nav-logo img {{ height: 32px; width: 32px; }}
+              .nav-logo span {{ color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }}
+              .nav-logo span em {{ font-style: normal; color: #D4A574; }}
+              .nav-links a {{ color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }}
+              .nav-links a:hover {{ color: #D4A574; }}
+              .report {{ max-width: 680px; margin: 0 auto; padding: 48px 24px; }}
+              .report-header {{ margin-bottom: 32px; }}
+              .report-date {{ font-size: 0.75rem; color: #D4A574; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }}
+              .report-header h1 {{ font-size: 1.8rem; letter-spacing: -0.5px; margin-bottom: 8px; }}
+              .ticker-badge {{ display: inline-block; background: #f0ede8; padding: 2px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; color: #D4A574; margin-right: 8px; }}
+              .etf-badge {{ background: #e6f9ee; color: #16a34a; }}
+              .verdict-pill {{ display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin: 16px 0; }}
+              .verdict-great {{ background: #e6f9ee; color: #16a34a; }}
+              .verdict-good {{ background: #e6f9ee; color: #22c55e; }}
+              .verdict-fair {{ background: #fef9e7; color: #ca8a04; }}
+              .verdict-bad {{ background: #fee; color: #dc2626; }}
+              .metrics-row {{ display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }}
+              .metric {{ background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 120px; }}
+              .metric-label {{ font-size: 0.68rem; text-transform: uppercase; color: #aaa; letter-spacing: 0.5px; }}
+              .metric-val {{ font-size: 1.1rem; font-weight: 700; color: #1a1a2e; }}
+              .metric-val.iv {{ color: #D4A574; }}
+              .breakdown {{ background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin: 24px 0; }}
+              .breakdown h3 {{ font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; }}
+              .bar-row {{ display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }}
+              .bar-label {{ font-size: 0.8rem; color: #666; width: 140px; flex-shrink: 0; }}
+              .bar-track {{ flex: 1; height: 8px; background: #f0ede8; border-radius: 4px; overflow: hidden; }}
+              .bar-fill {{ height: 100%; background: #16a34a; border-radius: 4px; }}
+              .bar-val {{ font-size: 0.8rem; font-weight: 600; color: #1a1a2e; width: 30px; text-align: right; }}
+              .ai-section {{ background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin-bottom: 16px; }}
+              .ai-section h3 {{ font-size: 0.95rem; color: #1a1a2e; margin-bottom: 8px; }}
+              .ai-section p {{ font-size: 0.88rem; color: #555; line-height: 1.6; }}
+              .cta-box {{ text-align: center; padding: 40px; margin: 32px 0; background: #1a1a2e; border-radius: 12px; }}
+              .cta-box p {{ color: rgba(250,248,245,0.6); margin-bottom: 16px; font-size: 0.9rem; }}
+              .cta-btn {{ display: inline-block; background: #D4A574; color: #1a1a2e; padding: 12px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; }}
+              .disclaimer {{ text-align: center; padding: 20px 24px; background: #f0ede8; font-size: 0.72rem; color: #aaa; }}
+              .disclaimer a {{ color: #D4A574; }}
+              footer {{ text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; }}
+              footer a {{ color: #D4A574; text-decoration: none; }}
+              @media (max-width: 768px) {{
+                nav {{ padding: 14px 20px; }}
+                .metrics-row {{ flex-direction: column; }}
+                .report-header h1 {{ font-size: 1.4rem; }}
+              }}
+            </style>
+          </head>
+          <body>
+            <nav>
+              <a href="/" class="nav-logo"><img src="/logo_dark.png" alt="AZAI Oracle"><span>AZAI <em>Oracle</em></span></a>
+              <div class="nav-links"><a href="/picks/">Picks</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a></div>
+            </nav>
+            <article class="report">
+              <div class="report-header">
+                <div class="report-date">AZAI Oracle Report &mdash; {date_str}</div>
+                <h1>{html.escape(name)}</h1>
+                <span class="ticker-badge">{ticker}</span>
+                {'<span class="ticker-badge etf-badge">ETF</span>' if is_etf else ''}
+                <div><span class="verdict-pill verdict-{vc}">{verdict}</span></div>
+              </div>
+              {metrics_html}
+              {breakdown_html}
+              {ai_html}
+              <div class="cta-box">
+                <p>Get real-time analysis with the AZAI Oracle app</p>
+                <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="cta-btn">Download AZAI Oracle</a>
+              </div>
+            </article>
+            <div class="disclaimer">AZAI Oracle is for informational purposes only. Not financial advice. <a href="/terms.html">Terms</a>.</div>
+            <footer><p>&copy; 2026 AZAI Oracle &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; asoni@kancanada.com</p></footer>
+          </body>
+          </html>"""
+
+              filepath = f"picks/{slug}.html"
+              with open(filepath, 'w') as f:
+                  f.write(page_html)
+              published.append(ticker)
+              print(f"Published: {filepath}")
+
+          # Update sitemap with new picks
+          sitemap_entries = []
+          for f in os.listdir('picks'):
+              if f.endswith('.html') and f != 'index.html':
+                  sitemap_entries.append(f'  <url>\n    <loc>https://azai.ca/picks/{f}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>')
+
+          # Read existing sitemap and append
+          with open('sitemap.xml', 'r') as f:
+              sitemap = f.read()
+
+          if sitemap_entries:
+              insert_point = sitemap.rfind('</urlset>')
+              new_sitemap = sitemap[:insert_point] + '\n'.join(sitemap_entries) + '\n' + sitemap[insert_point:]
+              with open('sitemap.xml', 'w') as f:
+                  f.write(new_sitemap)
+
+          # Update picks index
+          cards_html = ""
+          all_picks = []
+          for f in sorted(os.listdir('picks'), reverse=True):
+              if f.endswith('.html') and f != 'index.html':
+                  all_picks.append(f)
+
+          print(f"\nPublished {len(published)} new picks: {published}")
+          print(f"Total picks pages: {len(all_picks)}")
+          PYEOF
+
+      - name: Mark published in Google Sheets
+        if: success()
+        run: |
+          # Mark picks as published by calling the webhook
+          for ticker in $(python3 -c "
+          import json
+          with open('/tmp/picks.json') as f:
+              data = json.load(f)
+          for p in data.get('picks', []):
+              print(p['reportData'].get('ticker', ''))
+          "); do
+            curl -sL -X POST "${{ secrets.WEBHOOK_URL }}" \
+              -H "Content-Type: application/json" \
+              -d "{\"type\":\"markPublished\",\"ticker\":\"$ticker\"}" || true
+          done
+
+      - name: Commit and push
+        run: |
+          git config user.name "AZAI Bot"
+          git config user.email "bot@azai.ca"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-publish AZAI Picks $(date +%Y-%m-%d)"
+            git push
+          fi
