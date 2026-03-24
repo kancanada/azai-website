@@ -245,15 +245,89 @@ jobs:
               with open('sitemap.xml', 'w') as f:
                   f.write(new_sitemap)
 
-          # Update picks index
+          # Update picks index with cards
           cards_html = ""
-          all_picks = []
-          for f in sorted(os.listdir('picks'), reverse=True):
-              if f.endswith('.html') and f != 'index.html':
-                  all_picks.append(f)
+          for pick in picks:
+              rd = pick['reportData']
+              t = rd.get('ticker', '?')
+              s = t.lower().replace('.', '-')
+              n = html.escape(rd.get('companyName', t))
+              v = rd.get('verdict', 'N/A')
+              vc2 = 'great' if 'Great' in v else 'good' if 'Good' in v else 'fair' if 'Fair' in v else 'bad'
+              is_e = rd.get('type') == 'etf'
+              p = rd.get('currentPrice', 'N/A')
+              iv2 = rd.get('intrinsicValue', '')
+              ts2 = pick.get('timestamp', '')
+              try:
+                  ds = datetime.fromisoformat(ts2.replace('Z', '+00:00')).strftime('%b %d, %Y')
+              except:
+                  ds = ts2[:10]
+              sub = f"Score: {rd.get('score','N/A')}/100" if is_e else f"Intrinsic Value: ${iv2}"
+              cards_html += f'''<a href="/picks/{s}.html" class="pick-card">
+                <div class="pick-top"><span class="pick-ticker">{t}</span><span class="pick-date">{ds}</span></div>
+                <div class="pick-name">{n}</div>
+                <div class="pick-sub">${p} &middot; {sub}</div>
+                <span class="verdict-pill verdict-{vc2}">{v}</span>
+              </a>\n'''
 
-          print(f"\nPublished {len(published)} new picks: {published}")
-          print(f"Total picks pages: {len(all_picks)}")
+          if cards_html:
+              index_html = f'''<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>AZAI Picks - Top-Rated Stock & ETF Analyses | AZAI Oracle</title>
+            <meta name="description" content="Browse top-rated stock and ETF analyses from AZAI Oracle users. Intrinsic value, AI insights, and verdicts.">
+            <link rel="canonical" href="https://azai.ca/picks/">
+            <link rel="icon" type="image/png" href="/favicon.png">
+            <style>
+              * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+              body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }}
+              nav {{ display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }}
+              .nav-logo {{ display: flex; align-items: center; gap: 10px; text-decoration: none; }}
+              .nav-logo img {{ height: 32px; width: 32px; }}
+              .nav-logo span {{ color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }}
+              .nav-logo span em {{ font-style: normal; color: #D4A574; }}
+              .nav-links a {{ color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }}
+              .container {{ max-width: 800px; margin: 0 auto; padding: 48px 24px; }}
+              h1 {{ font-size: 1.6rem; margin-bottom: 8px; }}
+              .subtitle {{ color: #888; margin-bottom: 32px; }}
+              .picks-grid {{ display: grid; gap: 16px; }}
+              .pick-card {{ display: block; background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; }}
+              .pick-card:hover {{ box-shadow: 0 4px 16px rgba(0,0,0,0.08); }}
+              .pick-top {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }}
+              .pick-ticker {{ font-weight: 700; color: #D4A574; font-size: 0.9rem; }}
+              .pick-date {{ font-size: 0.72rem; color: #aaa; }}
+              .pick-name {{ font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }}
+              .pick-sub {{ font-size: 0.82rem; color: #666; margin-bottom: 8px; }}
+              .verdict-pill {{ display: inline-block; padding: 3px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; }}
+              .verdict-great {{ background: #e6f9ee; color: #16a34a; }}
+              .verdict-good {{ background: #e6f9ee; color: #22c55e; }}
+              .verdict-fair {{ background: #fef9e7; color: #ca8a04; }}
+              .verdict-bad {{ background: #fee; color: #dc2626; }}
+              .empty {{ text-align: center; padding: 60px; color: #aaa; }}
+              footer {{ text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; margin-top: 60px; }}
+              footer a {{ color: #D4A574; text-decoration: none; }}
+            </style>
+          </head>
+          <body>
+            <nav>
+              <a href="/" class="nav-logo"><img src="/logo_dark.png" alt="AZAI"><span>AZAI <em>Oracle</em></span></a>
+              <div class="nav-links"><a href="/picks/">Picks</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a></div>
+            </nav>
+            <div class="container">
+              <h1>AZAI Picks</h1>
+              <p class="subtitle">Top-rated analyses from AZAI Oracle users</p>
+              <div class="picks-grid">{cards_html}</div>
+            </div>
+            <footer><p>&copy; 2026 AZAI Oracle &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p></footer>
+          </body>
+          </html>'''
+              with open('picks/index.html', 'w') as f:
+                  f.write(index_html)
+              print("Updated picks/index.html")
+
+          print(f"\nPublished {len(published)} new picks: {[p for p in published]}")
           PYEOF
 
       - name: Mark published in Google Sheets
