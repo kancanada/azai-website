@@ -38,13 +38,14 @@ jobs:
           published = []
 
           for pick in picks:
-              rd = pick['reportData']
+              # Data is flat (no reportData wrapper)
+              rd = pick.get('reportData', pick)  # support both formats
               ticker = rd.get('ticker', 'UNKNOWN')
               slug = ticker.lower().replace('.', '-')
               is_etf = rd.get('type') == 'etf'
               name = rd.get('companyName', ticker)
               verdict = rd.get('verdict', 'N/A')
-              timestamp = pick.get('timestamp', datetime.now().isoformat())
+              timestamp = rd.get('timestamp', pick.get('timestamp', datetime.now().isoformat()))
 
               try:
                   date_str = datetime.fromisoformat(timestamp.replace('Z', '+00:00')).strftime('%B %d, %Y')
@@ -102,8 +103,14 @@ jobs:
               ai_html = ""
               if ai:
                   section_titles = {
+                      'whatDoTheyDo': 'What They Do',
                       'whatTheyDo': 'What They Do',
+                      'moat': 'Competitive Moat',
                       'moneyMachine': 'The Money Machine',
+                      'management': 'Management',
+                      'cashFlow': 'Cash Flow',
+                      'valuation': 'Valuation',
+                      'deal': 'The Deal',
                       'worthBuying': 'Worth Buying at This Price?',
                       'futureOutlook': 'Future Outlook',
                       'risks': 'Key Risks',
@@ -248,7 +255,7 @@ jobs:
           # Update picks index with cards
           cards_html = ""
           for pick in picks:
-              rd = pick['reportData']
+              rd = pick.get('reportData', pick)
               t = rd.get('ticker', '?')
               s = t.lower().replace('.', '-')
               n = html.escape(rd.get('companyName', t))
@@ -339,7 +346,7 @@ jobs:
           with open('/tmp/picks.json') as f:
               data = json.load(f)
           for p in data.get('picks', []):
-              print(p['reportData'].get('ticker', ''))
+              print(p.get('reportData', p).get('ticker', ''))
           "); do
             curl -sL -X POST "${{ secrets.WEBHOOK_URL }}" \
               -H "Content-Type: application/json" \
