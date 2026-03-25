@@ -83,8 +83,28 @@ jobs:
                   iv = rd.get('intrinsicValue', 'N/A')
                   eps_val = rd.get('eps', 'N/A')
                   pe = rd.get('peRatio', 'N/A')
+                  # Compute P/E from price/EPS if missing
+                  if pe in ('N/A', None) and price not in ('N/A', None) and eps_val not in ('N/A', None, 0):
+                      try: pe = round(float(price) / float(eps_val), 1)
+                      except: pass
+                  # Compute IV from price and margin of safety if missing
+                  if iv in ('N/A', None):
+                      try:
+                          mos_raw = rd.get('marginOfSafety', 0)
+                          if mos_raw and price not in ('N/A', None):
+                              iv = round(float(price) / (1 + abs(float(mos_raw)) / 100), 2) if float(mos_raw) < 0 else round(float(price) * (1 + float(mos_raw) / 100), 2)
+                      except: pass
                   bv = rd.get('bookValue', 'N/A')
                   mos = rd.get('marginOfSafety', 'N/A')
+                  # Round numeric values
+                  try: price = round(float(price), 2)
+                  except: pass
+                  try: iv = round(float(iv), 2)
+                  except: pass
+                  try: mos = round(float(mos), 1)
+                  except: pass
+                  try: bv = round(float(bv), 2)
+                  except: pass
                   metrics_html = f"""
                   <div class="metrics-row">
                     <div class="metric"><div class="metric-label">Current Price</div><div class="metric-val">${price}</div></div>
