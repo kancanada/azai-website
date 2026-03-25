@@ -3,417 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNH Stock Analysis - UnitedHealth Group Intrinsic Value | AZAI Oracle</title>
-  <meta name="description" content="Is UnitedHealth Group (UNH) overvalued? AZAI Oracle's EPS-based valuation model calculates intrinsic value and margin of safety. Current price: $269.54.">
-  <meta name="keywords" content="UNH stock analysis, UnitedHealth Group valuation, UNH intrinsic value, UNH stock price, is UNH overvalued, UNH EPS, UNH P/E ratio">
+  <title>UNH Stock Analysis - Bad Deal | AZAI Oracle</title>
+  <meta name="description" content="AZAI Oracle analysis of UnitedHealth Group Incorporated (UNH). Verdict: Bad Deal. Intrinsic value $N/A.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://azai.ca/picks/unh.html">
-
-  <meta property="og:title" content="UNH Stock Analysis - Is UnitedHealth Group a Good Deal?">
-  <meta property="og:description" content="AZAI Oracle rates UNH as Bad Deal with a margin of safety of -67%. See the full analysis.">
+  <meta property="og:title" content="UNH Stock Analysis - Bad Deal | AZAI Oracle">
+  <meta property="og:description" content="AZAI Oracle analysis of UnitedHealth Group Incorporated (UNH). Verdict: Bad Deal. Intrinsic value $N/A.">
   <meta property="og:url" content="https://azai.ca/picks/unh.html">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="AZAI Oracle">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "UNH Stock Analysis: UnitedHealth Group Intrinsic Value",
-    "description": "EPS-based valuation analysis of UnitedHealth Group (UNH). Current price $269.54 vs intrinsic value estimate.",
-    "author": {"@type": "Organization", "name": "AZAI Oracle"},
-    "publisher": {"@type": "Organization", "name": "AZAI Oracle", "url": "https://azai.ca"},
-    "datePublished": "2026-03-23",
-    "mainEntityOfPage": "https://azai.ca/picks/unh.html"
+    "headline": "UNH Analysis - Bad Deal",
+    "description": "AZAI Oracle analysis of UnitedHealth Group Incorporated (UNH). Verdict: Bad Deal. Intrinsic value $N/A.",
+    "datePublished": "2026-03-25T05:06:06.392880",
+    "publisher": { "@type": "Organization", "name": "AZAI Oracle" },
+    "url": "https://azai.ca/picks/unh.html"
   }
   </script>
-
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #FAF8F5;
-      color: #1a1a2e;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 48px;
-      background: #FAF8F5;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px; text-decoration: none;
-    }
-    .nav-logo img { height: 28px; width: 28px; }
-    .nav-logo span { color: #1a1a2e; font-size: 1rem; font-weight: 700; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: 32px; }
+    .nav-logo span { color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }
     .nav-logo span em { font-style: normal; color: #D4A574; }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a { color: #666; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
-    .nav-links a:hover { color: #1a1a2e; }
-    .nav-cta {
-      background: #1a1a2e !important; color: #FAF8F5 !important;
-      padding: 10px 24px; border-radius: 8px;
-      font-weight: 600 !important; font-size: 0.82rem !important;
-    }
-
-    .article {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    .breadcrumb {
-      font-size: 0.8rem;
-      color: #999;
-      margin-bottom: 32px;
-    }
-    .breadcrumb a { color: #D4A574; text-decoration: none; }
-
-    /* Hero Card */
-    .hero-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      border: 1px solid #eee;
-      margin-bottom: 40px;
-    }
-    .hero-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
-    }
-    .stock-name {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .stock-meta {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .ticker-badge {
-      background: rgba(212,165,116,0.12);
-      color: #b8863a;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 6px;
-    }
-    .exchange-badge {
-      color: #999;
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 4px 0;
-    }
-    .verdict-pill {
-      display: inline-block;
-      padding: 8px 20px;
-      border-radius: 24px;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-    .verdict-bad { background: #fee2e2; color: #dc2626; }
-    .verdict-good { background: #dcfce7; color: #16a34a; }
-    .verdict-great { background: #dcfce7; color: #15803d; }
-    .verdict-fair { background: #fef9c3; color: #ca8a04; }
-
-    .price-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    .price-block {}
-    .price-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #999;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .price-value {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .price-value.overvalued { color: #dc2626; }
-
-    .metrics-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .metric-box {
-      background: #f8f7f4;
-      border-radius: 10px;
-      padding: 14px 20px;
-      flex: 1;
-      text-align: center;
-    }
-    .metric-label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #aaa;
-      font-weight: 600;
-    }
-    .metric-value {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-
-    .margin-bar {
-      background: #f8f7f4;
-      border-radius: 10px;
-      padding: 20px;
-    }
-    .margin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .margin-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-    .margin-value {
-      font-size: 1.3rem;
-      font-weight: 800;
-    }
-    .margin-value.negative { color: #dc2626; }
-    .margin-value.positive { color: #16a34a; }
-    .margin-track {
-      height: 6px;
-      background: #e5e5e5;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .margin-fill {
-      height: 100%;
-      border-radius: 3px;
-    }
-
-    /* Analysis Sections */
-    .analysis-section {
-      margin-bottom: 36px;
-    }
-    .analysis-section h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-      color: #1a1a2e;
-      padding-bottom: 8px;
-      border-bottom: 2px solid rgba(212,165,116,0.2);
-    }
-    .analysis-section p {
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.8;
-    }
-
-    /* CTA Banner */
-    .cta-banner {
-      background: #1a1a2e;
-      border-radius: 16px;
-      padding: 48px 40px;
-      text-align: center;
-      margin-top: 48px;
-    }
-    .cta-banner h3 {
-      color: #FAF8F5;
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .cta-banner p {
-      color: rgba(250,248,245,0.5);
-      font-size: 0.9rem;
-      margin-bottom: 24px;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: #D4A574;
-      color: #1a1a2e;
-      padding: 14px 36px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-    .cta-btn:hover { transform: translateY(-2px); }
-
-    .disclaimer {
-      text-align: center;
-      padding: 24px;
-      font-size: 0.72rem;
-      color: #bbb;
-      margin-top: 32px;
-    }
+    .nav-links a { color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }
+    .nav-links a:hover { color: #D4A574; }
+    .report { max-width: 680px; margin: 0 auto; padding: 48px 24px; }
+    .report-header { margin-bottom: 32px; }
+    .report-date { font-size: 0.75rem; color: #D4A574; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .report-header h1 { font-size: 1.8rem; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .ticker-badge { display: inline-block; background: #f0ede8; padding: 2px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; color: #D4A574; margin-right: 8px; }
+    .etf-badge { background: #e6f9ee; color: #16a34a; }
+    .verdict-pill { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin: 16px 0; }
+    .verdict-great { background: #e6f9ee; color: #16a34a; }
+    .verdict-good { background: #e6f9ee; color: #22c55e; }
+    .verdict-fair { background: #fef9e7; color: #ca8a04; }
+    .verdict-bad { background: #fee; color: #dc2626; }
+    .metrics-row { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+    .metric { background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 120px; }
+    .metric-label { font-size: 0.68rem; text-transform: uppercase; color: #aaa; letter-spacing: 0.5px; }
+    .metric-val { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; }
+    .metric-val.iv { color: #D4A574; }
+    .breakdown { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin: 24px 0; }
+    .breakdown h3 { font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; }
+    .bar-row { display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }
+    .bar-label { font-size: 0.8rem; color: #666; width: 140px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 8px; background: #f0ede8; border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: #16a34a; border-radius: 4px; }
+    .bar-val { font-size: 0.8rem; font-weight: 600; color: #1a1a2e; width: 30px; text-align: right; }
+    .ai-section { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+    .ai-section h3 { font-size: 0.95rem; color: #1a1a2e; margin-bottom: 8px; }
+    .ai-section p { font-size: 0.88rem; color: #555; line-height: 1.6; }
+    .cta-box { text-align: center; padding: 40px; margin: 32px 0; background: #1a1a2e; border-radius: 12px; }
+    .cta-box p { color: rgba(250,248,245,0.6); margin-bottom: 16px; font-size: 0.9rem; }
+    .cta-btn { display: inline-block; background: #D4A574; color: #1a1a2e; padding: 12px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; }
+    .disclaimer { text-align: center; padding: 20px 24px; background: #f0ede8; font-size: 0.72rem; color: #aaa; }
     .disclaimer a { color: #D4A574; }
-
-    footer {
-      text-align: center;
-      padding: 28px 48px;
-      color: #bbb;
-      font-size: 0.8rem;
-      background: #1a1a2e;
-    }
+    footer { text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; }
     footer a { color: #D4A574; text-decoration: none; }
-
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       nav { padding: 14px 20px; }
-      .article { padding: 32px 16px 60px; }
-      .hero-card { padding: 24px; }
-      .hero-card-top { flex-direction: column; gap: 16px; }
-      .stock-name { font-size: 1.4rem; }
-      .price-value { font-size: 1.6rem; }
-      .metrics-row { flex-direction: column; gap: 8px; }
-      .nav-links a:not(.nav-cta) { display: none; }
+      .metrics-row { flex-direction: column; }
+      .report-header h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="/" class="nav-logo">
-      <img src="/logo.png" alt="AZAI Oracle">
-      <span>AZAI <em>Oracle</em></span>
-    </a>
-    <div class="nav-links">
-      <a href="/picks/">Picks</a>
-      <a href="/">Home</a>
-      <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="nav-cta">Download Free</a>
-    </div>
+    <a href="/" class="nav-logo"><img src="/logo_dark.png" alt="AZAI Oracle"><span>AZAI <em>Oracle</em></span></a>
+    <div class="nav-links"><a href="/picks/">Picks</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a></div>
   </nav>
-
-  <div class="article">
-    <div class="breadcrumb">
-      <a href="/">Home</a> / <a href="/picks/">Picks</a> / UNH
+  <article class="report">
+    <div class="report-header">
+      <div class="report-date">AZAI Oracle Report &mdash; March 25, 2026</div>
+      <h1>UnitedHealth Group Incorporated</h1>
+      <span class="ticker-badge">UNH</span>
+      
+      <div><span class="verdict-pill verdict-bad">Bad Deal</span></div>
     </div>
-
-    <!-- Hero Card -->
-    <div class="hero-card">
-      <div class="hero-card-top">
-        <div>
-          <div class="stock-name">UnitedHealth Group Incorporated</div>
-          <div class="stock-meta">
-            <span class="ticker-badge">UNH</span>
-            <span class="exchange-badge">NYSE</span>
-          </div>
+    
+        <div class="metrics-row">
+          <div class="metric"><div class="metric-label">Current Price</div><div class="metric-val">$269.54</div></div>
+          <div class="metric"><div class="metric-label">Intrinsic Value</div><div class="metric-val iv">$N/A</div></div>
+          <div class="metric"><div class="metric-label">EPS</div><div class="metric-val">$13.23</div></div>
+          <div class="metric"><div class="metric-label">P/E</div><div class="metric-val">N/A</div></div>
         </div>
-        <div class="verdict-pill verdict-bad">Bad Deal</div>
-      </div>
-
-      <div class="price-row">
-        <div class="price-block">
-          <div class="price-label">Current Price</div>
-          <div class="price-value">$269.54</div>
+        <div class="metrics-row">
+          <div class="metric"><div class="metric-label">Book Value</div><div class="metric-val">$103.874</div></div>
+          <div class="metric"><div class="metric-label">Margin of Safety</div><div class="metric-val">-67.1477794988912%</div></div>
         </div>
-        <div class="price-block">
-          <div class="price-label">Intrinsic Value</div>
-          <div class="price-value overvalued">$88.63</div>
-        </div>
-      </div>
-
-      <div class="metrics-row">
-        <div class="metric-box">
-          <div class="metric-label">EPS</div>
-          <div class="metric-value">$13.23</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-label">P/E</div>
-          <div class="metric-value">20.4</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-label">Book Value</div>
-          <div class="metric-value">$103.87</div>
-        </div>
-      </div>
-
-      <div class="margin-bar">
-        <div class="margin-header">
-          <span class="margin-label">Margin of Safety</span>
-          <span class="margin-value negative">-67.1%</span>
-        </div>
-        <div class="margin-track">
-          <div class="margin-fill" style="width: 0%; background: #dc2626;"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Analysis Sections -->
-    <div class="analysis-section">
-      <h2>What Does UnitedHealth Group Do?</h2>
-      <p>UnitedHealth Group is a giant in the healthcare industry. They operate in two main areas: one part provides health insurance plans to individuals, families, and employers, and the other part, called Optum, offers a wide range of health services including pharmacy benefits, data analytics, and care delivery. Essentially, they act as a bridge, connecting people with healthcare services and managing the costs associated with it, making money from premiums and fees for their services.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Competitive Moat</h2>
-      <p>This company has a very strong moat, primarily due to its scale and network effects. Their vast network of healthcare providers and members creates significant switching costs for customers, as moving to a different insurer or provider network can be complex and disruptive. Furthermore, their Optum segment leverages data analytics to improve efficiency and outcomes, creating a powerful competitive advantage that's difficult for others to replicate.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Management Quality</h2>
-      <p>The management team has a strong history of disciplined capital allocation, consistently reinvesting in the business and making strategic acquisitions to expand their service offerings. They have demonstrated a commitment to growing both their insurance and services segments, which has generally led to consistent shareholder returns over time. Their focus on integrating different parts of the healthcare system shows a clear strategic vision.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Cash Flow Analysis</h2>
-      <p>UnitedHealth Group has historically been a cash-generating powerhouse, with billions in free cash flow annually over the past few years. However, the provided data shows a concerning downward trend in projected free cash flow for 2024 and 2025. This decline, while still from a very high base, suggests potential headwinds or increased investment needs that investors should monitor closely.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Valuation</h2>
-      <p>Based on the discounted earnings analysis, the estimated intrinsic value per share is significantly lower than the current stock price. This indicates that the market is currently valuing UnitedHealth Group at a premium, making it appear expensive relative to its projected future earnings. The substantial negative margin of safety highlights a significant gap between what the stock is trading at and its calculated value.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Is UNH a Good Deal?</h2>
-      <p>Based on the calculated margin of safety, this is currently a bad deal for a value investor. The stock price is trading far above its estimated intrinsic value, leaving very little room for error. A disciplined value investor would likely pass on this opportunity, waiting for a much more significant price drop to offer an adequate margin of safety.</p>
-    </div>
-
-    <div class="analysis-section">
-      <h2>Key Risks</h2>
-      <p>One major risk is increased regulatory scrutiny on healthcare costs and insurance practices, which could impact profitability. Another significant risk is the competitive landscape, as other large players and emerging tech companies are increasingly vying for market share in healthcare services. Finally, a sudden downturn in the broader economy could negatively affect employer-sponsored health insurance enrollment and thus revenue.</p>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta-banner">
-      <h3>Want to analyze any stock like this?</h3>
-      <p>AZAI Oracle gives you intrinsic value, AI insights, and shareable PDF reports. Free.</p>
+    
+    <div class="ai-section"><h3>What They Do</h3><p>UnitedHealth Group is a giant in the healthcare industry. They operate in two main areas: one part provides health insurance plans to individuals, families, and employers, and the other part, called Optum, offers a wide range of health services including pharmacy benefits, data analytics, and care delivery. Essentially, they act as a bridge, connecting people with healthcare services and managing the costs associated with it, making money from premiums and fees for their services.</p></div><div class="ai-section"><h3>Competitive Moat</h3><p>This company has a very strong moat, primarily due to its scale and network effects. Their vast network of healthcare providers and members creates significant switching costs for customers, as moving to a different insurer or provider network can be complex and disruptive. Furthermore, their Optum segment leverages data analytics to improve efficiency and outcomes, creating a powerful competitive advantage that&#x27;s difficult for others to replicate.</p></div><div class="ai-section"><h3>Management</h3><p>The management team has a strong history of disciplined capital allocation, consistently reinvesting in the business and making strategic acquisitions to expand their service offerings. They have demonstrated a commitment to growing both their insurance and services segments, which has generally led to consistent shareholder returns over time. Their focus on integrating different parts of the healthcare system shows a clear strategic vision.</p></div><div class="ai-section"><h3>Cash Flow</h3><p>UnitedHealth Group has historically been a cash-generating powerhouse, with billions in free cash flow annually over the past few years. However, the provided data shows a concerning downward trend in projected free cash flow for 2024 and 2025. This decline, while still from a very high base, suggests potential headwinds or increased investment needs that investors should monitor closely.</p></div><div class="ai-section"><h3>Valuation</h3><p>Based on the discounted earnings analysis, the estimated intrinsic value per share is significantly lower than the current stock price. This indicates that the market is currently valuing UnitedHealth Group at a premium, making it appear expensive relative to its projected future earnings. The substantial negative margin of safety highlights a significant gap between what the stock is trading at and its calculated value.</p></div><div class="ai-section"><h3>The Deal</h3><p>Based on the calculated margin of safety, this is currently a bad deal for a value investor. The stock price is trading far above its estimated intrinsic value, leaving very little room for error. A disciplined value investor would likely pass on this opportunity, waiting for a much more significant price drop to offer an adequate margin of safety.</p></div><div class="ai-section"><h3>Key Risks</h3><p>One major risk is increased regulatory scrutiny on healthcare costs and insurance practices, which could impact profitability. Another significant risk is the competitive landscape, as other large players and emerging tech companies are increasingly vying for market share in healthcare services. Finally, a sudden downturn in the broader economy could negatively affect employer-sponsored health insurance enrollment and thus revenue.</p></div>
+    <div class="cta-box">
+      <p>Get real-time analysis with the AZAI Oracle app</p>
       <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="cta-btn">Download AZAI Oracle</a>
     </div>
-
-    <div class="disclaimer">
-      This analysis is for informational purposes only and does not constitute financial advice.
-      All investment decisions are made at your own risk. See <a href="/terms.html">Terms of Service</a>.
-      <br>Analysis generated by AZAI Oracle on March 23, 2026.
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 AZAI Oracle &middot;
-      <a href="/privacy.html">Privacy</a> &middot;
-      <a href="/terms.html">Terms</a> &middot;
-      <a href="/support.html">Support</a>
-    </p>
-  </footer>
+  </article>
+  <div class="disclaimer">AZAI Oracle is for informational purposes only. Not financial advice. <a href="/terms.html">Terms</a>.</div>
+  <footer><p>&copy; 2026 AZAI Oracle &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; asoni@kancanada.com</p></footer>
 </body>
 </html>
