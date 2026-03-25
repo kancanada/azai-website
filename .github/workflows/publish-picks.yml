@@ -274,6 +274,7 @@ jobs:
 
           # Update picks index with cards
           cards_html = ""
+          all_picks_data = []  # for homepage
           for pick in picks:
               rd = pick.get('reportData', pick)
               t = rd.get('ticker', '?')
@@ -284,18 +285,50 @@ jobs:
               is_e = rd.get('type') == 'etf'
               p = rd.get('currentPrice', 'N/A')
               iv2 = rd.get('intrinsicValue', '')
-              ts2 = pick.get('timestamp', '')
+              eps2 = rd.get('eps', '')
+              pe2 = rd.get('peRatio', '')
+              mos2 = rd.get('marginOfSafety', '')
+              ts2 = rd.get('timestamp', pick.get('timestamp', ''))
               try:
-                  ds = datetime.fromisoformat(ts2.replace('Z', '+00:00')).strftime('%b %d, %Y')
+                  ds = datetime.fromisoformat(str(ts2).replace('Z', '+00:00')).strftime('%b %d, %Y')
               except:
-                  ds = ts2[:10]
-              sub = f"Score: {rd.get('score','N/A')}/100" if is_e else f"Intrinsic Value: ${iv2}"
+                  ds = str(ts2)[:10]
+              # Compute IV if missing
+              if not iv2 and mos2 and p not in ('N/A', None, ''):
+                  try:
+                      iv2 = round(float(p) / (1 + abs(float(mos2)) / 100), 2) if float(mos2) < 0 else round(float(p) * (1 + float(mos2) / 100), 2)
+                  except: pass
+              # Compute PE if missing
+              if not pe2 and p not in ('N/A', None, '') and eps2 not in ('N/A', None, '', 0):
+                  try: pe2 = round(float(p) / float(eps2), 1)
+                  except: pass
+              # Round
+              try: p = round(float(p), 2)
+              except: pass
+              try: iv2 = round(float(iv2), 2)
+              except: pass
+              try: mos2 = round(float(mos2), 1)
+              except: pass
+
+              if is_e:
+                  sub = f"Score: {rd.get('score','N/A')}/100"
+                  detail = f"Yield: {rd.get('yield','N/A')}%"
+              else:
+                  sub = f"Intrinsic Value: ${iv2}" if iv2 else f"EPS: ${eps2}"
+                  detail = f"P/E: {pe2} &middot; MoS: {mos2}%" if pe2 else ""
+
               cards_html += f'''<a href="/picks/{s}.html" class="pick-card">
                 <div class="pick-top"><span class="pick-ticker">{t}</span><span class="pick-date">{ds}</span></div>
                 <div class="pick-name">{n}</div>
                 <div class="pick-sub">${p} &middot; {sub}</div>
+                <div class="pick-detail">{detail}</div>
                 <span class="verdict-pill verdict-{vc2}">{v}</span>
               </a>\n'''
+              all_picks_data.append({
+                  'ticker': t, 'slug': s, 'name': n, 'verdict': v, 'vc': vc2,
+                  'price': p, 'iv': iv2, 'pe': pe2, 'mos': mos2, 'date': ds,
+                  'is_etf': is_e, 'sub': sub, 'detail': detail
+              })
 
           if cards_html:
               index_html = f'''<!DOCTYPE html>
@@ -326,7 +359,8 @@ jobs:
               .pick-ticker {{ font-weight: 700; color: #D4A574; font-size: 0.9rem; }}
               .pick-date {{ font-size: 0.72rem; color: #aaa; }}
               .pick-name {{ font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }}
-              .pick-sub {{ font-size: 0.82rem; color: #666; margin-bottom: 8px; }}
+              .pick-sub {{ font-size: 0.82rem; color: #666; margin-bottom: 4px; }}
+              .pick-detail {{ font-size: 0.75rem; color: #999; margin-bottom: 8px; }}
               .verdict-pill {{ display: inline-block; padding: 3px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; }}
               .verdict-great {{ background: #e6f9ee; color: #16a34a; }}
               .verdict-good {{ background: #e6f9ee; color: #22c55e; }}
@@ -353,6 +387,32 @@ jobs:
               with open('picks/index.html', 'w') as f:
                   f.write(index_html)
               print("Updated picks/index.html")
+
+          # Update homepage picks section
+          if all_picks_data:
+              import re
+              homepage_cards = ""
+              for pd in all_picks_data[:6]:
+                  homepage_cards += f'''<a href="/picks/{pd['slug']}.html" class="pick-card">
+                <div class="pick-header"><span class="pick-ticker">{pd['ticker']}</span><span class="pick-date">{pd['date']}</span></div>
+                <div class="pick-name">{html.escape(pd['name'])}</div>
+                <div class="pick-metrics">${pd['price']} &middot; {pd['sub']}</div>
+                <span class="verdict verdict-{pd['vc']}">{pd['verdict']}</span>
+              </a>\n'''
+
+              with open('index.html', 'r') as f:
+                  homepage = f.read()
+
+              # Replace the picks-grid content
+              new_grid = f'<div class="picks-grid" id="picks-grid">\n{homepage_cards}    </div>'
+              homepage = re.sub(
+                  r'<div class="picks-grid" id="picks-grid">.*?</div>',
+                  new_grid, homepage, flags=re.DOTALL
+              )
+
+              with open('index.html', 'w') as f:
+                  f.write(homepage)
+              print("Updated homepage with latest picks")
 
           print(f"\nPublished {len(published)} new picks: {[p for p in published]}")
           PYEOF
