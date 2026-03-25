@@ -23,39 +23,65 @@
     <div class="article-header">
       <div class="category">Valuation Basics</div>
       <h1>What Is a Discount Rate and Why Does It Matter?</h1>
-      <p class="subtitle">The discount rate is the most important — and most misunderstood — variable in stock valuation. Here is what it means in plain English.</p>
+      <p class="subtitle">The discount rate is the most important - and most misunderstood - variable in stock valuation. Here is what it means in plain English.</p>
     </div>
     
-     <h2>Time Is Money — Literally</h2>
-     <p>Would you rather have $100 today or $100 one year from now? Today, obviously. That's because money today can be invested and grow. The discount rate quantifies exactly how much future money is worth less than present money.</p>
-     
-     <h2>How It Works in Valuation</h2>
-     <p>When calculating <a href="/learn/what-is-intrinsic-value.html">intrinsic value</a>, you project a company's future earnings and then discount them back to today's value. The discount rate is the percentage you use.</p>
+     <h2>The Most Important Variable You Cannot See</h2>
+     <p>Would you rather have $100 today or $100 five years from now? Today, obviously -- because you could invest that $100 and turn it into something more. The discount rate is the mathematical expression of this intuition. It quantifies exactly how much a dollar promised in the future is worth in present terms. And in stock valuation, it is the single variable with the most power to change your answer.</p>
+     <p>When calculating <a href="/learn/what-is-intrinsic-value.html">intrinsic value</a>, you project a company's future earnings and then discount each year's earnings back to what they are worth today. The discount rate is the percentage you use for that conversion.</p>
      <div class="formula">Present Value = Future Earnings / (1 + Discount Rate)^Years</div>
-     
+
      <div class="example">
        <p><strong>Example:</strong></p>
-       <p>$100 earned 5 years from now, discounted at 12%, is worth $100 / (1.12)^5 = $56.74 today. The higher the discount rate, the less future earnings are worth.</p>
+       <p>$100 earned 5 years from now, discounted at 12%, is worth $100 / (1.12)^5 = $56.74 today. That same $100 discounted at 8% is worth $68.06 today. The discount rate changed by 4 percentage points; the present value changed by 20%. This sensitivity is why the discount rate matters more than almost any other input in a valuation model.</p>
      </div>
-     
-     <h2>Why 12%?</h2>
-     <p>Most value investors use 10-15%. The 12% rate is popular because:</p>
+
+     <h2>Where the Rate Comes From</h2>
+     <p>In academic finance, the discount rate for a company's equity is often calculated using the Weighted Average Cost of Capital (WACC), which blends the cost of equity and the cost of debt:</p>
+     <div class="formula">WACC = (E/V x Cost of Equity) + (D/V x Cost of Debt x (1 - Tax Rate))</div>
+     <p>The cost of equity is typically estimated using the Capital Asset Pricing Model (CAPM), which adds a risk premium to the "risk-free rate" (usually the yield on 10-year U.S. Treasury bonds). In practice, this means the discount rate has two components:</p>
      <ul>
-       <li>It roughly equals the long-term stock market average return</li>
-       <li>It accounts for the risk of owning individual stocks</li>
-       <li>It provides a conservative baseline — your investment needs to beat this hurdle</li>
+       <li><strong>Risk-free rate:</strong> What you could earn with zero risk by buying government bonds. The 10-year U.S. Treasury yield has ranged from under 1% in 2020 to over 15% in 1981. As of recent data, it sits in the 4-5% range.</li>
+       <li><strong>Equity risk premium:</strong> The additional return you demand for taking on the risk of owning stocks instead of bonds. Historically, this has averaged 4-6%.</li>
      </ul>
-     
-     <h2>Higher vs Lower Discount Rates</h2>
-     <p>A higher discount rate means you demand more compensation for risk, resulting in a lower intrinsic value (more conservative). A lower rate gives a higher intrinsic value (more aggressive).</p>
-     
+     <p>Add these together and you get a range of roughly 8-12% for most established companies. Riskier companies -- small caps, unprofitable firms, emerging market stocks -- warrant higher rates.</p>
+
+     <h2>Why Many Value Investors Use 10-12%</h2>
+     <p>Most practitioners in the value investing tradition, from Buffett to individual investors, use a flat 10-15% discount rate rather than calculating WACC for each company. There are several reasons:</p>
+     <ul>
+       <li><strong>It approximates the long-term stock market return:</strong> The S&P 500 has returned roughly 10% annually over the past century, including dividends. Using 10-12% as a hurdle means you only buy stocks that you expect to beat the market average.</li>
+       <li><strong>It builds in a margin of safety on the rate itself:</strong> If the "correct" discount rate for a blue-chip stock is 9%, using 12% automatically makes your valuation more conservative.</li>
+       <li><strong>It avoids false precision:</strong> WACC calculations require estimating beta, the equity risk premium, and the company's target capital structure -- all of which are themselves estimates. A simple round number is no less accurate and far more honest about its uncertainty.</li>
+     </ul>
+     <p>Buffett himself has said he uses the long-term Treasury rate as a reference point but adjusts based on opportunity cost -- what return he could get elsewhere with similar risk.</p>
+
+     <h2>How the Rate Changes Your Valuation</h2>
+     <p>The discount rate is the lever with the most influence on a <a href="/learn/how-to-value-a-stock.html">DCF valuation</a>. Consider a company earning $5/share, growing at 10% annually:</p>
+     <ul>
+       <li><strong>At an 8% discount rate:</strong> Intrinsic value approximately $175/share</li>
+       <li><strong>At a 10% discount rate:</strong> Intrinsic value approximately $135/share</li>
+       <li><strong>At a 12% discount rate:</strong> Intrinsic value approximately $108/share</li>
+       <li><strong>At a 15% discount rate:</strong> Intrinsic value approximately $82/share</li>
+     </ul>
+     <p>Same company. Same earnings. Same growth rate. But the intrinsic value more than doubles from the highest to the lowest discount rate. This is why interest rates move the stock market. When the Federal Reserve cuts rates, the risk-free rate falls, discount rates fall across the board, and the present value of future cash flows rises -- pushing stock prices up. When rates rise, the reverse happens.</p>
+
+     <h2>Matching Rate to Risk</h2>
+     <p>Not all stocks deserve the same discount rate. The rate should reflect the certainty of the cash flows you are discounting:</p>
+     <ul>
+       <li><strong>Blue-chip, predictable businesses (Johnson & Johnson, Procter & Gamble):</strong> 8-10% is reasonable. Their earnings are highly stable and predictable.</li>
+       <li><strong>Established growth companies (Apple, Microsoft):</strong> 10-12%. Strong competitive positions but more earnings variability.</li>
+       <li><strong>Cyclical businesses (Ford, Caterpillar):</strong> 12-14%. Earnings swing significantly with the economic cycle.</li>
+       <li><strong>Small-cap or unprofitable companies:</strong> 15%+ or avoid using DCF entirely. The uncertainty is too high for present value calculations to be meaningful. Demand a larger <a href="/learn/margin-of-safety.html">margin of safety</a> instead.</li>
+     </ul>
+
      <div class="key-takeaway">
        <h3>Key Takeaways</h3>
        <ul>
-         <li>The discount rate converts future earnings into today's dollars</li>
-         <li>12% is a standard rate for stock valuation — your minimum hurdle</li>
-         <li>Higher rate = more conservative valuation, lower intrinsic value</li>
-         <li>Use a higher rate for riskier companies</li>
+         <li>The discount rate converts future cash flows to present value -- it is the most powerful variable in any valuation model</li>
+         <li>It combines the risk-free rate (Treasury yields, currently 4-5%) plus an equity risk premium (historically 4-6%)</li>
+         <li>Most value investors use 10-12% as a practical hurdle rate, avoiding the false precision of WACC calculations</li>
+         <li>Small changes in the discount rate produce large changes in intrinsic value -- a 4% change can double or halve your answer</li>
+         <li>Match the rate to the risk: lower for predictable blue chips, higher for volatile or speculative businesses</li>
        </ul>
      </div>
      

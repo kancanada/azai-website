@@ -26,35 +26,71 @@
       <p class="subtitle">Stock valuation is not guessing or gut feeling. Here is a systematic approach anyone can follow to estimate what a stock is truly worth.</p>
     </div>
     
-     <h2>Valuation Is a Process, Not a Guess</h2>
-     <p>Many investors buy stocks based on tips, headlines, or gut feelings. Professional value investors use a systematic process. Here's how to value any stock in four steps.</p>
-     
-     <h2>Step 1: Find the Earnings Per Share</h2>
-     <p>Start with <a href="/learn/what-is-eps.html">trailing EPS</a> — the actual earnings from the past 12 months. This is your anchor, based on real numbers rather than forecasts.</p>
-     
-     <h2>Step 2: Estimate Future Growth</h2>
-     <p>Look at the company's EPS growth rate over the past 5 years. Be conservative — cap your growth estimate at 15-20% even if recent growth was higher. Reversion to the mean is powerful.</p>
-     
-     <h2>Step 3: Apply the Discounted Earnings Model</h2>
-     <p>Project EPS forward 10 years using your growth rate, then discount each year back at 12% (a standard hurdle rate for stocks).</p>
-     <div class="formula">Year N Value = (EPS x (1 + Growth)^N) / (1.12)^N</div>
-     <p>Add all 10 years plus a terminal value for earnings beyond year 10 (using a lower, sustainable growth rate of 3-4%).</p>
-     
-     <h2>Step 4: Compare to Market Price</h2>
-     <p>If your calculated intrinsic value is $100 and the stock trades at $70, you have a 30% <a href="/learn/margin-of-safety.html">margin of safety</a>. That's a potential buy. If it trades at $130, it's overpriced — move on.</p>
-     
+     <h2>Three Methods, One Goal</h2>
+     <p>Professional investors do not rely on a single valuation method. They triangulate -- using multiple approaches to estimate <a href="/learn/what-is-intrinsic-value.html">intrinsic value</a> and looking for convergence. If three different methods all suggest a stock is worth roughly $100 and it trades at $65, your confidence in the <a href="/learn/margin-of-safety.html">margin of safety</a> is far higher than if only one method supports that conclusion.</p>
+     <p>Here are the three most important valuation approaches, from simplest to most rigorous.</p>
+
+     <h2>Method 1: The Graham Number</h2>
+     <p>Benjamin Graham designed this as a quick defensive screen. It calculates the maximum price a conservative investor should pay based on two fundamental metrics: <a href="/learn/what-is-eps.html">earnings per share</a> and <a href="/learn/what-is-book-value.html">book value per share</a>.</p>
+     <div class="formula">Graham Number = Square Root of (22.5 x EPS x BVPS)</div>
+     <p>The 22.5 comes from Graham's maximum acceptable <a href="/learn/what-is-pe-ratio.html">P/E ratio</a> of 15 multiplied by his maximum acceptable price-to-book ratio of 1.5. Any stock trading below its Graham Number passes the most basic value screen.</p>
+
      <div class="example">
-       <p><strong>Full Example:</strong></p>
-       <p>Company XYZ has EPS of $5.00, growing at 10% per year. Using a 12% discount rate over 10 years with 4% terminal growth, intrinsic value works out to approximately $118/share. If XYZ trades at $85, you have a 28% margin of safety.</p>
+       <p><strong>Example:</strong></p>
+       <p>A company has EPS of $4.00 and book value per share of $30.00. The Graham Number is the square root of (22.5 x 4 x 30) = the square root of 2,700 = approximately $52. If the stock trades at $38, it passes Graham's screen with room to spare.</p>
      </div>
-     
+
+     <p>Limitation: The Graham Number only works for profitable companies with positive book value. It tends to undervalue asset-light businesses like software companies and overvalue asset-heavy businesses with mediocre earnings.</p>
+
+     <h2>Method 2: Graham's Growth Formula</h2>
+     <p>For companies with earnings growth, Graham proposed a formula in the 1962 edition of <em>Security Analysis</em>:</p>
+     <div class="formula">V = EPS x (8.5 + 2g)</div>
+     <p>Where V is intrinsic value, EPS is trailing twelve-month earnings, and g is the expected annual growth rate for the next 7-10 years. The 8.5 represents the P/E Graham considered fair for a zero-growth company.</p>
+     <p>Be warned: Graham himself cautioned against treating this formula as gospel. Small changes in the growth assumption produce large changes in the output. If you estimate 10% growth instead of 8%, the intrinsic value jumps by roughly 14%. Always use conservative growth estimates -- cap at 15% even for fast growers, because reversion to the mean is one of the most powerful forces in business.</p>
+
+     <h2>Method 3: Discounted Cash Flow (DCF)</h2>
+     <p>The DCF model is the most rigorous approach. It projects future cash flows and discounts them back to present value using a <a href="/learn/discount-rate-explained.html">discount rate</a> that represents your minimum acceptable return.</p>
+
+     <h3>Step 1: Start with real earnings</h3>
+     <p>Use trailing twelve-month EPS or, better yet, Buffett's "owner earnings" (net income + depreciation - required capital expenditures). This is your anchor, based on actual numbers rather than analyst forecasts.</p>
+
+     <h3>Step 2: Estimate growth conservatively</h3>
+     <p>Look at the company's EPS growth over the past 5-10 years, but assume future growth will be lower. A company that grew at 20% per year is unlikely to sustain that rate. Cap your estimate at 15% for even the fastest growers.</p>
+
+     <h3>Step 3: Project and discount</h3>
+     <p>Project earnings forward 10 years, then discount each year's earnings back to present value:</p>
+     <div class="formula">Year N Value = (EPS x (1 + Growth Rate)^N) / (1 + Discount Rate)^N</div>
+     <p>Then add a terminal value for all earnings beyond year 10. A standard approach uses the Gordon Growth Model with a perpetual growth rate of 2-4% (roughly GDP growth).</p>
+
+     <h3>Step 4: Sum and compare</h3>
+     <p>Add all ten discounted annual values plus the terminal value. This is your estimated intrinsic value. Compare it to the current market price.</p>
+
+     <div class="example">
+       <p><strong>Full DCF Example:</strong></p>
+       <p>A company earns $5.00/share, growing at 10% per year. Using a 12% discount rate over 10 years and 3% terminal growth, the intrinsic value works out to approximately $118/share. If the stock trades at $82, you have a 30% margin of safety -- solidly in value territory.</p>
+     </div>
+
+     <h2>The Sensitivity Problem (Garbage In, Garbage Out)</h2>
+     <p>Here is the most important thing to understand about any valuation model: small changes in inputs produce large changes in output. Using the same company above, watch what happens when you adjust just two variables:</p>
+     <ul>
+       <li><strong>Growth 10%, Discount 12%:</strong> Intrinsic value roughly $118</li>
+       <li><strong>Growth 12%, Discount 10%:</strong> Intrinsic value roughly $185</li>
+       <li><strong>Growth 8%, Discount 14%:</strong> Intrinsic value roughly $72</li>
+     </ul>
+     <p>Same company. Same current earnings. Three wildly different "answers." This is why Buffett has said he would rather be approximately right than precisely wrong. The DCF model is a thinking framework, not a calculator that spits out truth. Use it to establish a range of reasonable values, not a single target price.</p>
+
+     <h2>Putting It All Together</h2>
+     <p>Run all three methods. If the Graham Number says $52, the growth formula says $57, and the DCF says $60, you have a convergent estimate around $55-60. If the stock trades at $38, you have a compelling case. If only one method supports a discount while the others suggest fair value or overvaluation, your conviction should be much lower.</p>
+     <p>Then apply the <a href="/learn/margin-of-safety.html">margin of safety</a>. Even your converged estimate is still an estimate. Graham and Dodd recommended buying at 30-50% below intrinsic value. In practice, most disciplined value investors look for at least 25%.</p>
+
      <div class="key-takeaway">
        <h3>Key Takeaways</h3>
        <ul>
-         <li>Start with real earnings (trailing EPS), not projections</li>
-         <li>Be conservative with growth estimates — it's better to be pleasantly surprised</li>
-         <li>Use a 12% discount rate as your hurdle for stock investments</li>
-         <li>Only buy when market price is well below your calculated value</li>
+         <li>Never rely on a single valuation method -- triangulate using the Graham Number, growth formula, and DCF</li>
+         <li>Start with actual earnings, not analyst projections, and be conservative with growth estimates</li>
+         <li>DCF models are dangerously sensitive to inputs -- a small change in growth or discount rate can double or halve your answer</li>
+         <li>Look for convergence across methods, then demand a margin of safety on top of that</li>
+         <li>Valuation is about establishing a range of reasonable values, not finding a precise number</li>
        </ul>
      </div>
      
