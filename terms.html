@@ -12,19 +12,15 @@
       color: #1a1a2e;
       line-height: 1.7;
     }
-    nav {
-      text-align: center;
-      padding: 20px 24px;
-      background: #1a1a2e;
-    }
-    nav a {
-      color: #D4A574;
-      text-decoration: none;
-      margin: 0 16px;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    nav a:hover { text-decoration: underline; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: 32px; }
+    .nav-logo span { color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }
+    .nav-logo span em { font-style: normal; color: #D4A574; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: rgba(250,248,245,0.7); text-decoration: none; font-size: 0.85rem; }
+    .nav-links a:hover { color: #D4A574; }
+    .nav-cta { background: #D4A574; color: #1a1a2e !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; }
     .container {
       max-width: 700px;
       margin: 0 auto;
@@ -74,10 +70,17 @@
 </head>
 <body>
   <nav>
-    <a href="/">Home</a>
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms of Service</a>
-    <a href="/support.html">Support</a>
+    <a href="/" class="nav-logo">
+      <img src="/logo.png" alt="AZAI Oracle">
+      <span>AZAI <em>Oracle</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="/picks/">Picks</a>
+      <a href="/learn/">Learn</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/support.html">Support</a>
+      <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="nav-cta">Download Free</a>
+    </div>
   </nav>
 
   <div class="container">
