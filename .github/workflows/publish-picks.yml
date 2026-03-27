@@ -23,9 +23,45 @@ jobs:
       - name: Generate pick pages
         run: |
           python3 << 'PYEOF'
-          import json, os, html
+          import json, os, html, re
           from datetime import datetime
 
+          # ─── Helpers ───────────────────────────────────────────────
+          def safe_round(val, decimals=2):
+              """Round numeric values safely, return 'N/A' on failure."""
+              if val in ('N/A', None, ''):
+                  return 'N/A'
+              try:
+                  return round(float(val), decimals)
+              except:
+                  return val
+
+          def verdict_class(verdict):
+              if 'Great' in str(verdict): return 'great'
+              if 'Good' in str(verdict): return 'good'
+              if 'Fair' in str(verdict): return 'fair'
+              return 'bad'
+
+          def parse_date(timestamp):
+              try:
+                  return datetime.fromisoformat(str(timestamp).replace('Z', '+00:00')).strftime('%B %d, %Y')
+              except:
+                  return str(timestamp)[:10]
+
+          def parse_date_short(timestamp):
+              try:
+                  return datetime.fromisoformat(str(timestamp).replace('Z', '+00:00')).strftime('%b %d, %Y')
+              except:
+                  return str(timestamp)[:10]
+
+          VERDICT_DESC = {
+              'Great Deal': 'Trading at a significant discount to intrinsic value.',
+              'Good Deal': 'Priced below its true value. Odds are in your favor.',
+              'Fair Deal': 'Roughly fairly priced. Not much margin for error.',
+              'Bad Deal': 'Overpriced relative to what the business is worth.',
+          }
+
+          # ─── Load new picks ────────────────────────────────────────
           with open('/tmp/picks.json') as f:
               data = json.load(f)
 
@@ -37,117 +73,157 @@ jobs:
           os.makedirs('picks', exist_ok=True)
           published = []
 
+          # ─── Generate individual report pages ──────────────────────
           for pick in picks:
-              # Data is flat (no reportData wrapper)
-              rd = pick.get('reportData', pick)  # support both formats
+              rd = pick.get('reportData', pick)
               ticker = rd.get('ticker', 'UNKNOWN')
               slug = ticker.lower().replace('.', '-')
               is_etf = rd.get('type') == 'etf'
               name = rd.get('companyName', ticker)
               verdict = rd.get('verdict', 'N/A')
+              verdict_desc = rd.get('verdictDescription', VERDICT_DESC.get(verdict, ''))
               timestamp = rd.get('timestamp', pick.get('timestamp', datetime.now().isoformat()))
+              date_str = parse_date(timestamp)
+              vc = verdict_class(verdict)
 
-              try:
-                  date_str = datetime.fromisoformat(timestamp.replace('Z', '+00:00')).strftime('%B %d, %Y')
-              except:
-                  date_str = timestamp[:10]
-
-              # Verdict CSS class
-              vc = 'great' if 'Great' in verdict else 'good' if 'Good' in verdict else 'fair' if 'Fair' in verdict else 'bad'
-
-              # Build metrics HTML
+              # ── Compute & round all metrics ──
+              price = safe_round(rd.get('currentPrice'))
               if is_etf:
-                  price = rd.get('currentPrice', 'N/A')
-                  yld = rd.get('yield', 'N/A')
-                  expense = rd.get('expenseRatio', 'N/A')
-                  score = rd.get('score', 'N/A')
-                  metrics_html = f"""
-                  <div class="metrics-row">
-                    <div class="metric"><div class="metric-label">Price</div><div class="metric-val">${price}</div></div>
-                    <div class="metric"><div class="metric-label">Yield</div><div class="metric-val">{yld}%</div></div>
-                    <div class="metric"><div class="metric-label">Expense</div><div class="metric-val">{expense}%</div></div>
-                    <div class="metric"><div class="metric-label">Score</div><div class="metric-val">{score}/100</div></div>
-                  </div>"""
-
-                  # Score breakdown
-                  sb = rd.get('scoreBreakdown', {})
-                  breakdown_html = ""
-                  if sb:
-                      breakdown_html = '<div class="breakdown"><h3>Score Breakdown</h3>'
-                      for key, label in [('costScore','Cost Efficiency'),('performanceScore','Performance'),('yieldScore','Yield'),('sizeScore','Size & Liquidity'),('diversificationScore','Diversification')]:
-                          val = sb.get(key, 0)
-                          breakdown_html += f'<div class="bar-row"><span class="bar-label">{label}</span><div class="bar-track"><div class="bar-fill" style="width:{val}%"></div></div><span class="bar-val">{val}</span></div>'
-                      breakdown_html += '</div>'
+                  yld = safe_round(rd.get('yield'), 2)
+                  expense = safe_round(rd.get('expenseRatio'), 2)
+                  score = safe_round(rd.get('score'), 0)
+                  beta = safe_round(rd.get('beta'), 2)
+                  total_assets = rd.get('totalAssets', 'N/A')
               else:
-                  price = rd.get('currentPrice', 'N/A')
-                  iv = rd.get('intrinsicValue', 'N/A')
-                  eps_val = rd.get('eps', 'N/A')
-                  pe = rd.get('peRatio', 'N/A')
+                  iv = safe_round(rd.get('intrinsicValue'))
+                  eps_val = safe_round(rd.get('eps'))
+                  pe = safe_round(rd.get('peRatio'), 1)
+                  bv = safe_round(rd.get('bookValue'))
+                  mos = safe_round(rd.get('marginOfSafety'), 1)
                   # Compute P/E from price/EPS if missing
-                  if pe in ('N/A', None) and price not in ('N/A', None) and eps_val not in ('N/A', None, 0):
+                  if pe == 'N/A' and price != 'N/A' and eps_val not in ('N/A', 0):
                       try: pe = round(float(price) / float(eps_val), 1)
                       except: pass
-                  # Compute IV from price and margin of safety if missing
-                  if iv in ('N/A', None):
+                  # Compute IV from MoS if missing
+                  if iv == 'N/A' and mos != 'N/A' and price != 'N/A':
                       try:
-                          mos_raw = rd.get('marginOfSafety', 0)
-                          if mos_raw and price not in ('N/A', None):
-                              iv = round(float(price) / (1 + abs(float(mos_raw)) / 100), 2) if float(mos_raw) < 0 else round(float(price) * (1 + float(mos_raw) / 100), 2)
+                          m = float(mos)
+                          iv = round(float(price) / (1 + abs(m) / 100), 2) if m < 0 else round(float(price) * (1 + m / 100), 2)
                       except: pass
-                  bv = rd.get('bookValue', 'N/A')
-                  mos = rd.get('marginOfSafety', 'N/A')
-                  # Round numeric values
-                  try: price = round(float(price), 2)
-                  except: pass
-                  try: iv = round(float(iv), 2)
-                  except: pass
-                  try: mos = round(float(mos), 1)
-                  except: pass
-                  try: bv = round(float(bv), 2)
-                  except: pass
-                  metrics_html = f"""
-                  <div class="metrics-row">
-                    <div class="metric"><div class="metric-label">Current Price</div><div class="metric-val">${price}</div></div>
-                    <div class="metric"><div class="metric-label">Intrinsic Value</div><div class="metric-val iv">${iv}</div></div>
-                    <div class="metric"><div class="metric-label">EPS</div><div class="metric-val">${eps_val}</div></div>
-                    <div class="metric"><div class="metric-label">P/E</div><div class="metric-val">{pe}</div></div>
-                  </div>
-                  <div class="metrics-row">
-                    <div class="metric"><div class="metric-label">Book Value</div><div class="metric-val">${bv}</div></div>
-                    <div class="metric"><div class="metric-label">Margin of Safety</div><div class="metric-val">{mos}%</div></div>
-                  </div>"""
-                  breakdown_html = ""
 
-              # AI analysis sections
-              ai = rd.get('aiAnalysis', {})
+              # ── Build hero metrics (the big verdict banner) ──
+              if is_etf:
+                  hero_metrics = f'''
+                  <div class="hero-banner">
+                    <div class="hero-left">
+                      <div class="hero-price-label">Current Price</div>
+                      <div class="hero-price">${price}</div>
+                    </div>
+                    <div class="hero-center">
+                      <span class="verdict-pill verdict-{vc}">{html.escape(verdict)}</span>
+                      <div class="verdict-desc">{html.escape(verdict_desc)}</div>
+                    </div>
+                    <div class="hero-right">
+                      <div class="hero-price-label">AZAI Score</div>
+                      <div class="hero-iv">{score}<span class="score-max">/100</span></div>
+                    </div>
+                  </div>'''
+              else:
+                  # Determine if undervalued
+                  try:
+                      is_under = float(price) < float(iv)
+                  except:
+                      is_under = False
+                  arrow = '&#9660;' if is_under else '&#9650;'
+                  arrow_cls = 'arrow-under' if is_under else 'arrow-over'
+                  hero_metrics = f'''
+                  <div class="hero-banner">
+                    <div class="hero-left">
+                      <div class="hero-price-label">Current Price</div>
+                      <div class="hero-price">${price}</div>
+                    </div>
+                    <div class="hero-center">
+                      <span class="verdict-pill verdict-{vc}">{html.escape(verdict)}</span>
+                      <div class="verdict-desc">{html.escape(verdict_desc)}</div>
+                    </div>
+                    <div class="hero-right">
+                      <div class="hero-price-label">Intrinsic Value</div>
+                      <div class="hero-iv">${iv}</div>
+                    </div>
+                  </div>
+                  <div class="mos-bar">
+                    <div class="mos-label">Margin of Safety <strong>{mos}%</strong></div>
+                    <div class="mos-track"><div class="mos-fill mos-{vc}" style="width:{min(abs(float(mos) if mos != 'N/A' else 0), 100)}%"></div></div>
+                  </div>'''
+
+              # ── Detail metrics grid ──
+              if is_etf:
+                  sb = rd.get('scoreBreakdown', {{}})
+                  details_html = f'''
+                  <div class="detail-grid">
+                    <div class="detail-card"><div class="detail-label">Yield</div><div class="detail-val">{yld}%</div></div>
+                    <div class="detail-card"><div class="detail-label">Expense Ratio</div><div class="detail-val">{expense}%</div></div>
+                    <div class="detail-card"><div class="detail-label">Beta</div><div class="detail-val">{beta}</div></div>
+                    <div class="detail-card"><div class="detail-label">Total Assets</div><div class="detail-val">{total_assets}</div></div>
+                  </div>'''
+                  # Score breakdown bars
+                  if sb:
+                      details_html += '<div class="breakdown"><h3>Score Breakdown</h3>'
+                      for key, label, icon in [('costScore','Cost Efficiency','&#128176;'),('performanceScore','Performance','&#128200;'),('yieldScore','Yield','&#128181;'),('sizeScore','Size & Liquidity','&#127974;'),('diversificationScore','Diversification','&#127760;')]:
+                          val = safe_round(sb.get(key, 0), 0)
+                          bar_cls = 'great' if float(val) >= 75 else 'good' if float(val) >= 50 else 'fair' if float(val) >= 25 else 'bad'
+                          details_html += f'<div class="bar-row"><span class="bar-icon">{icon}</span><span class="bar-label">{label}</span><div class="bar-track"><div class="bar-fill bar-{bar_cls}" style="width:{val}%"></div></div><span class="bar-val">{val}</span></div>'
+                      details_html += '</div>'
+                  # Top holdings
+                  holdings = rd.get('topHoldings', [])
+                  if holdings:
+                      details_html += '<div class="holdings"><h3>Top Holdings</h3><div class="holdings-list">'
+                      for h in holdings[:10]:
+                          hname = html.escape(str(h.get('name', h.get('symbol', '?'))))
+                          hweight = safe_round(h.get('weight', h.get('percentage', 0)), 2)
+                          details_html += f'<div class="holding-row"><span class="holding-name">{hname}</span><span class="holding-weight">{hweight}%</span></div>'
+                      details_html += '</div></div>'
+              else:
+                  details_html = f'''
+                  <div class="detail-grid">
+                    <div class="detail-card"><div class="detail-label">EPS</div><div class="detail-val">${eps_val}</div></div>
+                    <div class="detail-card"><div class="detail-label">P/E Ratio</div><div class="detail-val">{pe}</div></div>
+                    <div class="detail-card"><div class="detail-label">Book Value</div><div class="detail-val">${bv}</div></div>
+                    <div class="detail-card"><div class="detail-label">Margin of Safety</div><div class="detail-val">{mos}%</div></div>
+                  </div>'''
+
+              # ── AI analysis sections with icons ──
+              ai = rd.get('aiAnalysis', {{}})
               ai_html = ""
               if ai:
-                  section_titles = {
-                      'whatDoTheyDo': 'What They Do',
-                      'whatTheyDo': 'What They Do',
-                      'moat': 'Competitive Moat',
-                      'moneyMachine': 'The Money Machine',
-                      'management': 'Management',
-                      'cashFlow': 'Cash Flow',
-                      'valuation': 'Valuation',
-                      'deal': 'The Deal',
-                      'worthBuying': 'Worth Buying at This Price?',
-                      'futureOutlook': 'Future Outlook',
-                      'risks': 'Key Risks',
-                      'bottomLine': 'Bottom Line',
-                      'overview': 'Overview',
-                      'strategy': 'Strategy',
-                      'holdings': 'Top Holdings',
-                      'performance': 'Performance',
-                      'costs': 'Costs',
-                      'suitability': 'Suitability',
-                  }
-                  for key, title in section_titles.items():
-                      if key in ai and ai[key]:
-                          ai_html += f'<div class="ai-section"><h3>{title}</h3><p>{html.escape(str(ai[key]))}</p></div>'
+                  section_config = [
+                      ('whatDoTheyDo', 'What They Do', '&#127970;'),
+                      ('whatTheyDo', 'What They Do', '&#127970;'),
+                      ('moat', 'Competitive Moat', '&#127984;'),
+                      ('moneyMachine', 'The Money Machine', '&#128176;'),
+                      ('management', 'Management', '&#128100;'),
+                      ('cashFlow', 'Cash Flow', '&#128178;'),
+                      ('valuation', 'Valuation', '&#128200;'),
+                      ('deal', 'The Deal', '&#129309;'),
+                      ('risks', 'Key Risks', '&#9888;&#65039;'),
+                      ('worthBuying', 'Worth Buying?', '&#129300;'),
+                      ('futureOutlook', 'Future Outlook', '&#128302;'),
+                      ('bottomLine', 'Bottom Line', '&#127919;'),
+                      ('overview', 'Overview', '&#128218;'),
+                      ('strategy', 'Strategy', '&#127919;'),
+                      ('holdings', 'Top Holdings', '&#128188;'),
+                      ('performance', 'Performance', '&#128200;'),
+                      ('costs', 'Costs', '&#128176;'),
+                      ('suitability', 'Suitability', '&#127919;'),
+                  ]
+                  seen_titles = set()
+                  for key, title, icon in section_config:
+                      if key in ai and ai[key] and title not in seen_titles:
+                          seen_titles.add(title)
+                          ai_html += f'<div class="ai-section"><div class="ai-title"><span class="ai-icon">{icon}</span><h3>{title}</h3></div><p>{html.escape(str(ai[key]))}</p></div>'
 
               page_title = f"{ticker} {'ETF' if is_etf else 'Stock'} Analysis - {verdict} | AZAI Oracle"
-              page_desc = f"AZAI Oracle analysis of {name} ({ticker}). Verdict: {verdict}. {'ETF composite score and breakdown.' if is_etf else f'Intrinsic value ${iv}.'}"
+              page_desc = f"AZAI Oracle analysis of {html.escape(name)} ({ticker}). Verdict: {verdict}. {'ETF composite score and breakdown.' if is_etf else f'Intrinsic value ${iv}.'}"
 
               page_html = f"""<!DOCTYPE html>
           <html lang="en">
@@ -163,65 +239,121 @@ jobs:
             <meta property="og:url" content="https://azai.ca/picks/{slug}.html">
             <meta property="og:type" content="article">
             <script type="application/ld+json">
-            {{
+            {{{{
               "@context": "https://schema.org",
               "@type": "Article",
               "headline": "{ticker} Analysis - {verdict}",
               "description": "{page_desc}",
               "datePublished": "{timestamp}",
-              "publisher": {{ "@type": "Organization", "name": "AZAI Oracle" }},
+              "publisher": {{{{ "@type": "Organization", "name": "AZAI Oracle" }}}},
               "url": "https://azai.ca/picks/{slug}.html"
-            }}
+            }}}}
             </script>
             <link rel="icon" type="image/png" href="/favicon.png">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
             <style>
-              * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-              body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }}
-              nav {{ display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }}
-              .nav-logo {{ display: flex; align-items: center; gap: 10px; text-decoration: none; }}
-              .nav-logo img {{ height: 32px; width: 32px; }}
-              .nav-logo span {{ color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }}
-              .nav-logo span em {{ font-style: normal; color: #D4A574; }}
-              .nav-links a {{ color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }}
-              .nav-links a:hover {{ color: #D4A574; }}
-              .report {{ max-width: 680px; margin: 0 auto; padding: 48px 24px; }}
-              .report-header {{ margin-bottom: 32px; }}
-              .report-date {{ font-size: 0.75rem; color: #D4A574; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }}
-              .report-header h1 {{ font-size: 1.8rem; letter-spacing: -0.5px; margin-bottom: 8px; }}
-              .ticker-badge {{ display: inline-block; background: #f0ede8; padding: 2px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; color: #D4A574; margin-right: 8px; }}
-              .etf-badge {{ background: #e6f9ee; color: #16a34a; }}
-              .verdict-pill {{ display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin: 16px 0; }}
-              .verdict-great {{ background: #e6f9ee; color: #16a34a; }}
-              .verdict-good {{ background: #e6f9ee; color: #22c55e; }}
-              .verdict-fair {{ background: #fef9e7; color: #ca8a04; }}
-              .verdict-bad {{ background: #fee; color: #dc2626; }}
-              .metrics-row {{ display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }}
-              .metric {{ background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 120px; }}
-              .metric-label {{ font-size: 0.68rem; text-transform: uppercase; color: #aaa; letter-spacing: 0.5px; }}
-              .metric-val {{ font-size: 1.1rem; font-weight: 700; color: #1a1a2e; }}
-              .metric-val.iv {{ color: #D4A574; }}
-              .breakdown {{ background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin: 24px 0; }}
-              .breakdown h3 {{ font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; }}
-              .bar-row {{ display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }}
-              .bar-label {{ font-size: 0.8rem; color: #666; width: 140px; flex-shrink: 0; }}
-              .bar-track {{ flex: 1; height: 8px; background: #f0ede8; border-radius: 4px; overflow: hidden; }}
-              .bar-fill {{ height: 100%; background: #16a34a; border-radius: 4px; }}
-              .bar-val {{ font-size: 0.8rem; font-weight: 600; color: #1a1a2e; width: 30px; text-align: right; }}
-              .ai-section {{ background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin-bottom: 16px; }}
-              .ai-section h3 {{ font-size: 0.95rem; color: #1a1a2e; margin-bottom: 8px; }}
-              .ai-section p {{ font-size: 0.88rem; color: #555; line-height: 1.6; }}
-              .cta-box {{ text-align: center; padding: 40px; margin: 32px 0; background: #1a1a2e; border-radius: 12px; }}
-              .cta-box p {{ color: rgba(250,248,245,0.6); margin-bottom: 16px; font-size: 0.9rem; }}
-              .cta-btn {{ display: inline-block; background: #D4A574; color: #1a1a2e; padding: 12px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; }}
-              .disclaimer {{ text-align: center; padding: 20px 24px; background: #f0ede8; font-size: 0.72rem; color: #aaa; }}
-              .disclaimer a {{ color: #D4A574; }}
-              footer {{ text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; }}
-              footer a {{ color: #D4A574; text-decoration: none; }}
-              @media (max-width: 768px) {{
-                nav {{ padding: 14px 20px; }}
-                .metrics-row {{ flex-direction: column; }}
-                .report-header h1 {{ font-size: 1.4rem; }}
-              }}
+              * {{{{ margin:0; padding:0; box-sizing:border-box; }}}}
+              body {{{{ font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:#FAF8F5; color:#1a1a2e; line-height:1.6; -webkit-font-smoothing:antialiased; }}}}
+
+              /* Nav */
+              nav {{{{ display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:#1a1a2e; }}}}
+              .nav-logo {{{{ display:flex; align-items:center; gap:10px; text-decoration:none; }}}}
+              .nav-logo img {{{{ height:32px; width:32px; }}}}
+              .nav-logo span {{{{ color:#FAF8F5; font-size:1.1rem; font-weight:600; }}}}
+              .nav-logo span em {{{{ font-style:normal; color:#D4A574; }}}}
+              .nav-links a {{{{ color:rgba(250,248,245,0.7); text-decoration:none; margin-left:28px; font-size:0.85rem; }}}}
+              .nav-links a:hover {{{{ color:#D4A574; }}}}
+
+              /* Report container */
+              .report {{{{ max-width:720px; margin:0 auto; padding:48px 24px; }}}}
+
+              /* Header */
+              .report-header {{{{ margin-bottom:12px; }}}}
+              .report-date {{{{ font-size:0.72rem; color:#D4A574; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; margin-bottom:8px; }}}}
+              .report-header h1 {{{{ font-size:2rem; font-weight:800; letter-spacing:-1px; margin-bottom:8px; }}}}
+              .badges {{{{ display:flex; gap:8px; align-items:center; margin-bottom:4px; }}}}
+              .ticker-badge {{{{ display:inline-block; background:#f0ede8; padding:3px 12px; border-radius:6px; font-size:0.78rem; font-weight:700; color:#D4A574; }}}}
+              .etf-badge {{{{ background:#e6f9ee; color:#16a34a; }}}}
+
+              /* Hero verdict banner */
+              .hero-banner {{{{ display:flex; align-items:center; justify-content:space-between; background:#1a1a2e; border-radius:16px; padding:32px; margin:24px 0 16px; }}}}
+              .hero-left, .hero-right {{{{ text-align:center; min-width:120px; }}}}
+              .hero-price-label {{{{ font-size:0.68rem; text-transform:uppercase; letter-spacing:1px; color:rgba(250,248,245,0.5); margin-bottom:4px; }}}}
+              .hero-price {{{{ font-size:1.6rem; font-weight:800; color:#FAF8F5; }}}}
+              .hero-iv {{{{ font-size:1.6rem; font-weight:800; color:#D4A574; }}}}
+              .score-max {{{{ font-size:0.9rem; font-weight:500; color:rgba(212,165,116,0.6); }}}}
+              .hero-center {{{{ text-align:center; flex:1; padding:0 20px; }}}}
+              .verdict-pill {{{{ display:inline-block; padding:6px 20px; border-radius:24px; font-size:0.85rem; font-weight:700; }}}}
+              .verdict-great {{{{ background:rgba(22,163,74,0.2); color:#4ade80; }}}}
+              .verdict-good {{{{ background:rgba(34,197,94,0.2); color:#86efac; }}}}
+              .verdict-fair {{{{ background:rgba(202,138,4,0.2); color:#fbbf24; }}}}
+              .verdict-bad {{{{ background:rgba(220,38,38,0.2); color:#fca5a5; }}}}
+              .verdict-desc {{{{ font-size:0.78rem; color:rgba(250,248,245,0.45); margin-top:8px; font-weight:400; }}}}
+
+              /* Margin of safety bar */
+              .mos-bar {{{{ margin-bottom:24px; }}}}
+              .mos-label {{{{ font-size:0.78rem; color:#888; margin-bottom:6px; }}}}
+              .mos-label strong {{{{ color:#1a1a2e; }}}}
+              .mos-track {{{{ height:6px; background:#f0ede8; border-radius:3px; overflow:hidden; }}}}
+              .mos-fill {{{{ height:100%; border-radius:3px; transition:width 0.5s; }}}}
+              .mos-great {{{{ background:#16a34a; }}}}
+              .mos-good {{{{ background:#22c55e; }}}}
+              .mos-fair {{{{ background:#ca8a04; }}}}
+              .mos-bad {{{{ background:#dc2626; }}}}
+
+              /* Detail metrics grid */
+              .detail-grid {{{{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }}}}
+              .detail-card {{{{ background:#fff; border:1px solid #eee; border-radius:10px; padding:16px; text-align:center; }}}}
+              .detail-label {{{{ font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; color:#aaa; margin-bottom:4px; }}}}
+              .detail-val {{{{ font-size:1.05rem; font-weight:700; color:#1a1a2e; }}}}
+
+              /* Score breakdown */
+              .breakdown {{{{ background:#fff; border:1px solid #eee; border-radius:14px; padding:24px; margin-bottom:24px; }}}}
+              .breakdown h3 {{{{ font-size:0.82rem; text-transform:uppercase; letter-spacing:1px; color:#aaa; margin-bottom:16px; }}}}
+              .bar-row {{{{ display:flex; align-items:center; margin-bottom:12px; gap:10px; }}}}
+              .bar-icon {{{{ font-size:1rem; width:24px; text-align:center; }}}}
+              .bar-label {{{{ font-size:0.82rem; color:#555; width:130px; flex-shrink:0; font-weight:500; }}}}
+              .bar-track {{{{ flex:1; height:8px; background:#f0ede8; border-radius:4px; overflow:hidden; }}}}
+              .bar-fill {{{{ height:100%; border-radius:4px; }}}}
+              .bar-great {{{{ background:#16a34a; }}}}
+              .bar-good {{{{ background:#22c55e; }}}}
+              .bar-fair {{{{ background:#ca8a04; }}}}
+              .bar-bad {{{{ background:#dc2626; }}}}
+              .bar-val {{{{ font-size:0.82rem; font-weight:700; color:#1a1a2e; width:30px; text-align:right; }}}}
+
+              /* Holdings */
+              .holdings {{{{ background:#fff; border:1px solid #eee; border-radius:14px; padding:24px; margin-bottom:24px; }}}}
+              .holdings h3 {{{{ font-size:0.82rem; text-transform:uppercase; letter-spacing:1px; color:#aaa; margin-bottom:16px; }}}}
+              .holding-row {{{{ display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f5f3f0; }}}}
+              .holding-row:last-child {{{{ border-bottom:none; }}}}
+              .holding-name {{{{ font-size:0.85rem; color:#555; }}}}
+              .holding-weight {{{{ font-size:0.85rem; font-weight:600; color:#1a1a2e; }}}}
+
+              /* AI sections */
+              .ai-section {{{{ background:#fff; border:1px solid #eee; border-radius:14px; padding:24px 28px; margin-bottom:14px; }}}}
+              .ai-title {{{{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }}}}
+              .ai-icon {{{{ font-size:1.2rem; }}}}
+              .ai-section h3 {{{{ font-size:0.95rem; font-weight:700; color:#1a1a2e; }}}}
+              .ai-section p {{{{ font-size:0.88rem; color:#555; line-height:1.7; }}}}
+
+              /* CTA */
+              .cta-box {{{{ text-align:center; padding:48px 32px; margin:36px 0; background:#1a1a2e; border-radius:16px; }}}}
+              .cta-box p {{{{ color:rgba(250,248,245,0.5); margin-bottom:16px; font-size:0.9rem; }}}}
+              .cta-btn {{{{ display:inline-block; background:#D4A574; color:#1a1a2e; padding:14px 36px; border-radius:10px; font-weight:700; text-decoration:none; font-size:0.95rem; }}}}
+
+              /* Footer */
+              .disclaimer {{{{ text-align:center; padding:20px 24px; background:#f0ede8; font-size:0.72rem; color:#aaa; }}}}
+              .disclaimer a {{{{ color:#D4A574; }}}}
+              footer {{{{ text-align:center; padding:28px 24px; color:#bbb; font-size:0.8rem; background:#1a1a2e; }}}}
+              footer a {{{{ color:#D4A574; text-decoration:none; }}}}
+
+              @media (max-width:768px) {{{{
+                nav {{{{ padding:14px 20px; }}}}
+                .report-header h1 {{{{ font-size:1.5rem; }}}}
+                .hero-banner {{{{ flex-direction:column; gap:20px; padding:24px; }}}}
+                .detail-grid {{{{ grid-template-columns:repeat(2,1fr); }}}}
+                .bar-label {{{{ width:100px; }}}}
+              }}}}
             </style>
           </head>
           <body>
@@ -233,12 +365,13 @@ jobs:
               <div class="report-header">
                 <div class="report-date">AZAI Oracle Report &mdash; {date_str}</div>
                 <h1>{html.escape(name)}</h1>
-                <span class="ticker-badge">{ticker}</span>
-                {'<span class="ticker-badge etf-badge">ETF</span>' if is_etf else ''}
-                <div><span class="verdict-pill verdict-{vc}">{verdict}</span></div>
+                <div class="badges">
+                  <span class="ticker-badge">{ticker}</span>
+                  {'<span class="ticker-badge etf-badge">ETF</span>' if is_etf else ''}
+                </div>
               </div>
-              {metrics_html}
-              {breakdown_html}
+              {hero_metrics}
+              {details_html}
               {ai_html}
               <div class="cta-box">
                 <p>Get real-time analysis with the AZAI Oracle app</p>
@@ -256,82 +389,73 @@ jobs:
               published.append(ticker)
               print(f"Published: {filepath}")
 
-          # Update sitemap with new picks
+          # ─── Update sitemap (scan ALL existing pick files) ─────────
           sitemap_entries = []
           for f in os.listdir('picks'):
               if f.endswith('.html') and f != 'index.html':
                   sitemap_entries.append(f'  <url>\n    <loc>https://azai.ca/picks/{f}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>')
 
-          # Read existing sitemap and append
           with open('sitemap.xml', 'r') as f:
               sitemap = f.read()
 
+          # Remove old pick URLs, then re-add all
+          sitemap = re.sub(r'\s*<url>\s*<loc>https://azai\.ca/picks/[^<]+</loc>.*?</url>', '', sitemap, flags=re.DOTALL)
           if sitemap_entries:
               insert_point = sitemap.rfind('</urlset>')
               new_sitemap = sitemap[:insert_point] + '\n'.join(sitemap_entries) + '\n' + sitemap[insert_point:]
               with open('sitemap.xml', 'w') as f:
                   f.write(new_sitemap)
 
-          # Update picks index with cards
-          cards_html = ""
-          all_picks_data = []  # for homepage
-          for pick in picks:
-              rd = pick.get('reportData', pick)
-              t = rd.get('ticker', '?')
-              s = t.lower().replace('.', '-')
-              n = html.escape(rd.get('companyName', t))
-              v = rd.get('verdict', 'N/A')
-              vc2 = 'great' if 'Great' in v else 'good' if 'Good' in v else 'fair' if 'Fair' in v else 'bad'
-              is_e = rd.get('type') == 'etf'
-              p = rd.get('currentPrice', 'N/A')
-              iv2 = rd.get('intrinsicValue', '')
-              eps2 = rd.get('eps', '')
-              pe2 = rd.get('peRatio', '')
-              mos2 = rd.get('marginOfSafety', '')
-              ts2 = rd.get('timestamp', pick.get('timestamp', ''))
-              try:
-                  ds = datetime.fromisoformat(str(ts2).replace('Z', '+00:00')).strftime('%b %d, %Y')
-              except:
-                  ds = str(ts2)[:10]
-              # Compute IV if missing
-              if not iv2 and mos2 and p not in ('N/A', None, ''):
-                  try:
-                      iv2 = round(float(p) / (1 + abs(float(mos2)) / 100), 2) if float(mos2) < 0 else round(float(p) * (1 + float(mos2) / 100), 2)
-                  except: pass
-              # Compute PE if missing
-              if not pe2 and p not in ('N/A', None, '') and eps2 not in ('N/A', None, '', 0):
-                  try: pe2 = round(float(p) / float(eps2), 1)
-                  except: pass
-              # Round
-              try: p = round(float(p), 2)
-              except: pass
-              try: iv2 = round(float(iv2), 2)
-              except: pass
-              try: mos2 = round(float(mos2), 1)
-              except: pass
+          # ─── Build picks index from ALL existing HTML files (preserves old picks) ──
+          all_picks_data = []
+          for fname in sorted(os.listdir('picks'), reverse=True):
+              if not fname.endswith('.html') or fname == 'index.html':
+                  continue
+              slug_name = fname.replace('.html', '')
+              fpath = os.path.join('picks', fname)
+              with open(fpath, 'r') as ef:
+                  ehtml = ef.read()
+              # Extract metadata from the generated page
+              title_m = re.search(r'<h1>(.*?)</h1>', ehtml)
+              ticker_m = re.search(r'<span class="ticker-badge">(\w+)</span>', ehtml)
+              verdict_m = re.search(r'<span class="verdict-pill verdict-(\w+)">(.*?)</span>', ehtml)
+              date_m = re.search(r'AZAI Oracle Report &mdash; (.*?)</div>', ehtml)
+              price_m = re.search(r'hero-price">\$([\d.]+)', ehtml)
+              iv_m = re.search(r'hero-iv">\$([\d.]+)', ehtml)
+              score_m = re.search(r'hero-iv">([\d.]+)<span class="score-max">', ehtml)
+              etf_m = re.search(r'etf-badge', ehtml)
+
+              t = ticker_m.group(1) if ticker_m else slug_name.upper()
+              n = title_m.group(1) if title_m else slug_name.upper()
+              v = verdict_m.group(2) if verdict_m else 'N/A'
+              vc2 = verdict_m.group(1) if verdict_m else 'bad'
+              ds = date_m.group(1) if date_m else ''
+              p = price_m.group(1) if price_m else 'N/A'
+              is_e = bool(etf_m)
 
               if is_e:
-                  sub = f"Score: {rd.get('score','N/A')}/100"
-                  detail = f"Yield: {rd.get('yield','N/A')}%"
+                  sc = score_m.group(1) if score_m else 'N/A'
+                  sub = f"Score: {sc}/100"
               else:
-                  sub = f"Intrinsic Value: ${iv2}" if iv2 else f"EPS: ${eps2}"
-                  detail = f"P/E: {pe2} &middot; MoS: {mos2}%" if pe2 else ""
+                  iv_val = iv_m.group(1) if iv_m else ''
+                  sub = f"Intrinsic Value: ${iv_val}" if iv_val else ''
 
-              cards_html += f'''<a href="/picks/{s}.html" class="pick-card">
-                <div class="pick-top"><span class="pick-ticker">{t}</span><span class="pick-date">{ds}</span></div>
-                <div class="pick-name">{n}</div>
-                <div class="pick-sub">${p} &middot; {sub}</div>
-                <div class="pick-detail">{detail}</div>
-                <span class="verdict-pill verdict-{vc2}">{v}</span>
-              </a>\n'''
               all_picks_data.append({
-                  'ticker': t, 'slug': s, 'name': n, 'verdict': v, 'vc': vc2,
-                  'price': p, 'iv': iv2, 'pe': pe2, 'mos': mos2, 'date': ds,
-                  'is_etf': is_e, 'sub': sub, 'detail': detail
+                  'ticker': t, 'slug': slug_name, 'name': n, 'verdict': v, 'vc': vc2,
+                  'price': p, 'date': ds, 'is_etf': is_e, 'sub': sub,
               })
 
-          if cards_html:
-              index_html = f'''<!DOCTYPE html>
+          # ── Generate picks/index.html with ALL picks ──
+          cards_html = ""
+          for pd in all_picks_data:
+              cards_html += f'''<a href="/picks/{pd['slug']}.html" class="pick-card">
+                <div class="pick-top"><span class="pick-ticker">{pd['ticker']}</span><span class="pick-date">{pd['date']}</span></div>
+                <div class="pick-name">{html.escape(pd['name'])}</div>
+                <div class="pick-sub">${pd['price']} &middot; {pd['sub']}</div>
+                <span class="verdict-pill verdict-{pd['vc']}">{pd['verdict']}</span>
+              </a>\n'''
+
+          index_html = f'''<!DOCTYPE html>
           <html lang="en">
           <head>
             <meta charset="UTF-8">
@@ -340,35 +464,34 @@ jobs:
             <meta name="description" content="Browse top-rated stock and ETF analyses from AZAI Oracle users. Intrinsic value, AI insights, and verdicts.">
             <link rel="canonical" href="https://azai.ca/picks/">
             <link rel="icon" type="image/png" href="/favicon.png">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
             <style>
-              * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-              body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }}
-              nav {{ display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }}
-              .nav-logo {{ display: flex; align-items: center; gap: 10px; text-decoration: none; }}
-              .nav-logo img {{ height: 32px; width: 32px; }}
-              .nav-logo span {{ color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }}
-              .nav-logo span em {{ font-style: normal; color: #D4A574; }}
-              .nav-links a {{ color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }}
-              .container {{ max-width: 800px; margin: 0 auto; padding: 48px 24px; }}
-              h1 {{ font-size: 1.6rem; margin-bottom: 8px; }}
-              .subtitle {{ color: #888; margin-bottom: 32px; }}
-              .picks-grid {{ display: grid; gap: 16px; }}
-              .pick-card {{ display: block; background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; }}
-              .pick-card:hover {{ box-shadow: 0 4px 16px rgba(0,0,0,0.08); }}
-              .pick-top {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }}
-              .pick-ticker {{ font-weight: 700; color: #D4A574; font-size: 0.9rem; }}
-              .pick-date {{ font-size: 0.72rem; color: #aaa; }}
-              .pick-name {{ font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }}
-              .pick-sub {{ font-size: 0.82rem; color: #666; margin-bottom: 4px; }}
-              .pick-detail {{ font-size: 0.75rem; color: #999; margin-bottom: 8px; }}
-              .verdict-pill {{ display: inline-block; padding: 3px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; }}
-              .verdict-great {{ background: #e6f9ee; color: #16a34a; }}
-              .verdict-good {{ background: #e6f9ee; color: #22c55e; }}
-              .verdict-fair {{ background: #fef9e7; color: #ca8a04; }}
-              .verdict-bad {{ background: #fee; color: #dc2626; }}
-              .empty {{ text-align: center; padding: 60px; color: #aaa; }}
-              footer {{ text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; margin-top: 60px; }}
-              footer a {{ color: #D4A574; text-decoration: none; }}
+              * {{{{ margin:0; padding:0; box-sizing:border-box; }}}}
+              body {{{{ font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:#FAF8F5; color:#1a1a2e; line-height:1.6; }}}}
+              nav {{{{ display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:#1a1a2e; }}}}
+              .nav-logo {{{{ display:flex; align-items:center; gap:10px; text-decoration:none; }}}}
+              .nav-logo img {{{{ height:32px; width:32px; }}}}
+              .nav-logo span {{{{ color:#FAF8F5; font-size:1.1rem; font-weight:600; }}}}
+              .nav-logo span em {{{{ font-style:normal; color:#D4A574; }}}}
+              .nav-links a {{{{ color:rgba(250,248,245,0.7); text-decoration:none; margin-left:28px; font-size:0.85rem; }}}}
+              .container {{{{ max-width:800px; margin:0 auto; padding:48px 24px; }}}}
+              h1 {{{{ font-size:1.6rem; margin-bottom:8px; }}}}
+              .subtitle {{{{ color:#888; margin-bottom:32px; }}}}
+              .picks-grid {{{{ display:grid; gap:16px; }}}}
+              .pick-card {{{{ display:block; background:#fff; border:1px solid #eee; border-radius:12px; padding:20px; text-decoration:none; color:inherit; transition:box-shadow 0.2s; }}}}
+              .pick-card:hover {{{{ box-shadow:0 4px 16px rgba(0,0,0,0.08); }}}}
+              .pick-top {{{{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }}}}
+              .pick-ticker {{{{ font-weight:700; color:#D4A574; font-size:0.9rem; }}}}
+              .pick-date {{{{ font-size:0.72rem; color:#aaa; }}}}
+              .pick-name {{{{ font-size:1.05rem; font-weight:600; margin-bottom:4px; }}}}
+              .pick-sub {{{{ font-size:0.82rem; color:#666; margin-bottom:8px; }}}}
+              .verdict-pill {{{{ display:inline-block; padding:3px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; }}}}
+              .verdict-great {{{{ background:#e6f9ee; color:#16a34a; }}}}
+              .verdict-good {{{{ background:#e6f9ee; color:#22c55e; }}}}
+              .verdict-fair {{{{ background:#fef9e7; color:#ca8a04; }}}}
+              .verdict-bad {{{{ background:#fee; color:#dc2626; }}}}
+              footer {{{{ text-align:center; padding:28px 24px; color:#bbb; font-size:0.8rem; background:#1a1a2e; margin-top:60px; }}}}
+              footer a {{{{ color:#D4A574; text-decoration:none; }}}}
             </style>
           </head>
           <body>
@@ -384,35 +507,34 @@ jobs:
             <footer><p>&copy; 2026 AZAI Oracle &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p></footer>
           </body>
           </html>'''
-              with open('picks/index.html', 'w') as f:
-                  f.write(index_html)
-              print("Updated picks/index.html")
+          with open('picks/index.html', 'w') as f:
+              f.write(index_html)
+          print("Updated picks/index.html with ALL picks")
 
-          # Update homepage picks section
+          # ─── Update homepage picks section (use comment markers for safe replacement) ──
           if all_picks_data:
-              import re
               homepage_cards = ""
               for pd in all_picks_data[:6]:
-                  homepage_cards += f'''<a href="/picks/{pd['slug']}.html" class="pick-card">
-                <div class="pick-header"><span class="pick-ticker">{pd['ticker']}</span><span class="pick-date">{pd['date']}</span></div>
+                  homepage_cards += f'''      <a href="/picks/{pd['slug']}.html" class="pick-card">
+                <div class="pick-header"><span class="pick-ticker">{pd['ticker']}</span><span class="pick-date">{pd['date']}</span><span class="verdict verdict-{pd['vc']}">{pd['verdict']}</span></div>
                 <div class="pick-name">{html.escape(pd['name'])}</div>
                 <div class="pick-metrics">${pd['price']} &middot; {pd['sub']}</div>
-                <span class="verdict verdict-{pd['vc']}">{pd['verdict']}</span>
               </a>\n'''
 
               with open('index.html', 'r') as f:
                   homepage = f.read()
 
-              # Replace the picks-grid content
-              new_grid = f'<div class="picks-grid" id="picks-grid">\n{homepage_cards}    </div>'
+              # Match the entire picks-grid div by finding the closing </div> that's
+              # followed by the picks-cta div (unique landmark), not just the first </div>
               homepage = re.sub(
-                  r'<div class="picks-grid" id="picks-grid">.*?</div>',
-                  new_grid, homepage, flags=re.DOTALL
+                  r'<div class="picks-grid" id="picks-grid">.*?</div>\s*(?=<div class="picks-cta">)',
+                  f'<div class="picks-grid" id="picks-grid">\n{homepage_cards}    </div>\n    ',
+                  homepage, flags=re.DOTALL
               )
 
               with open('index.html', 'w') as f:
                   f.write(homepage)
-              print("Updated homepage with latest picks")
+              print("Updated homepage with latest 6 picks")
 
           print(f"\nPublished {len(published)} new picks: {[p for p in published]}")
           PYEOF
