@@ -50,6 +50,7 @@
       color: #1a1a2e;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* Nav */
@@ -70,7 +71,7 @@
       gap: 10px;
       text-decoration: none;
     }
-    .nav-logo img { height: 28px; width: 28px; }
+    .nav-logo img { height: 28px; width: 28px; background: #1a1a2e; border-radius: 7px; }
     .nav-logo span {
       color: #1a1a2e;
       font-size: 1rem;
@@ -275,20 +276,6 @@
       font-size: 0.9rem;
       color: #555;
     }
-    .feature-list li::before {
-      content: '';
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      background: rgba(212,165,116,0.15);
-      border-radius: 50%;
-      margin-top: 2px;
-      position: relative;
-    }
-    .feature-list li::after {
-      content: '';
-      position: absolute;
-    }
     .check {
       flex-shrink: 0;
       width: 20px;
@@ -362,7 +349,7 @@
       margin-bottom: 12px;
     }
     .pick-ticker { font-size: 1.1rem; font-weight: 700; }
-    .pick-verdict {
+    .pick-verdict, .verdict {
       font-size: 0.72rem;
       font-weight: 600;
       padding: 3px 10px;
@@ -372,6 +359,7 @@
     .verdict-good { background: #e6f9ee; color: #22c55e; }
     .verdict-fair { background: #fef9e7; color: #ca8a04; }
     .verdict-bad { background: #fee; color: #dc2626; }
+    .pick-date { font-size: 0.72rem; color: #bbb; margin-left: auto; margin-right: 8px; }
     .pick-name { font-size: 0.82rem; color: #888; margin-bottom: 16px; }
     .pick-metrics { display: flex; justify-content: space-between; }
     .pick-metric { text-align: center; flex: 1; }
@@ -480,6 +468,7 @@
       .nav-links a:not(.nav-cta) { display: none; }
       .value-strip-inner { grid-template-columns: 1fr 1fr; }
       .hero-proof { gap: 24px; }
+      .nav-logo span { display: none; }
     }
   </style>
 </head>
@@ -612,34 +601,41 @@
       <p>Top-rated analyses from our community. Updated as users discover value.</p>
     </div>
     <div class="picks-grid" id="picks-grid">
-<a href="/picks/arm.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">ARM</span><span class="pick-date">Mar 25, 2026</span></div>
-      <div class="pick-name">Arm Holdings plc</div>
-      <div class="pick-metrics">$162.2 &middot; Intrinsic Value: $81.1</div>
-      <span class="verdict verdict-bad">Bad Deal</span>
-    </a>
-<a href="/picks/mda.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">MDA</span><span class="pick-date">Mar 25, 2026</span></div>
-      <div class="pick-name">MDA Space Ltd.</div>
-      <div class="pick-metrics">$26.91 &middot; Intrinsic Value: $13.46</div>
-      <span class="verdict verdict-bad">Bad Deal</span>
-    </a>
-<a href="/picks/gme.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">GME</span><span class="pick-date">Mar 25, 2026</span></div>
-      <div class="pick-name">GameStop Corporation</div>
-      <div class="pick-metrics">$23.03 &middot; Intrinsic Value: $11.52</div>
-      <span class="verdict verdict-bad">Bad Deal</span>
-    </a>
-<a href="/picks/rklb.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">RKLB</span><span class="pick-date">Mar 25, 2026</span></div>
-      <div class="pick-name">Rocket Lab Corporation</div>
-      <div class="pick-metrics">$73.21 &middot; Intrinsic Value: $36.6</div>
-      <span class="verdict verdict-bad">Bad Deal</span>
-    </a>
-    </div>
-        <div class="pick-name">UnitedHealth Group Incorporated</div>
-        <div class="pick-metrics">$272.28 &middot; Intrinsic Value: $161.26</div>
-        <span class="pick-verdict verdict-bad">Bad Deal</span>
+      <a href="/picks/arm.html" class="pick-card">
+        <div class="pick-header">
+          <span class="pick-ticker">ARM</span>
+          <span class="pick-date">Mar 25, 2026</span>
+          <span class="verdict verdict-bad">Bad Deal</span>
+        </div>
+        <div class="pick-name">Arm Holdings plc</div>
+        <div class="pick-metrics">$162.2 &middot; Intrinsic Value: $81.1</div>
+      </a>
+      <a href="/picks/mda.html" class="pick-card">
+        <div class="pick-header">
+          <span class="pick-ticker">MDA</span>
+          <span class="pick-date">Mar 25, 2026</span>
+          <span class="verdict verdict-bad">Bad Deal</span>
+        </div>
+        <div class="pick-name">MDA Space Ltd.</div>
+        <div class="pick-metrics">$26.91 &middot; Intrinsic Value: $13.46</div>
+      </a>
+      <a href="/picks/gme.html" class="pick-card">
+        <div class="pick-header">
+          <span class="pick-ticker">GME</span>
+          <span class="pick-date">Mar 25, 2026</span>
+          <span class="verdict verdict-bad">Bad Deal</span>
+        </div>
+        <div class="pick-name">GameStop Corporation</div>
+        <div class="pick-metrics">$23.03 &middot; Intrinsic Value: $11.52</div>
+      </a>
+      <a href="/picks/rklb.html" class="pick-card">
+        <div class="pick-header">
+          <span class="pick-ticker">RKLB</span>
+          <span class="pick-date">Mar 25, 2026</span>
+          <span class="verdict verdict-bad">Bad Deal</span>
+        </div>
+        <div class="pick-name">Rocket Lab Corporation</div>
+        <div class="pick-metrics">$73.21 &middot; Intrinsic Value: $36.6</div>
       </a>
     </div>
     <div class="picks-cta">
