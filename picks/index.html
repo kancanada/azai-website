@@ -7,33 +7,34 @@
   <meta name="description" content="Browse top-rated stock and ETF analyses from AZAI Oracle users. Intrinsic value, AI insights, and verdicts.">
   <link rel="canonical" href="https://azai.ca/picks/">
   <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #1a1a2e; line-height: 1.6; }
-    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: #1a1a2e; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 32px; width: 32px; }
-    .nav-logo span { color: #FAF8F5; font-size: 1.1rem; font-weight: 600; }
-    .nav-logo span em { font-style: normal; color: #D4A574; }
-    .nav-links a { color: rgba(250,248,245,0.7); text-decoration: none; margin-left: 28px; font-size: 0.85rem; }
-    .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
-    h1 { font-size: 1.6rem; margin-bottom: 8px; }
-    .subtitle { color: #888; margin-bottom: 32px; }
-    .picks-grid { display: grid; gap: 16px; }
-    .pick-card { display: block; background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: box-shadow 0.2s; }
-    .pick-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .pick-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .pick-ticker { font-weight: 700; color: #D4A574; font-size: 0.9rem; }
-    .pick-date { font-size: 0.72rem; color: #aaa; }
-    .pick-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
-    .pick-sub { font-size: 0.82rem; color: #666; margin-bottom: 8px; }
-    .verdict-pill { display: inline-block; padding: 3px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; }
-    .verdict-great { background: #e6f9ee; color: #16a34a; }
-    .verdict-good { background: #e6f9ee; color: #22c55e; }
-    .verdict-fair { background: #fef9e7; color: #ca8a04; }
-    .verdict-bad { background: #fee; color: #dc2626; }
-    footer { text-align: center; padding: 28px 24px; color: #bbb; font-size: 0.8rem; background: #1a1a2e; margin-top: 60px; }
-    footer a { color: #D4A574; text-decoration: none; }
+    * {{ margin:0; padding:0; box-sizing:border-box; }}
+    body {{ font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:#FAF8F5; color:#1a1a2e; line-height:1.6; }}
+    nav {{ display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:#1a1a2e; }}
+    .nav-logo {{ display:flex; align-items:center; gap:10px; text-decoration:none; }}
+    .nav-logo img {{ height:32px; width:32px; }}
+    .nav-logo span {{ color:#FAF8F5; font-size:1.1rem; font-weight:600; }}
+    .nav-logo span em {{ font-style:normal; color:#D4A574; }}
+    .nav-links a {{ color:rgba(250,248,245,0.7); text-decoration:none; margin-left:28px; font-size:0.85rem; }}
+    .container {{ max-width:800px; margin:0 auto; padding:48px 24px; }}
+    h1 {{ font-size:1.6rem; margin-bottom:8px; }}
+    .subtitle {{ color:#888; margin-bottom:32px; }}
+    .picks-grid {{ display:grid; gap:16px; }}
+    .pick-card {{ display:block; background:#fff; border:1px solid #eee; border-radius:12px; padding:20px; text-decoration:none; color:inherit; transition:box-shadow 0.2s; }}
+    .pick-card:hover {{ box-shadow:0 4px 16px rgba(0,0,0,0.08); }}
+    .pick-top {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }}
+    .pick-ticker {{ font-weight:700; color:#D4A574; font-size:0.9rem; }}
+    .pick-date {{ font-size:0.72rem; color:#aaa; }}
+    .pick-name {{ font-size:1.05rem; font-weight:600; margin-bottom:4px; }}
+    .pick-sub {{ font-size:0.82rem; color:#666; margin-bottom:8px; }}
+    .verdict-pill {{ display:inline-block; padding:3px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; }}
+    .verdict-great {{ background:#e6f9ee; color:#16a34a; }}
+    .verdict-good {{ background:#e6f9ee; color:#22c55e; }}
+    .verdict-fair {{ background:#fef9e7; color:#ca8a04; }}
+    .verdict-bad {{ background:#fee; color:#dc2626; }}
+    footer {{ text-align:center; padding:28px 24px; color:#bbb; font-size:0.8rem; background:#1a1a2e; margin-top:60px; }}
+    footer a {{ color:#D4A574; text-decoration:none; }}
   </style>
 </head>
 <body>
@@ -44,68 +45,115 @@
   <div class="container">
     <h1>AZAI Picks</h1>
     <p class="subtitle">Top-rated analyses from AZAI Oracle users</p>
-    <div class="picks-grid">
-      <a href="/picks/adbe.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">ADBE</span><span class="pick-date">Mar 27, 2026</span></div>
-        <div class="pick-name">Adobe Inc.</div>
-        <div class="pick-sub">$235.23 &middot; Intrinsic Value: $306.38</div>
-        <span class="verdict-pill verdict-great">Great Deal</span>
-      </a>
-      <a href="/picks/cpb.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">CPB</span><span class="pick-date">Mar 27, 2026</span></div>
-        <div class="pick-name">The Campbell's Company</div>
-        <div class="pick-sub">$21.91 &middot; Intrinsic Value: $24.94</div>
-        <span class="verdict-pill verdict-good">Good Deal</span>
-      </a>
-      <a href="/picks/gild.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">GILD</span><span class="pick-date">Mar 27, 2026</span></div>
-        <div class="pick-name">Gilead Sciences, Inc.</div>
-        <div class="pick-sub">$135.56 &middot; Intrinsic Value: $148.39</div>
-        <span class="verdict-pill verdict-good">Good Deal</span>
-      </a>
-      <a href="/picks/vz.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">VZ</span><span class="pick-date">Mar 27, 2026</span></div>
-        <div class="pick-name">Verizon Communications Inc.</div>
-        <div class="pick-sub">$50.56 &middot; Intrinsic Value: $49.49</div>
-        <span class="verdict-pill verdict-fair">Fair Deal</span>
-      </a>
-      <a href="/picks/aapl.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">AAPL</span><span class="pick-date">Mar 27, 2026</span></div>
-        <div class="pick-name">Apple Inc.</div>
-        <div class="pick-sub">$252.35 &middot; Intrinsic Value: $96.17</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-      <a href="/picks/arm.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">ARM</span><span class="pick-date">Mar 25, 2026</span></div>
-        <div class="pick-name">Arm Holdings plc</div>
-        <div class="pick-sub">$162.20 &middot; Intrinsic Value: $81.10</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-      <a href="/picks/mda.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">MDA</span><span class="pick-date">Mar 25, 2026</span></div>
-        <div class="pick-name">MDA Space Ltd.</div>
-        <div class="pick-sub">$26.91 &middot; Intrinsic Value: $13.46</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-      <a href="/picks/gme.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">GME</span><span class="pick-date">Mar 25, 2026</span></div>
-        <div class="pick-name">GameStop Corporation</div>
-        <div class="pick-sub">$23.03 &middot; Intrinsic Value: $11.52</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-      <a href="/picks/rklb.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">RKLB</span><span class="pick-date">Mar 25, 2026</span></div>
-        <div class="pick-name">Rocket Lab Corporation</div>
-        <div class="pick-sub">$73.21 &middot; Intrinsic Value: $36.60</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-      <a href="/picks/unh.html" class="pick-card">
-        <div class="pick-top"><span class="pick-ticker">UNH</span><span class="pick-date">Mar 24, 2026</span></div>
-        <div class="pick-name">UnitedHealth Group Incorporated</div>
-        <div class="pick-sub">$272.28 &middot; Intrinsic Value: $161.26</div>
-        <span class="verdict-pill verdict-bad">Bad Deal</span>
-      </a>
-    </div>
+    <div class="picks-grid"><a href="/picks/vz.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">VZ</span><span class="pick-date">March 27, 2026</span></div>
+      <div class="pick-name">Verizon Communications Inc.</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-fair">Fair Deal</span>
+    </a>
+<a href="/picks/vfv-to.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">VFV-TO</span><span class="pick-date">March 29, 2026</span></div>
+      <div class="pick-name">VANGUARD SP 500 INDEX ETF</div>
+      <div class="pick-sub">$156.7 &middot; Score: 73.0/100</div>
+      <span class="verdict-pill verdict-good">Good Deal</span>
+    </a>
+<a href="/picks/unh.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">UNH</span><span class="pick-date"></span></div>
+      <div class="pick-name">UnitedHealth Group Incorporated</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/uber.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">UBER</span><span class="pick-date">March 28, 2026</span></div>
+      <div class="pick-name">Uber Technologies, Inc.</div>
+      <div class="pick-sub">$69.18 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/sap.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">SAP</span><span class="pick-date">March 31, 2026</span></div>
+      <div class="pick-name">SAP  SE</div>
+      <div class="pick-sub">$168.29 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/rklb.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">RKLB</span><span class="pick-date">March 25, 2026</span></div>
+      <div class="pick-name">Rocket Lab Corporation</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/pltr.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">PLTR</span><span class="pick-date">March 30, 2026</span></div>
+      <div class="pick-name">Palantir Technologies Inc.</div>
+      <div class="pick-sub">$143.06 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/mda.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">MDA</span><span class="pick-date">March 25, 2026</span></div>
+      <div class="pick-name">MDA Space Ltd.</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/gme.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">GME</span><span class="pick-date">March 25, 2026</span></div>
+      <div class="pick-name">GameStop Corporation</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/gild.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">GILD</span><span class="pick-date">March 27, 2026</span></div>
+      <div class="pick-name">Gilead Sciences, Inc.</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-good">Good Deal</span>
+    </a>
+<a href="/picks/crm.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">CRM</span><span class="pick-date">March 31, 2026</span></div>
+      <div class="pick-name">Salesforce, Inc.</div>
+      <div class="pick-sub">$185.03 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/cpb.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">CPB</span><span class="pick-date">March 27, 2026</span></div>
+      <div class="pick-name">The Campbell&amp;#x27;s Company</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-good">Good Deal</span>
+    </a>
+<a href="/picks/ci.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">CI</span><span class="pick-date">March 28, 2026</span></div>
+      <div class="pick-name">The Cigna Group</div>
+      <div class="pick-sub">$261.96 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-good">Good Deal</span>
+    </a>
+<a href="/picks/bce-to.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">BCE-TO</span><span class="pick-date">March 29, 2026</span></div>
+      <div class="pick-name">BCE INC.</div>
+      <div class="pick-sub">$35.06 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/arm.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">ARM</span><span class="pick-date">March 25, 2026</span></div>
+      <div class="pick-name">Arm Holdings plc</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+<a href="/picks/agnc.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">AGNC</span><span class="pick-date">March 29, 2026</span></div>
+      <div class="pick-name">AGNC Investment Corp.</div>
+      <div class="pick-sub">$9.69 &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/adbe.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">ADBE</span><span class="pick-date">March 27, 2026</span></div>
+      <div class="pick-name">Adobe Inc.</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-great">Great Deal</span>
+    </a>
+<a href="/picks/aapl.html" class="pick-card">
+      <div class="pick-top"><span class="pick-ticker">AAPL</span><span class="pick-date">March 27, 2026</span></div>
+      <div class="pick-name">Apple Inc.</div>
+      <div class="pick-sub">$N/A &middot; Score: N/A/100</div>
+      <span class="verdict-pill verdict-bad">Bad Deal</span>
+    </a>
+</div>
   </div>
   <footer><p>&copy; 2026 AZAI Oracle &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p></footer>
 </body>
