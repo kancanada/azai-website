@@ -158,7 +158,7 @@ jobs:
 
               # ── Detail metrics grid ──
               if is_etf:
-                  sb = rd.get('scoreBreakdown', {{}})
+                  sb = rd.get('scoreBreakdown', {})
                   details_html = f'''
                   <div class="detail-grid">
                     <div class="detail-card"><div class="detail-label">Yield</div><div class="detail-val">{yld}%</div></div>
@@ -193,7 +193,7 @@ jobs:
                   </div>'''
 
               # ── AI analysis sections with icons ──
-              ai = rd.get('aiAnalysis', {{}})
+              ai = rd.get('aiAnalysis', {})
               ai_html = ""
               if ai:
                   section_config = [
@@ -389,20 +389,27 @@ jobs:
               published.append(ticker)
               print(f"Published: {filepath}")
 
-          # ─── Update sitemap (scan ALL existing pick files) ─────────
+          # ─── Update sitemap (scan ALL existing pick files, deduplicated) ─────────
+          today = datetime.now().strftime('%Y-%m-%d')
           sitemap_entries = []
-          for f in os.listdir('picks'):
+          seen_urls = set()
+          for f in sorted(os.listdir('picks')):
               if f.endswith('.html') and f != 'index.html':
-                  sitemap_entries.append(f'  <url>\n    <loc>https://azai.ca/picks/{f}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>')
+                  url = f'https://azai.ca/picks/{f}'
+                  if url not in seen_urls:
+                      seen_urls.add(url)
+                      sitemap_entries.append(f'  <url>\n    <loc>{url}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>')
 
           with open('sitemap.xml', 'r') as f:
               sitemap = f.read()
 
-          # Remove old pick URLs, then re-add all
-          sitemap = re.sub(r'\s*<url>\s*<loc>https://azai\.ca/picks/[^<]+</loc>.*?</url>', '', sitemap, flags=re.DOTALL)
+          # Remove ALL pick URLs (including /picks/ index and individual pages)
+          sitemap = re.sub(r'\s*<url>\s*<loc>https://azai\.ca/picks/[^<]*</loc>.*?</url>', '', sitemap, flags=re.DOTALL)
+          # Re-add picks index + deduplicated individual pages
           if sitemap_entries:
               insert_point = sitemap.rfind('</urlset>')
-              new_sitemap = sitemap[:insert_point] + '\n'.join(sitemap_entries) + '\n' + sitemap[insert_point:]
+              picks_index = f'  <url>\n    <loc>https://azai.ca/picks/</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>'
+              new_sitemap = sitemap[:insert_point] + picks_index + '\n' + '\n'.join(sitemap_entries) + '\n' + sitemap[insert_point:]
               with open('sitemap.xml', 'w') as f:
                   f.write(new_sitemap)
 
