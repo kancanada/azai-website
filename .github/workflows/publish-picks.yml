@@ -97,12 +97,12 @@ jobs:
               else:
                   iv = safe_round(rd.get('intrinsicValue'))
                   eps_val = safe_round(rd.get('eps'))
-                  pe = safe_round(rd.get('peRatio'), 1)
+                  pe = safe_round(rd.get('peRatio'), 2)
                   bv = safe_round(rd.get('bookValue'))
                   mos = safe_round(rd.get('marginOfSafety'), 1)
                   # Compute P/E from price/EPS if missing
                   if pe == 'N/A' and price != 'N/A' and eps_val not in ('N/A', 0):
-                      try: pe = round(float(price) / float(eps_val), 1)
+                      try: pe = round(float(price) / float(eps_val), 2)
                       except: pass
                   # Compute IV from MoS if missing
                   if iv == 'N/A' and mos != 'N/A' and price != 'N/A':
@@ -441,8 +441,8 @@ jobs:
               is_e = bool(etf_m)
 
               if is_e:
-                  sc = score_m.group(1) if score_m else 'N/A'
-                  sub = f"Score: {sc}/100"
+                  sc = score_m.group(1) if score_m else ''
+                  sub = f"Score: {sc}/100" if sc else ''
               else:
                   iv_val = iv_m.group(1) if iv_m else ''
                   sub = f"Intrinsic Value: ${iv_val}" if iv_val else ''
@@ -455,10 +455,13 @@ jobs:
           # ── Generate picks/index.html with ALL picks ──
           cards_html = ""
           for pd in all_picks_data:
+              price_str = f"${pd['price']}" if pd['price'] != 'N/A' else ''
+              sub_parts = [x for x in [price_str, pd['sub']] if x]
+              sub_line = ' &middot; '.join(sub_parts)
               cards_html += f'''<a href="/picks/{pd['slug']}.html" class="pick-card">
                 <div class="pick-top"><span class="pick-ticker">{pd['ticker']}</span><span class="pick-date">{pd['date']}</span></div>
                 <div class="pick-name">{html.escape(pd['name'])}</div>
-                <div class="pick-sub">${pd['price']} &middot; {pd['sub']}</div>
+                {f'<div class="pick-sub">{sub_line}</div>' if sub_line else ''}
                 <span class="verdict-pill verdict-{pd['vc']}">{pd['verdict']}</span>
               </a>\n'''
 
