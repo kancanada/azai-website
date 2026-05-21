@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toss — Send files between Mac and Android</title>
+<meta name="description" content="Direct, encrypted file transfer between Mac and Android on the same Wi-Fi. No cloud, no accounts, no telemetry. Pay once, no subscription.">
+<meta name="author" content="AZAI Corp.">
+<link rel="canonical" href="https://azai.ca/toss/">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<meta property="og:title" content="Toss — Send files between Mac and Android">
+<meta property="og:description" content="Direct, encrypted Mac↔Android file transfer. No cloud.">
+<meta property="og:image" content="https://azai.ca/toss/og-image.png">
+<meta property="og:url" content="https://azai.ca/toss/">
+<meta property="og:type" content="website">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+  /* ---- Palette: matches the Toss app theme ---- */
+  :root {
+    --bg:       #F4F2EE;
+    --ink:      #1A1A1A;
+    --ink-soft: #6B6B6B;
+    --hairline: #DDDAD3;
+    --accent:   #D63A1F;
+    --surface:  #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'tnum';
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  a:hover { border-bottom-color: var(--ink); }
+
+  /* ---- Nav ---- */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 960px; margin: 0 auto; padding: 24px 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 500; border: 0; font-size: 14px; }
+  .brand img { width: 24px; height: 24px; }
+  .nav-right { font-size: 13px; color: var(--ink-soft); }
+  .nav-right a { color: var(--ink-soft); border: 0; margin-left: 24px; }
+  .nav-right a:hover { color: var(--ink); }
+
+  /* ---- Hero ---- */
+  .hero {
+    max-width: 960px; margin: 64px auto 96px; padding: 0 40px;
+  }
+  .hero h1 {
+    font-size: 64px; font-weight: 400; letter-spacing: -1.2px;
+    line-height: 1.05; margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--ink-soft); }
+  .hero .tagline {
+    font-size: 18px; color: var(--ink-soft); max-width: 520px;
+    margin-bottom: 48px;
+  }
+
+  /* ---- Download buttons ---- */
+  .downloads { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: var(--bg);
+    padding: 14px 22px; font-size: 14px; font-weight: 500;
+    border: 0; cursor: pointer; letter-spacing: 0.1px;
+    text-decoration: none;
+  }
+  .btn:hover { background: #000; }
+  .btn.outline {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--hairline);
+  }
+  .btn.outline:hover { border-color: var(--ink); background: transparent; }
+  /* Disabled CTA — same shape, muted ink, not clickable. Used
+     for "Launching soon" before launch. */
+  .btn.disabled {
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--hairline);
+    cursor: not-allowed; pointer-events: none;
+  }
+  .btn .meta { font-size: 11px; color: var(--ink-soft); margin-left: 8px; }
+  .btn.outline .meta, .btn.disabled .meta { color: var(--ink-faint, #B5B3AE); }
+
+  /* ---- Sections ---- */
+  section { max-width: 960px; margin: 0 auto; padding: 64px 40px; border-top: 1px solid var(--hairline); }
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--ink-soft); margin-bottom: 24px;
+  }
+  .grid-3 {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px;
+  }
+  .feature h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .feature .n {
+    font-size: 11px; color: var(--ink-soft); margin-bottom: 12px;
+    font-feature-settings: 'tnum';
+  }
+
+  /* ---- How it works ---- */
+  .steps {
+    display: grid; grid-template-columns: 80px 1fr; row-gap: 28px; column-gap: 24px;
+  }
+  .steps .n { font-size: 13px; color: var(--ink-soft); padding-top: 2px; }
+  .steps h3 { font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+  .steps p { font-size: 14px; color: var(--ink-soft); }
+
+  /* ---- Footer ---- */
+  footer {
+    max-width: 960px; margin: 0 auto; padding: 48px 40px 64px;
+    border-top: 1px solid var(--hairline);
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    font-size: 12px; color: var(--ink-soft);
+  }
+  footer .links a {
+    color: var(--ink-soft); border: 0; margin-left: 20px;
+  }
+  footer .links a:hover { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 44px; }
+    .grid-3 { grid-template-columns: 1fr; gap: 32px; }
+    nav { padding: 20px 24px; }
+    .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    footer .links a { margin-left: 0; margin-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/toss/">
+    <img src="favicon.png" alt="Toss">
+    <span>toss</span>
+  </a>
+  <div class="nav-right">
+    <a href="#how">How it works</a>
+    <a href="#download">Download</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</nav>
+
+<header class="hero" id="download">
+  <h1>Send anything <em>between</em><br>Mac and Android.</h1>
+  <p class="tagline">
+    Direct over your Wi-Fi. Encrypted end-to-end. No cloud, no accounts,
+    no telemetry. Pay once.
+  </p>
+
+  <div class="downloads">
+    <span class="btn disabled">
+      Download for Mac
+      <span class="meta">Launching soon</span>
+    </span>
+    <span class="btn disabled">
+      Get on Google Play
+      <span class="meta">Launching soon</span>
+    </span>
+  </div>
+  <p style="font-size:13px;color:var(--ink-soft);margin-top:24px;max-width:520px;">
+    Toss is in final testing. Drop us a note at
+    <a href="mailto:asoni@kancanada.com?subject=Notify%20me%20when%20Toss%20launches"
+       style="color:var(--ink);border-bottom:1px solid var(--hairline);">asoni@kancanada.com</a>
+    to be told the moment it goes live.
+  </p>
+</header>
+
+<section id="how">
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="n">01</div>
+    <div>
+      <h3>Install on both devices</h3>
+      <p>Drag Toss.app into Applications. Install AZAI Toss from Google Play
+         on your phone. Open each once.</p>
+    </div>
+    <div class="n">02</div>
+    <div>
+      <h3>Send</h3>
+      <p>On Mac: drag a file onto the window, or right-click in Finder → Share → Toss.
+         On phone: any file → Share → Toss → pick the Mac.</p>
+    </div>
+    <div class="n">03</div>
+    <div>
+      <h3>Receive</h3>
+      <p>The other device shows an Accept prompt. Approved files land in
+         <code>~/Downloads/Toss/</code> on Mac and in the Gallery / Downloads on phone.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Built differently</div>
+  <div class="grid-3">
+    <div class="feature">
+      <div class="n">01</div>
+      <h3>No cloud</h3>
+      <p>Files go directly between your devices over local Wi-Fi.
+         Nothing touches our servers because we don't have any.</p>
+    </div>
+    <div class="feature">
+      <div class="n">02</div>
+      <h3>End-to-end encrypted</h3>
+      <p>XChaCha20-Poly1305 per chunk. Mutual identity authentication.
+         Forward secrecy on every session.</p>
+    </div>
+    <div class="feature">
+      <div class="n">03</div>
+      <h3>Pay once</h3>
+      <p>Free up to 1 GB per transfer. $29 one-time unlock for larger
+         files. No subscription, no upsell.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Feedback</div>
+  <h3 style="font-size:24px;font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;">
+    Missing something? Tell us.
+  </h3>
+  <p style="font-size:14px;color:var(--ink-soft);margin-bottom:24px;max-width:520px;">
+    No tracker, no roadmap survey. Just write what you want, hit send.
+  </p>
+  <a class="btn outline"
+     href="mailto:asoni@kancanada.com?subject=Toss%20feature%20request&body=What%20I%27d%20like%20Toss%20to%20do%3A%0A%0A">
+    Request a feature
+  </a>
+</section>
+
+<footer>
+  <div>© 2026 AZAI Corp.</div>
+  <div class="links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
+    <a href="https://azai.ca/">AZAI</a>
+  </div>
+</footer>
+
+</body>
+</html>

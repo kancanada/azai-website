@@ -1,664 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AZAI Oracle - Know What a Stock Is Worth Before You Buy</title>
-  <meta name="description" content="AZAI Oracle uses AI and discounted earnings models to calculate intrinsic value for 200+ stocks and ETFs. Free Android app with PDF reports and ETF scoring.">
-  <meta name="keywords" content="stock valuation, intrinsic value calculator, ETF analysis, AI stock analysis, value investing, stock screener, EPS valuation, margin of safety, stock analysis app">
-  <meta name="author" content="AZAI Oracle">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://azai.ca/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZAI Corp. — Software for people who want their tools to work.</title>
+<meta name="description" content="AZAI Corp. builds calm, well-made software. Two products today: AZAI Oracle for stock valuation, and Toss for direct file transfer between Mac and Android.">
+<link rel="canonical" href="https://azai.ca/">
+<link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="AZAI Oracle - Know What a Stock Is Worth">
-  <meta property="og:description" content="Institutional-grade stock & ETF valuation, powered by AI. Free on Android.">
-  <meta property="og:image" content="https://azai.ca/og-image.png">
-  <meta property="og:url" content="https://azai.ca/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="AZAI Oracle">
+<meta property="og:title" content="AZAI Corp.">
+<meta property="og:description" content="Software for people who want their tools to work.">
+<meta property="og:url" content="https://azai.ca/">
+<meta property="og:type" content="website">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AZAI Oracle - Know What a Stock Is Worth">
-  <meta name="twitter:description" content="Institutional-grade stock & ETF valuation, powered by AI. Free on Android.">
-  <meta name="twitter:image" content="https://azai.ca/og-image.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "AZAI Oracle",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Android",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": "AI-powered stock and ETF intrinsic value analysis with discounted earnings models, ETF composite scoring, and shareable PDF reports.",
-    "url": "https://azai.ca",
-    "downloadUrl": "https://play.google.com/store/apps/details?id=com.azai.valueinvestor"
-  }
-  </script>
+:root {
+  --bg:       #F4F2EE;
+  --ink:      #1A1A1A;
+  --ink-soft: #6B6B6B;
+  --ink-faint:#B5B3AE;
+  --hairline: #DDDAD3;
+  --surface:  #FFFFFF;
+}
 
-  <link rel="icon" type="image/png" href="favicon.png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum';
+}
+a { color: var(--ink); text-decoration: none; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #FAF8F5;
-      color: #1a1a2e;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1080px; margin: 0 auto; padding: 28px 48px;
+}
+.brand { font-weight: 500; font-size: 15px; letter-spacing: -0.1px; }
+.brand span { color: var(--ink-soft); margin-left: 6px; font-weight: 400; }
+.nav-right a {
+  font-size: 13px; color: var(--ink-soft); margin-left: 28px;
+}
+.nav-right a:hover { color: var(--ink); }
 
-    /* Nav */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 48px;
-      background: #FAF8F5;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo img { height: 28px; width: 28px; background: #1a1a2e; border-radius: 7px; }
-    .nav-logo span {
-      color: #1a1a2e;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-    .nav-logo span em { font-style: normal; color: #D4A574; }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a {
-      color: #666;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #1a1a2e; }
-    .nav-cta {
-      background: #1a1a2e !important;
-      color: #FAF8F5 !important;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-weight: 600 !important;
-      font-size: 0.82rem !important;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: #2a2a3e !important; }
+main { max-width: 1080px; margin: 0 auto; padding: 64px 48px; }
 
-    /* Hero */
-    .hero {
-      padding: 100px 48px 60px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .hero-text {}
-    .hero-badge {
-      display: inline-block;
-      background: rgba(212,165,116,0.12);
-      color: #b8863a;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-bottom: 24px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      font-size: 3.4rem;
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-      color: #1a1a2e;
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, #D4A574, #b8863a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 36px;
-      max-width: 480px;
-      font-weight: 400;
-    }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #1a1a2e;
-      color: #FAF8F5;
-      padding: 16px 32px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(26,26,46,0.2);
-    }
-    .btn-secondary {
-      color: #666;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .btn-secondary:hover { color: #1a1a2e; }
-    .hero-proof {
-      margin-top: 40px;
-      display: flex;
-      gap: 40px;
-    }
-    .proof-item {}
-    .proof-num {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #1a1a2e;
-    }
-    .proof-label {
-      font-size: 0.75rem;
-      color: #999;
-      font-weight: 500;
-    }
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      position: relative;
-    }
-    .hero-screen {
-      width: 300px;
-      border-radius: 24px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.12);
-    }
+.lede {
+  max-width: 720px; margin-bottom: 96px;
+}
+.lede h1 {
+  font-size: 56px; font-weight: 400; letter-spacing: -1.2px;
+  line-height: 1.05; margin-bottom: 24px;
+}
+.lede h1 em { font-style: normal; color: var(--ink-soft); }
+.lede p {
+  font-size: 18px; color: var(--ink-soft); max-width: 560px;
+}
 
-    /* Value Prop Strip */
-    .value-strip {
-      background: #1a1a2e;
-      padding: 60px 48px;
-    }
-    .value-strip-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-    }
-    .value-item {
-      text-align: center;
-      padding: 24px 16px;
-    }
-    .value-item h3 {
-      color: #D4A574;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .value-item p {
-      color: rgba(250,248,245,0.6);
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
+.section-label {
+  font-size: 11px; font-weight: 500; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--ink-soft); margin-bottom: 24px;
+}
 
-    /* Feature Sections - alternating */
-    .feature-section {
-      padding: 100px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .feature-section.reversed .feature-text { order: 2; }
-    .feature-section.reversed .feature-visual { order: 1; }
-    .feature-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #D4A574;
-      margin-bottom: 16px;
-    }
-    .feature-text h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      color: #1a1a2e;
-    }
-    .feature-text p {
-      font-size: 1rem;
-      color: #666;
-      line-height: 1.7;
-      margin-bottom: 24px;
-      max-width: 440px;
-    }
-    .feature-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .feature-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    .check {
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      background: rgba(212,165,116,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-    .check svg { width: 12px; height: 12px; }
-    .feature-visual { display: flex; justify-content: center; }
-    .feature-screen {
-      width: 320px;
-      border-radius: 20px;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.1);
-    }
+.products {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+  border-top: 1px solid var(--hairline); padding-top: 48px;
+}
+.product { display: block; color: inherit; }
+.product .meta {
+  font-size: 11px; color: var(--ink-soft);
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 16px;
+  font-feature-settings: 'tnum';
+}
+.product h2 {
+  font-size: 32px; font-weight: 400; letter-spacing: -0.4px;
+  margin-bottom: 8px;
+}
+.product .blurb {
+  font-size: 15px; color: var(--ink-soft);
+  max-width: 460px; margin-bottom: 20px;
+}
+.product .arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px; transition: gap 0.12s ease;
+}
+.product:hover .arrow { gap: 10px; }
 
-    /* Divider */
-    .section-divider {
-      max-width: 1100px;
-      margin: 0 auto;
-      border: none;
-      border-top: 1px solid rgba(0,0,0,0.06);
-    }
+.principles {
+  margin-top: 96px; padding-top: 48px;
+  border-top: 1px solid var(--hairline);
+}
+.principles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px;
+}
+.principle h3 {
+  font-size: 15px; font-weight: 500; margin-bottom: 6px;
+}
+.principle p {
+  font-size: 14px; color: var(--ink-soft); line-height: 1.55;
+}
+.principle .n {
+  font-size: 11px; color: var(--ink-soft);
+  margin-bottom: 10px; font-feature-settings: 'tnum';
+}
 
-    /* AZAI Picks */
-    .picks-section {
-      padding: 80px 48px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-header h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
-    }
-    .section-header p {
-      color: #888;
-      font-size: 0.95rem;
-    }
-    .picks-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .pick-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
-      border: 1px solid #eee;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .pick-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    }
-    .pick-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .pick-ticker { font-size: 1.1rem; font-weight: 700; }
-    .pick-verdict, .verdict {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-    .verdict-great { background: #e6f9ee; color: #16a34a; }
-    .verdict-good { background: #e6f9ee; color: #22c55e; }
-    .verdict-fair { background: #fef9e7; color: #ca8a04; }
-    .verdict-bad { background: #fee; color: #dc2626; }
-    .pick-date { font-size: 0.72rem; color: #bbb; margin-left: auto; margin-right: 8px; }
-    .pick-name { font-size: 0.82rem; color: #888; margin-bottom: 16px; }
-    .pick-metrics { display: flex; justify-content: space-between; }
-    .pick-metric { text-align: center; flex: 1; }
-    .pick-metric-label { font-size: 0.65rem; text-transform: uppercase; color: #aaa; letter-spacing: 0.5px; }
-    .pick-metric-value { font-size: 0.9rem; font-weight: 600; }
-    .picks-empty {
-      text-align: center;
-      padding: 48px;
-      color: #aaa;
-      font-size: 0.9rem;
-      grid-column: 1 / -1;
-    }
-    .picks-cta { text-align: center; margin-top: 24px; }
-    .picks-cta a { color: #D4A574; font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+footer {
+  max-width: 1080px; margin: 0 auto; padding: 48px 48px 64px;
+  border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between; flex-wrap: wrap;
+  font-size: 12px; color: var(--ink-soft);
+}
+footer .links a { color: var(--ink-soft); margin-left: 20px; }
+footer .links a:hover { color: var(--ink); }
 
-    /* Final CTA */
-    .final-cta {
-      background: #1a1a2e;
-      padding: 100px 48px;
-      text-align: center;
-    }
-    .final-cta h2 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: #FAF8F5;
-      letter-spacing: -1.5px;
-      margin-bottom: 12px;
-    }
-    .final-cta h2 span { color: #D4A574; }
-    .final-cta p {
-      color: rgba(250,248,245,0.5);
-      font-size: 1rem;
-      margin-bottom: 36px;
-    }
-    .btn-primary-light {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #D4A574;
-      color: #1a1a2e;
-      padding: 16px 40px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary-light:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(212,165,116,0.3);
-    }
-
-    /* Disclaimer */
-    .disclaimer {
-      text-align: center;
-      padding: 20px 48px;
-      background: #f0ede8;
-      font-size: 0.72rem;
-      color: #aaa;
-    }
-    .disclaimer a { color: #D4A574; }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 28px 48px;
-      color: #bbb;
-      font-size: 0.8rem;
-      background: #1a1a2e;
-    }
-    footer a { color: #D4A574; text-decoration: none; }
-
-    /* Mobile */
-    @media (max-width: 900px) {
-      nav { padding: 14px 24px; }
-      .nav-links { gap: 20px; }
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 60px 24px 40px;
-        text-align: center;
-        gap: 40px;
-      }
-      .hero h1 { font-size: 2.6rem; }
-      .hero-sub { margin: 0 auto 32px; }
-      .hero-actions { justify-content: center; }
-      .hero-proof { justify-content: center; }
-      .hero-screen { width: 240px; }
-      .value-strip { padding: 40px 24px; }
-      .value-strip-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .feature-section {
-        grid-template-columns: 1fr;
-        padding: 60px 24px;
-        gap: 40px;
-        text-align: center;
-      }
-      .feature-section.reversed .feature-text { order: 1; }
-      .feature-section.reversed .feature-visual { order: 2; }
-      .feature-text p { margin: 0 auto 24px; }
-      .feature-screen { width: 260px; }
-      .picks-grid { grid-template-columns: 1fr; }
-      .final-cta { padding: 60px 24px; }
-      .final-cta h2 { font-size: 1.8rem; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2rem; letter-spacing: -1px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      .value-strip-inner { grid-template-columns: 1fr 1fr; }
-      .hero-proof { gap: 24px; }
-      .nav-logo span { display: none; }
-    }
-  </style>
+@media (max-width: 720px) {
+  nav, main, footer { padding-left: 24px; padding-right: 24px; }
+  .lede h1 { font-size: 40px; }
+  .products, .principles-grid { grid-template-columns: 1fr; gap: 40px; }
+  footer .links a { margin-left: 0; margin-right: 16px; }
+}
+</style>
 </head>
 <body>
-  <nav>
-    <a href="/" class="nav-logo">
-      <img src="logo.png" alt="AZAI Oracle">
-      <span>AZAI <em>Oracle</em></span>
-    </a>
-    <div class="nav-links">
-      <a href="/picks/">Picks</a>
-      <a href="/learn/">Learn</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/support.html">Support</a>
-      <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="nav-cta">Download Free</a>
-    </div>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-badge">Free on Google Play</div>
-      <h1>Know what a stock is <span class="highlight">actually worth.</span></h1>
-      <p class="hero-sub">AZAI Oracle calculates intrinsic value using EPS-based valuation models and AI analysis. Stop guessing. Start investing with conviction.</p>
-      <div class="hero-actions">
-        <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="btn-primary">Download for Android</a>
-        <a href="#features" class="btn-secondary">See how it works</a>
-      </div>
-      <div class="hero-proof">
-        <div class="proof-item">
-          <div class="proof-num">10 sec</div>
-          <div class="proof-label">To know if a stock is overpriced</div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-num">$0</div>
-          <div class="proof-label">Free forever. No hidden fees.</div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-num">1 tap</div>
-          <div class="proof-label">Share reports with anyone</div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <img src="screen_stock.png" alt="AAPL intrinsic value analysis showing current price vs fair value" class="hero-screen">
-    </div>
-  </section>
-
-  <!-- Value Strip -->
-  <section class="value-strip">
-    <div class="value-strip-inner">
-      <div class="value-item">
-        <h3>Never Overpay Again</h3>
-        <p>See the real worth of any stock before you put money in</p>
-      </div>
-      <div class="value-item">
-        <h3>Spot Hidden Deals</h3>
-        <p>Find undervalued stocks the market hasn't caught up to yet</p>
-      </div>
-      <div class="value-item">
-        <h3>Invest with Confidence</h3>
-        <p>AI breaks down every stock so you understand what you're buying</p>
-      </div>
-      <div class="value-item">
-        <h3>Impress Your Circle</h3>
-        <p>Share professional PDF reports that make you look like a pro</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Feature 1: Stock Valuation -->
-  <section class="feature-section" id="features">
-    <div class="feature-text">
-      <div class="feature-label">Stock Valuation</div>
-      <h2>Intrinsic value in seconds. Not hours.</h2>
-      <p>Our discounted earnings model uses real EPS data, a 12% discount rate, and conservative growth assumptions to calculate what a business is actually worth.</p>
-      <ul class="feature-list">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Current Price vs. Intrinsic Value side-by-side</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>EPS, P/E, and Book Value at a glance</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Clear verdict: Great Deal, Good, Fair, or Bad Deal</li>
-      </ul>
-    </div>
-    <div class="feature-visual">
-      <img src="screen_stock.png" alt="Stock valuation screen showing intrinsic value" class="feature-screen">
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- Feature 2: AI Insights -->
-  <section class="feature-section reversed">
-    <div class="feature-text">
-      <div class="feature-label">AI-Powered</div>
-      <h2>Analysis that reads like it was written by an analyst.</h2>
-      <p>Every stock gets a full breakdown: what the company does, how it makes money, competitive position, risks, and whether you should buy at this price.</p>
-      <ul class="feature-list">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>7-section deep dive on every stock</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Written in plain English, not Wall Street jargon</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Updated with the latest financial data</li>
-      </ul>
-    </div>
-    <div class="feature-visual">
-      <img src="screen_ai.png" alt="AI-powered analysis with detailed commentary" class="feature-screen">
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- Feature 3: ETF Scoring -->
-  <section class="feature-section">
-    <div class="feature-text">
-      <div class="feature-label">ETF Ratings</div>
-      <h2>ETFs scored on what actually matters.</h2>
-      <p>Our 5-factor composite model scores every ETF on cost efficiency, performance, yield, fund size, and diversification. No guesswork.</p>
-      <ul class="feature-list">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Score breakdown with visual bars</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Top holdings and sector allocation</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Performance across 1Y, 3Y, 5Y horizons</li>
-      </ul>
-    </div>
-    <div class="feature-visual">
-      <img src="screen_etf.png" alt="ETF composite scoring with verdict" class="feature-screen">
-    </div>
-  </section>
-
-  <!-- AZAI Picks -->
-  <section class="picks-section" id="picks">
-    <div class="section-header">
-      <h2>AZAI Picks</h2>
-      <p>Top-rated analyses from our community. Updated as users discover value.</p>
-    </div>
-    <div class="picks-grid" id="picks-grid">
-      <a href="/picks/xeqt-to.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">XEQT-TO</span><span class="pick-date">April 11, 2026</span><span class="verdict verdict-good">Good Deal</span></div>
-      <div class="pick-name">ISHARES CORE EQUITY ETF</div>
-      <div class="pick-metrics">$41.71 &middot; Score: 70.0/100</div>
-    </a>
-      <a href="/picks/vz.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">VZ</span><span class="pick-date">March 27, 2026</span><span class="verdict verdict-fair">Fair Deal</span></div>
-      <div class="pick-name">Verizon Communications Inc.</div>
-      <div class="pick-metrics">$N/A &middot; </div>
-    </a>
-      <a href="/picks/vfv-to.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">VFV-TO</span><span class="pick-date">March 29, 2026</span><span class="verdict verdict-good">Good Deal</span></div>
-      <div class="pick-name">VANGUARD SP 500 INDEX ETF</div>
-      <div class="pick-metrics">$156.7 &middot; Score: 73.0/100</div>
-    </a>
-      <a href="/picks/unh.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">UNH</span><span class="pick-date"></span><span class="verdict verdict-bad">Bad Deal</span></div>
-      <div class="pick-name">UnitedHealth Group Incorporated</div>
-      <div class="pick-metrics">$N/A &middot; </div>
-    </a>
-      <a href="/picks/uber.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">UBER</span><span class="pick-date">March 28, 2026</span><span class="verdict verdict-great">Great Deal</span></div>
-      <div class="pick-name">Uber Technologies, Inc.</div>
-      <div class="pick-metrics">$69.18 &middot; </div>
-    </a>
-      <a href="/picks/sap.html" class="pick-card">
-      <div class="pick-header"><span class="pick-ticker">SAP</span><span class="pick-date">March 31, 2026</span><span class="verdict verdict-great">Great Deal</span></div>
-      <div class="pick-name">SAP  SE</div>
-      <div class="pick-metrics">$168.29 &middot; </div>
-    </a>
-    </div>
-    <div class="picks-cta">
-      <a href="/picks/">View all picks &rarr;</a>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="final-cta">
-    <h2>Stop overpaying for <span>stocks.</span></h2>
-    <p>Free to download. No account required. No ads.</p>
-    <a href="https://play.google.com/store/apps/details?id=com.azai.valueinvestor" class="btn-primary-light">Download AZAI Oracle</a>
-  </section>
-
-  <!-- Disclaimer -->
-  <div class="disclaimer">
-    AZAI Oracle is for informational purposes only and does not constitute financial advice.
-    All investment decisions are made at your own risk.
-    See <a href="/terms.html">Terms of Service</a>.
+<nav>
+  <a class="brand" href="/">azai corp.<span>// software</span></a>
+  <div class="nav-right">
+    <a href="/oracle.html">Oracle</a>
+    <a href="/toss/">Toss</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
   </div>
+</nav>
 
-  <footer>
-    <p>&copy; 2026 AZAI Oracle &middot;
-      <a href="/privacy.html">Privacy</a> &middot;
-      <a href="/terms.html">Terms</a> &middot;
-      <a href="/support.html">Support</a> &middot;
-      <a href="/learn/">Learn</a> &middot;
-      asoni@kancanada.com
+<main>
+
+  <section class="lede">
+    <h1>Software <em>for people who want<br>their tools to work.</em></h1>
+    <p>
+      We build two kinds of products at AZAI: ones we'd be embarrassed
+      to ship without using ourselves, and none of the other kind.
     </p>
-  </footer>
+  </section>
+
+  <div class="section-label">Products</div>
+  <section class="products">
+
+    <a class="product" href="/oracle.html">
+      <div class="meta">01 · Investing</div>
+      <h2>Oracle</h2>
+      <p class="blurb">
+        Know what a stock is worth before you buy. AI plus discounted
+        earnings models. Free on Android. 200+ stocks and ETFs.
+      </p>
+      <span class="arrow">Open Oracle &nbsp;&rarr;</span>
+    </a>
+
+    <a class="product" href="/toss/">
+      <div class="meta">02 · File transfer</div>
+      <h2>Toss</h2>
+      <p class="blurb">
+        Send anything between Mac and Android. Direct over Wi-Fi.
+        Encrypted. No cloud, no accounts. Pay once.
+      </p>
+      <span class="arrow">Open Toss &nbsp;&rarr;</span>
+    </a>
+
+  </section>
+
+  <section class="principles">
+    <div class="section-label">How we build</div>
+    <div class="principles-grid">
+      <div class="principle">
+        <div class="n">01</div>
+        <h3>Useful first.</h3>
+        <p>If it doesn't make the next hour of someone's life easier,
+           it doesn't ship. We don't optimize for daily active users.</p>
+      </div>
+      <div class="principle">
+        <div class="n">02</div>
+        <h3>Honest.</h3>
+        <p>No dark patterns. No upsell loops. No data we don't need.
+           If we charge for it, we charge once.</p>
+      </div>
+      <div class="principle">
+        <div class="n">03</div>
+        <h3>Quiet.</h3>
+        <p>Good design is unobtrusive. Our apps stay out of the way
+           until you ask for them. They look the same in five years.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>© 2026 AZAI Corp. · British Columbia, Canada.</div>
+  <div class="links">
+    <a href="/oracle.html">Oracle</a>
+    <a href="/toss/">Toss</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
+  </div>
+</footer>
+
 </body>
 </html>

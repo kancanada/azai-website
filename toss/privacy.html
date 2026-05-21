@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Toss</title>
+<meta name="description" content="Privacy Policy for Toss by AZAI Corp.">
+<link rel="canonical" href="https://azai.ca/toss/privacy.html">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+  :root {
+    --bg:#F4F2EE; --ink:#1A1A1A; --ink-soft:#6B6B6B;
+    --hairline:#DDDAD3; --accent:#D63A1F;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  nav {
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:720px; margin:0 auto; padding:24px 40px;
+  }
+  .brand { display:flex; align-items:center; gap:12px; font-weight:500; font-size:14px; text-decoration:none; color:var(--ink); }
+  .brand img { width:24px; height:24px; }
+  .nav-right { font-size:13px; color:var(--ink-soft); }
+  .nav-right a { color:var(--ink-soft); text-decoration:none; margin-left:24px; }
+  .nav-right a:hover { color:var(--ink); }
+  main { max-width:720px; margin:32px auto 64px; padding:0 40px; }
+  h1 {
+    font-size:40px; font-weight:400; letter-spacing:-0.8px;
+    line-height:1.1; margin:24px 0 8px;
+  }
+  .updated { color:var(--ink-soft); font-size:13px; margin-bottom:48px; }
+  h2 {
+    font-size:11px; font-weight:500; text-transform:uppercase;
+    letter-spacing:0.8px; color:var(--ink-soft);
+    margin-top:48px; margin-bottom:12px;
+    padding-top:24px; border-top:1px solid var(--hairline);
+  }
+  p, ul { font-size:15px; line-height:1.6; margin-bottom:12px; }
+  ul { padding-left:24px; }
+  li { margin-bottom:6px; }
+  strong { font-weight:500; }
+  a { color:var(--ink); border-bottom:1px solid var(--hairline); text-decoration:none; }
+  a:hover { border-bottom-color:var(--ink); }
+  footer {
+    max-width:720px; margin:0 auto; padding:48px 40px 64px;
+    border-top:1px solid var(--hairline);
+    font-size:12px; color:var(--ink-soft);
+  }
+  @media (max-width:720px) {
+    nav, main, footer { padding-left:24px; padding-right:24px; }
+    h1 { font-size:32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/toss/">
+    <img src="favicon.png" alt="Toss">
+    <span>toss</span>
+  </a>
+  <div class="nav-right">
+    <a href="/toss/">Home</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</nav>
+
+<main>
+
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: 21 May 2026</p>
+
+<h2>The short version</h2>
+<p>
+  Toss has no servers, no accounts, and no analytics. We don't see your
+  files, your contacts, or your usage. The app talks directly between
+  your own devices over your own Wi-Fi.
+</p>
+
+<h2>Who we are</h2>
+<p>
+  Toss is published by <strong>AZAI Corp.</strong>, a Canadian company
+  based in British Columbia. Contact:
+  <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a>.
+</p>
+
+<h2>What Toss does NOT collect</h2>
+<ul>
+  <li>We don't collect file names, contents, or any metadata about
+      what you transfer.</li>
+  <li>We don't collect device IDs, advertising IDs, or location.</li>
+  <li>We don't use analytics, crash reporting, or any third-party
+      SDK that phones home.</li>
+  <li>We don't run servers. There is no AZAI Corp. database that
+      could hold your data, because no such database exists.</li>
+</ul>
+
+<h2>What stays on your device</h2>
+<ul>
+  <li>A locally-generated cryptographic identity (a key pair) so that
+      other devices can verify it's you. The private key never leaves
+      your device.</li>
+  <li>The list of files you have recently received, so the Toss app
+      can show a "Recent" list. Stored only on your phone.</li>
+  <li>App settings (your device name, preferences). Stored only on
+      your device.</li>
+</ul>
+<p>
+  Nothing in the list above is transmitted to AZAI Corp. or any
+  third party.
+</p>
+
+<h2>What travels between your devices</h2>
+<p>
+  When you send a file with Toss, the file itself, its name, and its
+  size are sent <strong>directly to the receiving device</strong> over
+  your local Wi-Fi network, end-to-end encrypted with XChaCha20-Poly1305.
+  We are not in the path. Your internet service provider sees encrypted
+  traffic on your LAN; we see nothing.
+</p>
+
+<h2>Permissions Toss asks for</h2>
+<ul>
+  <li><strong>Local network access</strong> — to discover and connect to
+      nearby devices running Toss.</li>
+  <li><strong>Notifications</strong> — to tell you when a file lands.</li>
+  <li><strong>Media access (Android)</strong> — only used when you opt in
+      to the USB-stick browse mode, so the Mac can read your phone's
+      public folders.</li>
+  <li><strong>Storage (Android)</strong> — to save received files to
+      Downloads / Gallery.</li>
+</ul>
+<p>Each permission can be revoked in your system settings.</p>
+
+<h2>Payments</h2>
+<p>
+  Toss has a free tier for transfers up to 1 GB. Larger transfers
+  require a one-time $29 unlock, purchased through Google Play
+  Billing. AZAI Corp. never sees your credit card number. Google's
+  privacy policy applies to that transaction; we receive only a
+  receipt confirming you've paid.
+</p>
+
+<h2>Children</h2>
+<p>
+  Toss is not directed to children under 13. Because we collect
+  nothing, we do not knowingly collect data from children.
+</p>
+
+<h2>Changes</h2>
+<p>
+  If this policy changes, the "Last updated" date above will change
+  with it. Material changes will be flagged in the app's release
+  notes.
+</p>
+
+<h2>Your rights</h2>
+<p>
+  Under PIPEDA (Canada), GDPR (EU/EEA), and similar laws elsewhere,
+  you have the right to access, correct, or delete personal data we
+  hold about you. We do not hold any personal data about you. If you
+  want to verify that, email
+  <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a> and
+  we will confirm in writing.
+</p>
+
+</main>
+
+<footer>
+  © 2026 AZAI Corp. ·
+  <a href="/toss/" style="color:inherit;border:0;">toss</a> ·
+  <a href="terms.html" style="color:inherit;border:0;">Terms</a>
+</footer>
+
+</body>
+</html>
