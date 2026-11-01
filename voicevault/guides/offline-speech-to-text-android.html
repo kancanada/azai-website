@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speech-to-text on Android without internet: what actually works | VoiceVault</title>
+<meta name="description" content="Which Android apps really transcribe offline, from voice typing to full meeting transcripts, and a two-minute test to check any app yourself.">
+<link rel="canonical" href="https://azai.ca/voicevault/guides/offline-speech-to-text-android.html">
+<link rel="icon" type="image/png" href="../icon.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://azai.ca/voicevault/guides/offline-speech-to-text-android.html">
+<meta property="og:title" content="Speech-to-text on Android without internet: what actually works | VoiceVault">
+<meta property="og:description" content="Which Android apps really transcribe offline, from voice typing to full meeting transcripts, and a two-minute test to check any app yourself.">
+<meta property="og:image" content="https://azai.ca/voicevault/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Speech-to-text on Android without internet: what actually works", "description": "Which Android apps really transcribe offline, from voice typing to full meeting transcripts, and a two-minute test to check any app yourself.", "dateModified": "2026-10-31", "datePublished": "2026-10-31", "mainEntityOfPage": "https://azai.ca/voicevault/guides/offline-speech-to-text-android.html", "image": "https://azai.ca/voicevault/og.jpg", "author": {"@type": "Organization", "name": "Kan Canada Trading Corp."}, "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Android have built-in offline speech-to-text?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, for some uses. Gboard's voice typing and Google's Live Transcribe can work offline once their language models are downloaded. Full meeting transcription offline depends on your phone: Google Recorder on Pixels, Samsung Voice Recorder with Galaxy AI on recent Galaxy phones, or an app such as VoiceVault."}}, {"@type": "Question", "name": "How can I tell if an app transcribes offline?", "acceptedAnswer": {"@type": "Answer", "text": "Turn on airplane mode, record 30 seconds of speech and stop. If the transcript appears straight away, the app transcribes on the phone. If it says it will transcribe later, or shows an error, it uses a server."}}, {"@type": "Question", "name": "Is offline transcription less accurate?", "acceptedAnswer": {"@type": "Answer", "text": "Not necessarily. Modern on-device models are close to cloud quality for clear speech in supported languages. Cloud services may handle rare languages, heavy accents or very noisy audio better."}}, {"@type": "Question", "name": "Which languages does VoiceVault transcribe offline?", "acceptedAnswer": {"@type": "Answer", "text": "25 European languages, including English, French, German, Spanish, Italian, Portuguese, Dutch, Polish, Swedish and Ukrainian, using NVIDIA's Parakeet model on the phone."}}]}]</script>
+<style>
+@font-face{font-family:Geist;src:url(../geist.ttf);font-weight:100 900;font-display:swap}
+:root{--bg:#F4F2FA;--ink:#121214;--ink2:#4A4A57;--ink3:#8A8A98;--violet:#6D4AFF;--line:rgba(18,18,20,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+ background:radial-gradient(1000px 700px at 0% 0%,#E4DCFF 0%,transparent 65%),var(--bg) no-repeat}
+a{color:var(--violet)}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;color:var(--ink)}
+.brand img{width:30px;height:30px;border-radius:8px}
+nav .links a{color:var(--ink2);text-decoration:none;font-size:14px;margin-left:18px}
+.crumbs{font-size:14px;color:var(--ink3);margin:18px 0 10px}.crumbs a{color:var(--ink3)}
+h1{font-size:clamp(34px,5vw,48px);line-height:1.08;letter-spacing:-.03em;font-weight:700;margin-bottom:14px}
+.meta{font-size:14px;color:var(--ink3);margin-bottom:28px}
+.answer{background:#fff;border-radius:20px;padding:22px 24px;margin:0 0 30px;border-left:4px solid var(--violet)}
+.answer b{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:6px}
+article h2{font-size:28px;line-height:1.2;letter-spacing:-.02em;margin:42px 0 12px}
+article h3{font-size:20px;margin:28px 0 8px}
+article p,article li{font-size:18px;color:#26262e}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px 22px}article li{margin-bottom:8px}
+.table{overflow-x:auto;margin:10px 0 24px;background:#fff;border-radius:16px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+.note{font-size:15px;color:var(--ink2)}
+.disclose{font-size:15px;color:var(--ink2);background:rgba(109,74,255,.07);border-radius:14px;padding:14px 18px;margin:0 0 26px}
+.cta{background:#121214;color:#fff;border-radius:26px;padding:30px;margin:44px 0;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.cta div{flex:1 1 300px}.cta h3{font-size:22px;margin-bottom:6px;color:#fff}.cta p{color:#C9C9D6;font-size:16px;margin:0}
+.cta a{background:#E5392F;color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:14px 26px;white-space:nowrap}
+details{border-top:1px solid var(--line);padding:16px 0}details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:18px}
+details p{margin-top:8px}
+.sources li{font-size:15px}
+.more{display:grid;gap:12px;margin:20px 0 40px}
+.more a{display:block;background:#fff;border-radius:16px;padding:16px 20px;text-decoration:none;color:var(--ink);font-weight:600}
+.more a span{display:block;font-weight:400;color:var(--ink2);font-size:15px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:14px;color:var(--ink3)}footer a{color:var(--ink3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="brand" href="/voicevault/"><img src="../icon.png" alt="">VoiceVault</a>
+<div class="links"><a href="/voicevault/guides/">Guides</a><a href="/voicevault/">The app</a></div></nav>
+<div class="crumbs"><a href="/voicevault/">VoiceVault</a> › <a href="/voicevault/guides/">Guides</a></div><article><h1>Speech-to-text on Android without internet: what actually works</h1><div class="meta">Updated 31 October 2026 · 6 min read</div><div class="answer"><b>Short answer</b>Offline speech-to-text works when the speech model is downloaded to your phone. For quick dictation, Gboard voice typing can work offline once your language is downloaded. For live captions, Google's Live Transcribe has downloadable offline languages. For full meeting transcripts, Google Recorder works offline on Pixels, Samsung Voice Recorder with Galaxy AI on recent Galaxy phones, and VoiceVault on any Android 13+ phone. Test any app by recording in airplane mode.</div><p class="disclose">We make VoiceVault, one of the apps covered here.</p><p>"Works offline" means different things in different apps. Some record offline but transcribe later on a server. Some transcribe offline but send your audio to the cloud for summaries. This guide sorts the Android options by what you actually want to do, and gives you a quick test to check any app yourself.</p>
+
+<h2>What makes speech-to-text work offline</h2>
+<p>Turning speech into text needs a speech-recognition model. Cloud apps keep that model on their servers and send your audio there. Offline apps download the model to your phone, usually once, over Wi-Fi, and run it on the phone's own chips. After that first download, they don't need a connection, and your audio doesn't leave the phone.</p>
+
+<h2>The options, by what you need</h2>
+<div class="table"><table>
+<tr><th>You want to...</th><th>Option</th><th>Offline?</th><th>Phones</th></tr>
+<tr><td>Dictate a message or email</td><td>Gboard voice typing</td><td>Yes, once your language is downloaded</td><td>Most Android phones</td></tr>
+<tr><td>See live captions of a conversation</td><td>Live Transcribe</td><td>Yes, for downloaded languages</td><td>Android 12+ for several languages; English on Android 8–11</td></tr>
+<tr><td>Record and transcribe a meeting</td><td>Google Recorder</td><td>Yes</td><td>Pixel only</td></tr>
+<tr><td>Record and transcribe a meeting</td><td>Samsung Voice Recorder (Galaxy AI)</td><td>Transcripts yes; summaries may use the cloud unless set to on-device</td><td>Recent Galaxy phones</td></tr>
+<tr><td>Meeting transcript, speakers, summary and to-dos</td><td>VoiceVault</td><td>Yes, all of it</td><td>Android 13 and newer</td></tr>
+<tr><td>Meeting notes with online-meeting bots</td><td>Otter, Fireflies</td><td>No: records offline, transcribes on their servers</td><td>Android, iPhone, web</td></tr>
+</table></div>
+
+<h3>Dictation: Gboard</h3>
+<p>Google's keyboard can recognize speech on the phone once you've downloaded your language in its voice-typing settings (menu names vary by version). It's ideal for messages and short notes, not for recording a meeting.</p>
+<h3>Live captions: Live Transcribe</h3>
+<p>Live Transcribe shows what people are saying in real time, which is excellent for accessibility. According to Google, on Android 12 and newer you can download several languages for offline use; on Android 8 to 11, English. It's built for following a conversation as it happens rather than producing meeting notes.</p>
+<h3>Meeting recordings: built-in recorders</h3>
+<p>If you have a Pixel, Google Recorder transcribes on the phone and is free. On recent Samsung Galaxy phones, the Voice Recorder app can transcribe with Galaxy AI; check Samsung's settings if you want summaries processed on the phone as well.</p>
+<h3>Meeting notes on any Android phone: VoiceVault</h3>
+<p>VoiceVault downloads NVIDIA's Parakeet speech model (25 European languages) and an AI for summaries the first time you open it on Wi-Fi. After that, the transcript, the speaker labels, the summary and the to-dos are all made on the phone, and it works in airplane mode. There's no account and no VoiceVault server.</p>
+
+<div class="cta"><div><h3>Every meeting, written up. Right on your phone.</h3><p>VoiceVault for Android: transcripts, summaries and to-dos with no account, no servers and no subscription. 30 days free, then pay once.</p></div><a href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dguide%26utm_campaign%3Doffline-speech-to-text-android">Get it on Google Play</a></div>
+
+<h2>Test any app in two minutes</h2>
+<ol>
+<li>Turn on airplane mode, and make sure Wi-Fi is off too.</li>
+<li>Open the app and record 30 seconds of normal speech.</li>
+<li>Stop. If the transcript appears now, transcription is on the phone.</li>
+<li>Ask for a summary, if the app makes one. If it fails or waits for a connection, summaries use a server.</li>
+<li>Turn airplane mode off and check whether anything uploads or syncs.</li>
+</ol>
+<p>Do this test with the app you already use. It's the fastest way to know whether a "private" or "offline" claim holds up.</p>
+
+<h2>What offline costs you</h2>
+<ul>
+<li><b>A one-time download.</b> Speech and summary models are large; set things up on Wi-Fi.</li>
+<li><b>Phone power and time.</b> Your phone does the work, so long meetings take longer to summarize on older phones.</li>
+<li><b>Fewer cloud extras.</b> No bots joining online meetings, and no shared team workspace.</li>
+</ul>
+<p>In return you get transcripts anywhere, nothing on anyone else's server, and no per-minute pricing. For the cost side, see <a href="ai-note-taker-no-subscription.html">AI note takers without a subscription</a>.</p>
+<h2>Questions</h2><details><summary>Does Android have built-in offline speech-to-text?</summary><p>Yes, for some uses. Gboard's voice typing and Google's Live Transcribe can work offline once their language models are downloaded. Full meeting transcription offline depends on your phone: Google Recorder on Pixels, Samsung Voice Recorder with Galaxy AI on recent Galaxy phones, or an app such as VoiceVault.</p></details><details><summary>How can I tell if an app transcribes offline?</summary><p>Turn on airplane mode, record 30 seconds of speech and stop. If the transcript appears straight away, the app transcribes on the phone. If it says it will transcribe later, or shows an error, it uses a server.</p></details><details><summary>Is offline transcription less accurate?</summary><p>Not necessarily. Modern on-device models are close to cloud quality for clear speech in supported languages. Cloud services may handle rare languages, heavy accents or very noisy audio better.</p></details><details><summary>Which languages does VoiceVault transcribe offline?</summary><p>25 European languages, including English, French, German, Spanish, Italian, Portuguese, Dutch, Polish, Swedish and Ukrainian, using NVIDIA's Parakeet model on the phone.</p></details><h2>Sources</h2><ul class="sources"><li><a href="https://support.google.com/accessibility/android/answer/9158064?hl=en" rel="nofollow noopener">Google: use Live Transcribe (offline languages)</a></li><li><a href="https://techcrunch.com/2019/10/15/googles-new-voice-recorder-app-transcribes-in-real-time-even-when-offline" rel="nofollow noopener">Google Recorder transcribes offline on Pixel (TechCrunch)</a></li><li><a href="https://www.samsung.com/ie/support/mobile-devices/how-to-use-galaxy-ai-transcript-assist" rel="nofollow noopener">Samsung: how to use Galaxy AI Transcript Assist</a></li><li><a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3" rel="nofollow noopener">NVIDIA Parakeet TDT 0.6B v3 model card</a></li><li><a href="https://play.google.com/store/apps/details?id=com.aisense.otter" rel="nofollow noopener">Otter on Google Play (transcription needs internet)</a></li></ul><p class="note">Prices and features were checked on 31 October 2026 and change often; check each provider before you buy.</p></article><h2 style="font-size:24px;margin-top:40px">More guides</h2><div class="more"><a href="otter-alternative-offline.html">An Otter alternative that works without the cloud<span>Otter transcribes in its cloud and needs an internet connection and an account. Here&#x27;s when that matters, and the Android apps that transcribe meetings on the phone instead.</span></a><a href="ai-note-taker-no-subscription.html">AI note takers without a subscription<span>Otter, Fireflies and Plaud charge every month because they run your meetings through their servers. Here&#x27;s what that costs over three years, and when a one-time purchase makes sense.</span></a><a href="transcribe-meeting-android.html">How to transcribe an in-person meeting on Android<span>Where to put the phone, which app to use, and what to do after the meeting, so you get a clean transcript, the right speaker names and a usable summary.</span></a></div>
+<footer>VoiceVault is made by Kan Canada Trading Corp., British Columbia, Canada · <a href="/voicevault/privacy.html">Privacy policy</a> · <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a></footer>
+</div>
+</body>
+</html>

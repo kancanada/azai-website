@@ -1,0 +1,66 @@
+<!--{
+"order": 4,
+"title": "Speech-to-text on Android without internet: what actually works | VoiceVault",
+"h1": "Speech-to-text on Android without internet: what actually works",
+"description": "Which Android apps really transcribe offline, from voice typing to full meeting transcripts, and a two-minute test to check any app yourself.",
+"minutes": 6,
+"answer": "Offline speech-to-text works when the speech model is downloaded to your phone. For quick dictation, Gboard voice typing can work offline once your language is downloaded. For live captions, Google's Live Transcribe has downloadable offline languages. For full meeting transcripts, Google Recorder works offline on Pixels, Samsung Voice Recorder with Galaxy AI on recent Galaxy phones, and VoiceVault on any Android 13+ phone. Test any app by recording in airplane mode.",
+"disclose": "We make VoiceVault, one of the apps covered here.",
+"faq": [
+ ["Does Android have built-in offline speech-to-text?", "Yes, for some uses. Gboard's voice typing and Google's Live Transcribe can work offline once their language models are downloaded. Full meeting transcription offline depends on your phone: Google Recorder on Pixels, Samsung Voice Recorder with Galaxy AI on recent Galaxy phones, or an app such as VoiceVault."],
+ ["How can I tell if an app transcribes offline?", "Turn on airplane mode, record 30 seconds of speech and stop. If the transcript appears straight away, the app transcribes on the phone. If it says it will transcribe later, or shows an error, it uses a server."],
+ ["Is offline transcription less accurate?", "Not necessarily. Modern on-device models are close to cloud quality for clear speech in supported languages. Cloud services may handle rare languages, heavy accents or very noisy audio better."],
+ ["Which languages does VoiceVault transcribe offline?", "25 European languages, including English, French, German, Spanish, Italian, Portuguese, Dutch, Polish, Swedish and Ukrainian, using NVIDIA's Parakeet model on the phone."]
+],
+"sources": [
+ ["Google: use Live Transcribe (offline languages)", "https://support.google.com/accessibility/android/answer/9158064?hl=en"],
+ ["Google Recorder transcribes offline on Pixel (TechCrunch)", "https://techcrunch.com/2019/10/15/googles-new-voice-recorder-app-transcribes-in-real-time-even-when-offline"],
+ ["Samsung: how to use Galaxy AI Transcript Assist", "https://www.samsung.com/ie/support/mobile-devices/how-to-use-galaxy-ai-transcript-assist"],
+ ["NVIDIA Parakeet TDT 0.6B v3 model card", "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3"],
+ ["Otter on Google Play (transcription needs internet)", "https://play.google.com/store/apps/details?id=com.aisense.otter"]
+]
+}-->
+<p>"Works offline" means different things in different apps. Some record offline but transcribe later on a server. Some transcribe offline but send your audio to the cloud for summaries. This guide sorts the Android options by what you actually want to do, and gives you a quick test to check any app yourself.</p>
+
+<h2>What makes speech-to-text work offline</h2>
+<p>Turning speech into text needs a speech-recognition model. Cloud apps keep that model on their servers and send your audio there. Offline apps download the model to your phone, usually once, over Wi-Fi, and run it on the phone's own chips. After that first download, they don't need a connection, and your audio doesn't leave the phone.</p>
+
+<h2>The options, by what you need</h2>
+<div class="table"><table>
+<tr><th>You want to...</th><th>Option</th><th>Offline?</th><th>Phones</th></tr>
+<tr><td>Dictate a message or email</td><td>Gboard voice typing</td><td>Yes, once your language is downloaded</td><td>Most Android phones</td></tr>
+<tr><td>See live captions of a conversation</td><td>Live Transcribe</td><td>Yes, for downloaded languages</td><td>Android 12+ for several languages; English on Android 8–11</td></tr>
+<tr><td>Record and transcribe a meeting</td><td>Google Recorder</td><td>Yes</td><td>Pixel only</td></tr>
+<tr><td>Record and transcribe a meeting</td><td>Samsung Voice Recorder (Galaxy AI)</td><td>Transcripts yes; summaries may use the cloud unless set to on-device</td><td>Recent Galaxy phones</td></tr>
+<tr><td>Meeting transcript, speakers, summary and to-dos</td><td>VoiceVault</td><td>Yes, all of it</td><td>Android 13 and newer</td></tr>
+<tr><td>Meeting notes with online-meeting bots</td><td>Otter, Fireflies</td><td>No: records offline, transcribes on their servers</td><td>Android, iPhone, web</td></tr>
+</table></div>
+
+<h3>Dictation: Gboard</h3>
+<p>Google's keyboard can recognize speech on the phone once you've downloaded your language in its voice-typing settings (menu names vary by version). It's ideal for messages and short notes, not for recording a meeting.</p>
+<h3>Live captions: Live Transcribe</h3>
+<p>Live Transcribe shows what people are saying in real time, which is excellent for accessibility. According to Google, on Android 12 and newer you can download several languages for offline use; on Android 8 to 11, English. It's built for following a conversation as it happens rather than producing meeting notes.</p>
+<h3>Meeting recordings: built-in recorders</h3>
+<p>If you have a Pixel, Google Recorder transcribes on the phone and is free. On recent Samsung Galaxy phones, the Voice Recorder app can transcribe with Galaxy AI; check Samsung's settings if you want summaries processed on the phone as well.</p>
+<h3>Meeting notes on any Android phone: VoiceVault</h3>
+<p>VoiceVault downloads NVIDIA's Parakeet speech model (25 European languages) and an AI for summaries the first time you open it on Wi-Fi. After that, the transcript, the speaker labels, the summary and the to-dos are all made on the phone, and it works in airplane mode. There's no account and no VoiceVault server.</p>
+
+<!--CTA-->
+
+<h2>Test any app in two minutes</h2>
+<ol>
+<li>Turn on airplane mode, and make sure Wi-Fi is off too.</li>
+<li>Open the app and record 30 seconds of normal speech.</li>
+<li>Stop. If the transcript appears now, transcription is on the phone.</li>
+<li>Ask for a summary, if the app makes one. If it fails or waits for a connection, summaries use a server.</li>
+<li>Turn airplane mode off and check whether anything uploads or syncs.</li>
+</ol>
+<p>Do this test with the app you already use. It's the fastest way to know whether a "private" or "offline" claim holds up.</p>
+
+<h2>What offline costs you</h2>
+<ul>
+<li><b>A one-time download.</b> Speech and summary models are large; set things up on Wi-Fi.</li>
+<li><b>Phone power and time.</b> Your phone does the work, so long meetings take longer to summarize on older phones.</li>
+<li><b>Fewer cloud extras.</b> No bots joining online meetings, and no shared team workspace.</li>
+</ul>
+<p>In return you get transcripts anywhere, nothing on anyone else's server, and no per-minute pricing. For the cost side, see <a href="ai-note-taker-no-subscription.html">AI note takers without a subscription</a>.</p>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An Otter alternative that works offline, without the cloud (Android) | VoiceVault</title>
+<meta name="description" content="Otter transcribes in its cloud and needs an internet connection and an account. Here&#x27;s when that matters, and the Android apps that transcribe meetings on the phone instead.">
+<link rel="canonical" href="https://azai.ca/voicevault/guides/otter-alternative-offline.html">
+<link rel="icon" type="image/png" href="../icon.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://azai.ca/voicevault/guides/otter-alternative-offline.html">
+<meta property="og:title" content="An Otter alternative that works offline, without the cloud (Android) | VoiceVault">
+<meta property="og:description" content="Otter transcribes in its cloud and needs an internet connection and an account. Here&#x27;s when that matters, and the Android apps that transcribe meetings on the phone instead.">
+<meta property="og:image" content="https://azai.ca/voicevault/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "An Otter alternative that works without the cloud", "description": "Otter transcribes in its cloud and needs an internet connection and an account. Here's when that matters, and the Android apps that transcribe meetings on the phone instead.", "dateModified": "2026-10-31", "datePublished": "2026-10-31", "mainEntityOfPage": "https://azai.ca/voicevault/guides/otter-alternative-offline.html", "image": "https://azai.ca/voicevault/og.jpg", "author": {"@type": "Organization", "name": "Kan Canada Trading Corp."}, "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Otter work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Otter's Android app can record without a connection, but its Google Play listing says transcription needs an internet connection: the audio is transcribed on Otter's servers once you're back online."}}, {"@type": "Question", "name": "Is there a free offline alternative to Otter?", "acceptedAnswer": {"@type": "Answer", "text": "On a Pixel, Google's Recorder app transcribes on the phone for free. On recent Samsung Galaxy phones, the Voice Recorder app can transcribe with Galaxy AI. Both are tied to those phone brands. VoiceVault works on any Android 13+ phone, is free for 30 days, then is a one-time purchase."}}, {"@type": "Question", "name": "Can VoiceVault join my Zoom or Teams calls like Otter?", "acceptedAnswer": {"@type": "Answer", "text": "No. VoiceVault records what your phone's microphone hears, so it suits meetings in the room and calls on speaker. If you mainly need a bot in online meetings, Otter or Fireflies fit better."}}, {"@type": "Question", "name": "Will I lose my Otter transcripts if I switch?", "acceptedAnswer": {"@type": "Answer", "text": "No. Otter lets you export transcripts as PDF, TXT or SRT and audio as MP3, according to its app listing. Keep those exports; VoiceVault starts with your next meeting."}}]}]</script>
+<style>
+@font-face{font-family:Geist;src:url(../geist.ttf);font-weight:100 900;font-display:swap}
+:root{--bg:#F4F2FA;--ink:#121214;--ink2:#4A4A57;--ink3:#8A8A98;--violet:#6D4AFF;--line:rgba(18,18,20,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+ background:radial-gradient(1000px 700px at 0% 0%,#E4DCFF 0%,transparent 65%),var(--bg) no-repeat}
+a{color:var(--violet)}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;color:var(--ink)}
+.brand img{width:30px;height:30px;border-radius:8px}
+nav .links a{color:var(--ink2);text-decoration:none;font-size:14px;margin-left:18px}
+.crumbs{font-size:14px;color:var(--ink3);margin:18px 0 10px}.crumbs a{color:var(--ink3)}
+h1{font-size:clamp(34px,5vw,48px);line-height:1.08;letter-spacing:-.03em;font-weight:700;margin-bottom:14px}
+.meta{font-size:14px;color:var(--ink3);margin-bottom:28px}
+.answer{background:#fff;border-radius:20px;padding:22px 24px;margin:0 0 30px;border-left:4px solid var(--violet)}
+.answer b{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:6px}
+article h2{font-size:28px;line-height:1.2;letter-spacing:-.02em;margin:42px 0 12px}
+article h3{font-size:20px;margin:28px 0 8px}
+article p,article li{font-size:18px;color:#26262e}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px 22px}article li{margin-bottom:8px}
+.table{overflow-x:auto;margin:10px 0 24px;background:#fff;border-radius:16px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+.note{font-size:15px;color:var(--ink2)}
+.disclose{font-size:15px;color:var(--ink2);background:rgba(109,74,255,.07);border-radius:14px;padding:14px 18px;margin:0 0 26px}
+.cta{background:#121214;color:#fff;border-radius:26px;padding:30px;margin:44px 0;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.cta div{flex:1 1 300px}.cta h3{font-size:22px;margin-bottom:6px;color:#fff}.cta p{color:#C9C9D6;font-size:16px;margin:0}
+.cta a{background:#E5392F;color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:14px 26px;white-space:nowrap}
+details{border-top:1px solid var(--line);padding:16px 0}details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:18px}
+details p{margin-top:8px}
+.sources li{font-size:15px}
+.more{display:grid;gap:12px;margin:20px 0 40px}
+.more a{display:block;background:#fff;border-radius:16px;padding:16px 20px;text-decoration:none;color:var(--ink);font-weight:600}
+.more a span{display:block;font-weight:400;color:var(--ink2);font-size:15px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:14px;color:var(--ink3)}footer a{color:var(--ink3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="brand" href="/voicevault/"><img src="../icon.png" alt="">VoiceVault</a>
+<div class="links"><a href="/voicevault/guides/">Guides</a><a href="/voicevault/">The app</a></div></nav>
+<div class="crumbs"><a href="/voicevault/">VoiceVault</a> › <a href="/voicevault/guides/">Guides</a></div><article><h1>An Otter alternative that works without the cloud</h1><div class="meta">Updated 31 October 2026 · 7 min read</div><div class="answer"><b>Short answer</b>Otter records anywhere, but it transcribes on its servers, so you need an internet connection and an Otter account, and your meetings are stored in Otter's cloud. If you want transcripts and summaries made on the phone itself, look at Google Recorder (Pixel phones), Samsung Voice Recorder with Galaxy AI (recent Galaxy phones), or VoiceVault (Android 13 and newer). Otter is still the better choice if you need a bot to join Zoom or Teams, or a team workspace.</div><p class="disclose">We make VoiceVault, one of the apps in this guide. We've tried to be fair, including where Otter is the better choice.</p><p>Otter is one of the best-known AI note takers, and for good reason: it's accurate, it joins online meetings for you, and teams can share and comment on notes. But it works in a particular way that doesn't suit every meeting. This guide explains what Otter does with your audio, when that's a problem, and which Android apps work differently.</p>
+
+<h2>How Otter handles your meetings</h2>
+<p>Otter's own Google Play listing spells it out. Live transcription works "when online", the requirements include an "internet connection for transcribing" and "account creation", and your data is automatically backed up to Otter's cloud. In practice that means:</p>
+<ul>
+<li><b>You need a signal to get a transcript.</b> You can record on a plane or in a basement meeting room, but the words appear only after the audio reaches Otter's servers.</li>
+<li><b>Your meetings live on someone else's servers.</b> Otter says it doesn't sell or share your data and that you can delete it. For many meetings that's fine. For performance reviews, HR matters, legal or medical conversations, some people and some employers would rather the audio never leave the phone.</li>
+<li><b>You pay by the minute, in effect.</b> On 31 October 2026, Otter's free Basic plan included 300 transcription minutes a month with a 30-minute limit per conversation. Pro listed 1,200 minutes a month and a 90-minute limit, at $16.99 a month or $8.33 a month billed yearly. Business removed the monthly minute cap for meetings, with a 4-hour limit per conversation.</li>
+</ul>
+
+<h2>When Otter is still the better choice</h2>
+<p>An on-device app isn't better at everything. Stay with Otter (or Fireflies) if:</p>
+<ul>
+<li>most of your meetings are on Zoom, Google Meet or Teams and you want a bot to join and record them;</li>
+<li>your team shares notes, comments and highlights in one workspace;</li>
+<li>you use an iPhone, or need your notes on the web;</li>
+<li>you want slides captured automatically from online meetings.</li>
+</ul>
+
+<h2>When an on-device app makes more sense</h2>
+<ul>
+<li><b>Confidential conversations.</b> Board prep, HR, negotiations, a doctor's appointment. If the transcript is made on your phone, there's no copy on anyone's server.</li>
+<li><b>Patchy or no internet.</b> Client sites, flights, trains, older office buildings.</li>
+<li><b>Long or frequent meetings.</b> No minutes to ration and no per-conversation cap.</li>
+<li><b>You'd rather not pay monthly.</b> On-device apps don't run servers for every minute you record, so they can be sold once.</li>
+</ul>
+
+<h2>Android apps that transcribe on the phone</h2>
+<div class="table"><table>
+<tr><th>App</th><th>Phones</th><th>Transcribes on the phone</th><th>Summary and to-dos</th><th>Cost</th></tr>
+<tr><td>Google Recorder</td><td>Pixel only</td><td>Yes</td><td>Summaries on some newer Pixels</td><td>Free, built in</td></tr>
+<tr><td>Samsung Voice Recorder (Galaxy AI)</td><td>Recent Galaxy phones</td><td>Yes</td><td>Summaries; may use Samsung's cloud unless you choose on-device processing</td><td>Free, built in</td></tr>
+<tr><td>VoiceVault</td><td>Android 13 and newer</td><td>Yes</td><td>Yes, plus to-dos with owners and Ask across meetings</td><td>30 days free, then US$49.99 once</td></tr>
+<tr><td>Otter (for comparison)</td><td>Android, iPhone, web</td><td>No, in Otter's cloud</td><td>Yes</td><td>Free tier; Pro from $8.33/month billed yearly</td></tr>
+</table></div>
+<p class="note">Built-in apps are a good first try if you have the right phone. Check the settings: features and where processing happens vary by model and software version.</p>
+
+<h3>What VoiceVault does differently</h3>
+<p>VoiceVault downloads its own AI to your phone once, over Wi-Fi: NVIDIA's Parakeet model for transcripts, and Google's Gemma (or your phone's Gemini Nano) for summaries. After that, recording, transcripts, speaker labels, summaries and to-dos are all made on the phone, and work in airplane mode. There's no account and no VoiceVault server, so there's nothing for us to read, share or sell. Backups go to your own Google Drive, and only if you turn them on.</p>
+<p>The trade-offs are real: it's Android only, it doesn't join online meetings, and the AI download is large, so set it up on Wi-Fi. Summaries of long meetings take longer on older phones.</p>
+
+<div class="cta"><div><h3>Every meeting, written up. Right on your phone.</h3><p>VoiceVault for Android: transcripts, summaries and to-dos with no account, no servers and no subscription. 30 days free, then pay once.</p></div><a href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dguide%26utm_campaign%3Dotter-alternative-offline">Get it on Google Play</a></div>
+
+<h2>How to switch from Otter</h2>
+<ol>
+<li>Export anything you want to keep from Otter: transcripts as PDF, TXT or SRT, audio as MP3.</li>
+<li>Install VoiceVault from Google Play and open it on Wi-Fi so it can download its AI.</li>
+<li>At your next meeting, tap Record and put the phone in the middle of the table. The screen can be off.</li>
+<li>When you stop, the transcript, summary and to-dos appear on the phone. Tap a speaker label to put a name to each voice.</li>
+</ol>
+<p>For more on getting a clean recording, see <a href="transcribe-meeting-android.html">how to transcribe an in-person meeting on Android</a>.</p>
+<h2>Questions</h2><details><summary>Does Otter work offline?</summary><p>Otter's Android app can record without a connection, but its Google Play listing says transcription needs an internet connection: the audio is transcribed on Otter's servers once you're back online.</p></details><details><summary>Is there a free offline alternative to Otter?</summary><p>On a Pixel, Google's Recorder app transcribes on the phone for free. On recent Samsung Galaxy phones, the Voice Recorder app can transcribe with Galaxy AI. Both are tied to those phone brands. VoiceVault works on any Android 13+ phone, is free for 30 days, then is a one-time purchase.</p></details><details><summary>Can VoiceVault join my Zoom or Teams calls like Otter?</summary><p>No. VoiceVault records what your phone's microphone hears, so it suits meetings in the room and calls on speaker. If you mainly need a bot in online meetings, Otter or Fireflies fit better.</p></details><details><summary>Will I lose my Otter transcripts if I switch?</summary><p>No. Otter lets you export transcripts as PDF, TXT or SRT and audio as MP3, according to its app listing. Keep those exports; VoiceVault starts with your next meeting.</p></details><h2>Sources</h2><ul class="sources"><li><a href="https://play.google.com/store/apps/details?id=com.aisense.otter" rel="nofollow noopener">Otter on Google Play (features and requirements)</a></li><li><a href="https://otter.ai/pricing" rel="nofollow noopener">Otter pricing</a></li><li><a href="https://techcrunch.com/2019/10/15/googles-new-voice-recorder-app-transcribes-in-real-time-even-when-offline" rel="nofollow noopener">Google Recorder transcribes offline on Pixel (TechCrunch)</a></li><li><a href="https://www.samsung.com/ie/support/mobile-devices/how-to-use-galaxy-ai-transcript-assist" rel="nofollow noopener">Samsung: how to use Galaxy AI Transcript Assist</a></li></ul><p class="note">Prices and features were checked on 31 October 2026 and change often; check each provider before you buy.</p></article><h2 style="font-size:24px;margin-top:40px">More guides</h2><div class="more"><a href="ai-note-taker-no-subscription.html">AI note takers without a subscription<span>Otter, Fireflies and Plaud charge every month because they run your meetings through their servers. Here&#x27;s what that costs over three years, and when a one-time purchase makes sense.</span></a><a href="transcribe-meeting-android.html">How to transcribe an in-person meeting on Android<span>Where to put the phone, which app to use, and what to do after the meeting, so you get a clean transcript, the right speaker names and a usable summary.</span></a><a href="offline-speech-to-text-android.html">Speech-to-text on Android without internet: what actually works<span>Which Android apps really transcribe offline, from voice typing to full meeting transcripts, and a two-minute test to check any app yourself.</span></a></div>
+<footer>VoiceVault is made by Kan Canada Trading Corp., British Columbia, Canada · <a href="/voicevault/privacy.html">Privacy policy</a> · <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a></footer>
+</div>
+</body>
+</html>
