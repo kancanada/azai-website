@@ -3,106 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoiceVault — Speak it. Save it.</title>
-<meta name="description" content="VoiceVault records and transcribes on your phone, then files every recording to your folder or Google Drive automatically.">
+<title>VoiceVault: AI meeting notes that stay on your phone</title>
+<meta name="description" content="Record any meeting and walk out with the summary, the to-dos and who said what. Written on your Android phone, never uploaded. 30 days free, then pay once.">
 <link rel="canonical" href="https://azai.ca/voicevault/">
 <link rel="icon" type="image/png" href="icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azai.ca/voicevault/">
+<meta property="og:title" content="VoiceVault: look at your people, not your notepad">
+<meta property="og:description" content="AI meeting notes written on your phone. Nothing is uploaded. 30 days free, then pay once.">
+<meta property="og:image" content="https://azai.ca/voicevault/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+  @font-face { font-family:Geist; src:url(geist.ttf); font-weight:100 900; font-display:swap; }
   :root {
-    --bg:#F4F2EE; --ink:#1A1A1A; --ink-soft:#6B6B6B;
-    --hairline:#DDDAD3; --accent:#D63A1F;
+    --bg:#F4F2FA; --ink:#121214; --ink2:#4A4A57; --ink3:#8A8A98;
+    --violet:#6D4AFF; --red:#E5392F; --card:#fff; --line:rgba(18,18,20,.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body {
-    background:var(--bg); color:var(--ink);
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased;
+    font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif; color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    background:radial-gradient(1100px 900px at 0% 0%,#E4DCFF 0%,transparent 65%),
+      radial-gradient(1000px 900px at 100% 20%,#D3E4FF 0%,transparent 65%),var(--bg) no-repeat;
   }
-  nav {
-    display:flex; justify-content:space-between; align-items:center;
-    max-width:720px; margin:0 auto; padding:24px 40px;
-  }
-  .brand { display:flex; align-items:center; gap:12px; font-weight:500; font-size:14px; text-decoration:none; color:var(--ink); }
-  .brand img { width:24px; height:24px; }
-  .nav-right { font-size:13px; color:var(--ink-soft); }
-  .nav-right a { color:var(--ink-soft); text-decoration:none; margin-left:24px; }
-  .nav-right a:hover { color:var(--ink); }
-  main { max-width:720px; margin:32px auto 64px; padding:0 40px; }
-  h1 {
-    font-size:40px; font-weight:400; letter-spacing:-0.8px;
-    line-height:1.1; margin:24px 0 8px;
-  }
-  .updated { color:var(--ink-soft); font-size:13px; margin-bottom:48px; }
-  h2 {
-    font-size:11px; font-weight:500; text-transform:uppercase;
-    letter-spacing:0.8px; color:var(--ink-soft);
-    margin-top:48px; margin-bottom:12px;
-    padding-top:24px; border-top:1px solid var(--hairline);
-  }
-  p, ul { font-size:15px; line-height:1.6; margin-bottom:12px; }
-  ul { padding-left:24px; }
-  li { margin-bottom:6px; }
-  strong { font-weight:500; }
-  a { color:var(--ink); border-bottom:1px solid var(--hairline); text-decoration:none; }
-  a:hover { border-bottom-color:var(--ink); }
-  footer {
-    max-width:720px; margin:0 auto; padding:48px 40px 64px;
-    border-top:1px solid var(--hairline);
-    font-size:12px; color:var(--ink-soft);
-  }
-  @media (max-width:720px) {
-    nav, main, footer { padding-left:24px; padding-right:24px; }
-    h1 { font-size:32px; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:22px 0; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; text-decoration:none; }
+  .brand img { width:30px; height:30px; border-radius:8px; }
+  .links { display:flex; gap:22px; font-size:14px; color:var(--ink2); }
+  .links a { text-decoration:none; }
+  .links a:hover { color:var(--ink); }
+
+  h1, h2 { font-weight:700; letter-spacing:-.035em; line-height:1.03; }
+  em { font-style:normal; color:var(--violet); }
+  .eyebrow { font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--violet); margin-bottom:14px; }
+  .lede { font-size:20px; color:var(--ink2); max-width:520px; }
+
+  .play { display:inline-flex; align-items:center; gap:12px; background:var(--ink); color:#fff; text-decoration:none;
+    border-radius:999px; padding:12px 26px 12px 14px; font-weight:600; font-size:16px; }
+  .play img { width:34px; height:34px; border-radius:9px; }
+  .play small { display:block; font-size:12px; font-weight:400; opacity:.7; }
+  .note { margin-top:14px; font-size:14px; color:var(--ink3); }
+
+  .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding:40px 0 80px; }
+  .hero h1 { font-size:clamp(44px,6.4vw,76px); margin-bottom:22px; }
+  .hero .lede { margin-bottom:30px; }
+
+  .phone { width:100%; max-width:320px; margin:0 auto; padding:10px; border-radius:46px; background:#121214;
+    box-shadow:0 40px 90px rgba(40,20,120,.25); }
+  .phone img { display:block; width:100%; border-radius:37px; }
+
+  .strip { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding-bottom:90px; }
+  .strip div { background:rgba(255,255,255,.7); border-radius:22px; padding:22px 24px; font-size:15px; color:var(--ink2); }
+  .strip b { display:block; color:var(--ink); font-size:17px; margin-bottom:4px; }
+
+  section.row { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:60px 0; }
+  section.row.flip .text { order:2; }
+  section.row h2 { font-size:clamp(34px,4.4vw,52px); margin-bottom:18px; }
+  section.row .phone { max-width:300px; }
+
+  .dark { background:#0E0E14; color:#fff; border-radius:36px; margin:60px 0; padding:64px 56px;
+    background:radial-gradient(700px 500px at 0% 0%,#3B2A8C 0%,transparent 70%),radial-gradient(700px 600px at 100% 100%,#123A7A 0%,transparent 70%),#0E0E14; }
+  .dark h2 { font-size:clamp(34px,4.6vw,56px); margin-bottom:18px; }
+  .dark em { color:#B9A8FF; }
+  .dark .eyebrow { color:#B9A8FF; }
+  .dark .lede { color:#C9C9D6; max-width:620px; }
+  .checks { display:grid; grid-template-columns:1fr 1fr; gap:18px 40px; margin-top:40px; }
+  .checks > div { display:flex; gap:14px; font-size:17px; }
+  .checks span { flex:none; width:28px; height:28px; border-radius:50%; background:var(--violet); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; }
+  .checks small { display:block; color:#C9C9D6; font-size:15px; }
+
+  .price { text-align:center; padding:70px 0 40px; }
+  .price h2 { font-size:clamp(36px,5vw,60px); margin-bottom:16px; }
+  .price .lede { margin:0 auto 40px; }
+  .compare { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:760px; margin:0 auto 40px; text-align:left; }
+  .compare div { border-radius:26px; padding:30px 32px; background:rgba(255,255,255,.7); }
+  .compare div.us { background:var(--ink); color:#fff; }
+  .compare h3 { font-size:13px; letter-spacing:.08em; text-transform:uppercase; opacity:.7; margin-bottom:12px; font-weight:600; }
+  .compare p { margin-top:10px; font-size:17px; }
+  .compare p::before { content:"✕  "; color:#B4B4C0; font-weight:700; }
+  .compare .us p::before { content:"✓  "; color:#7CE3A4; }
+
+  .faq { max-width:760px; margin:0 auto; padding:50px 0 80px; }
+  .faq h2 { font-size:36px; margin-bottom:24px; }
+  details { border-top:1px solid var(--line); padding:18px 0; }
+  details:last-child { border-bottom:1px solid var(--line); }
+  summary { cursor:pointer; font-weight:600; font-size:18px; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:"+"; float:right; color:var(--ink3); }
+  details[open] summary::after { content:"–"; }
+  details p { margin-top:10px; color:var(--ink2); }
+
+  .end { text-align:center; padding:40px 0 90px; }
+  .end h2 { font-size:clamp(36px,5vw,58px); margin-bottom:28px; }
+  footer { border-top:1px solid var(--line); padding:28px 0 40px; font-size:14px; color:var(--ink3); display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+
+  @media (max-width:800px) {
+    .hero, section.row { grid-template-columns:1fr; gap:36px; }
+    section.row.flip .text { order:0; }
+    .hero { padding-top:16px; }
+    .strip, .compare, .checks { grid-template-columns:1fr; }
+    .dark { padding:44px 26px; border-radius:28px; }
+    .links a.hide { display:none; }
   }
 </style>
 </head>
 <body>
+<div class="wrap">
 
 <nav>
-  <a class="brand" href="/voicevault/">
-    <img src="icon.png" alt="VoiceVault">
-    <span>voicevault</span>
-  </a>
-  <div class="nav-right">
-    <a href="/voicevault/">Home</a>
-    <a href="privacy.html">Privacy</a>
+  <a class="brand" href="/voicevault/"><img src="icon.png" alt="">VoiceVault</a>
+  <div class="links">
+    <a class="hide" href="#private">Privacy</a>
+    <a class="hide" href="#price">Price</a>
+    <a href="#faq">FAQ</a>
   </div>
 </nav>
 
-<main>
+<header class="hero">
+  <div>
+    <div class="eyebrow">For people who run the meeting</div>
+    <h1>Look at your people, <em>not your notepad.</em></h1>
+    <p class="lede">Press Record and run the meeting. VoiceVault writes the summary, the to-dos and who said what, right on your phone. Nothing is uploaded.</p>
+    <a class="play" href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dlanding"><img src="icon.png" alt=""><span><small>Get it on</small>Google Play</span></a>
+    <p class="note">Android · 30 days free · then pay once</p>
+  </div>
+  <div class="phone"><img src="img/02-live-words.jpg" alt="VoiceVault recording a meeting, with the words appearing as they're spoken"></div>
+</header>
 
-<h1>Speak it. Save it.</h1>
-<p class="updated">VoiceVault for Android · 30 days free · No account</p>
+<div class="strip">
+  <div><b>Nothing leaves your phone</b>Recorded, transcribed and summarized on the device. Works in airplane mode.</div>
+  <div><b>No account, no servers</b>We never receive your recordings, so we can't read, share or sell them.</div>
+  <div><b>Pay once</b>No subscription, no minute limits, no AI credits.</div>
+</div>
 
-<p style="font-size:18px">
-  Hit record and talk. VoiceVault writes it down as you speak, then files the
-  audio and the transcript where you want them. Automatically.
-</p>
+<section class="row">
+  <div class="text">
+    <div class="eyebrow">The moment you stop</div>
+    <h2>Walk out knowing <em>who owes what.</em></h2>
+    <p class="lede">The decisions in a few lines, and a to-do list with an owner on each item. Add a due date and VoiceVault reminds you on the day.</p>
+  </div>
+  <div class="phone"><img src="img/04-summary-todos.jpg" alt="A meeting summary with to-dos and their owners" loading="lazy"></div>
+</section>
 
-<h2>Be in the conversation</h2>
-<p>Stop taking notes. Your words appear on screen as you say them, with a timestamp on every line.</p>
+<section class="row flip">
+  <div class="text">
+    <div class="eyebrow">Who said what</div>
+    <h2>End “I thought <em>you had it.”</em></h2>
+    <p class="lede">Every line of the transcript shows who said it and when. Tap any line to hear exactly how it was said.</p>
+  </div>
+  <div class="phone"><img src="img/05-who-said-what.jpg" alt="A transcript with each line labelled by speaker and time" loading="lazy"></div>
+</section>
 
-<h2>Files itself</h2>
-<p>Every recording lands in your folder, or in your own Google Drive, the moment you tap stop. No sharing, no exporting, no copy-paste.</p>
+<section class="row">
+  <div class="text">
+    <div class="eyebrow">Before your next 1:1</div>
+    <h2>“What did I promise?” <em>Just ask.</em></h2>
+    <p class="lede">Ask in plain words across every meeting you've recorded. The answer comes from your own meetings, with the source.</p>
+  </div>
+  <div class="phone"><img src="img/06-ask.jpg" alt="Asking what was promised this week, answered from recordings" loading="lazy"></div>
+</section>
 
-<h2>Private by design</h2>
-<p>Transcription runs on your phone. No servers, no ads, no tracking. VoiceVault can only see the files it creates.</p>
+<section class="dark" id="private">
+  <div class="eyebrow">Confidential stays confidential</div>
+  <h2>Some meetings <em>can't go to a cloud.</em></h2>
+  <p class="lede">Most AI note takers send your meetings to their servers to be transcribed. VoiceVault runs its own AI on your phone, so the conversation never leaves it.</p>
+  <div class="checks">
+    <div><span>✓</span><div>Performance reviews and HR conversations<small>Recorded and written up on the phone.</small></div></div>
+    <div><span>✓</span><div>Board prep and client negotiations<small>No account to sign in to, no copy on our side.</small></div></div>
+    <div><span>✓</span><div>Never used to train AI<small>No ads. No tracking.</small></div></div>
+    <div><span>✓</span><div>Backups only if you want them<small>To your own Google Drive, and nowhere else.</small></div></div>
+  </div>
+</section>
 
-<h2>Pay once. Own it.</h2>
-<p>Try everything free for 30 days. Then one payment of $49.99 unlocks VoiceVault for life. No subscription, no minutes to buy, no AI credits.</p>
+<section class="price" id="price">
+  <div class="eyebrow">Pay once</div>
+  <h2>No meter <em>running.</em></h2>
+  <p class="lede">Try everything free for 30 days. Then one payment unlocks VoiceVault for life: US$49.99, or the equivalent shown in Google Play.</p>
+  <div class="compare">
+    <div><h3>Most AI note takers</h3><p>Monthly subscription</p><p>Minute limits</p><p>Your meetings in their cloud</p><p>Account required</p></div>
+    <div class="us"><h3>VoiceVault</h3><p>One payment</p><p>Record as much as you like</p><p>Stays on your phone</p><p>No account</p></div>
+  </div>
+</section>
 
-<h2>Keeps going</h2>
-<p>Screen off, phone in your pocket, long meeting: recording and transcription carry on until you tap stop.</p>
+<section class="faq" id="faq">
+  <h2>Questions</h2>
+  <details><summary>Does it work without internet?</summary>
+    <p>Yes. After the first setup, when VoiceVault downloads its AI to your phone over Wi-Fi, recording, transcripts, summaries and Ask all work in airplane mode.</p></details>
+  <details><summary>Which phones does it run on?</summary>
+    <p>Android 13 and newer. Summaries are fastest on recent phones.</p></details>
+  <details><summary>Can it record online meetings?</summary>
+    <p>VoiceVault records what your phone's microphone hears, so it's made for meetings in the room and calls on speaker. It doesn't join Zoom or Teams as a bot.</p></details>
+  <details><summary>Can people see that I'm recording?</summary>
+    <p>VoiceVault shows a recording notification, and Android shows the microphone indicator. Always tell people when you're recording, and follow the consent rules where you are.</p></details>
+  <details><summary>What happens after the 30 days?</summary>
+    <p>To keep recording, unlock VoiceVault with one payment. If you don't, everything you've already recorded stays readable on your phone.</p></details>
+  <details><summary>Is there an iPhone version?</summary>
+    <p>Not yet. VoiceVault is Android only for now.</p></details>
+</section>
 
-<p style="margin-top:48px"><a href="privacy.html">Privacy policy</a></p>
-
-</main>
+<section class="end">
+  <h2>Be in the room. <em>VoiceVault takes the notes.</em></h2>
+  <a class="play" href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dlanding"><img src="icon.png" alt=""><span><small>Get it on</small>Google Play</span></a>
+  <p class="note">30 days free · then one payment, yours for life</p>
+</section>
 
 <footer>
-  VoiceVault is made by Kan Canada Trading Corp., British Columbia, Canada ·
-  <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a>
+  <span>VoiceVault is made by Kan Canada Trading Corp., British Columbia, Canada</span>
+  <span><a href="privacy.html">Privacy policy</a> · <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a></span>
 </footer>
 
+</div>
 </body>
 </html>
