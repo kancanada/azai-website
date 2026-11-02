@@ -45,7 +45,8 @@
         "https://azai.ca/flip-to-focus/img/place-face-down.jpg",
         "https://azai.ca/flip-to-focus/img/timer-running.jpg",
         "https://azai.ca/flip-to-focus/img/paused.jpg",
-        "https://azai.ca/flip-to-focus/img/home.jpg"
+        "https://azai.ca/flip-to-focus/img/home.jpg",
+        "https://azai.ca/flip-to-focus/img/share-card.jpg"
       ],
       "offers": {
         "@type": "Offer",
@@ -60,7 +61,13 @@
         "Automatic Do Not Disturb during sessions",
         "Optional Strict Mode",
         "Daily streaks and a year-long heatmap",
-        "Session tags and CSV export",
+        "Weekly and monthly study stats with a daily report",
+        "Subjects with daily study goals",
+        "Exam countdown (D-day) on the home screen",
+        "Focus score for every session",
+        "Break timer between sessions",
+        "Shareable study-time card for Instagram and other apps",
+        "CSV export",
         "No ads, no account, no data collection"
       ],
       "publisher": { "@id": "https://azai.ca/#org" }
@@ -113,6 +120,16 @@
           "@type": "Question",
           "name": "Does it drain the battery?",
           "acceptedAnswer": { "@type": "Answer", "text": "The screen switches off while the phone lies face down, so a session uses far less battery than a timer that keeps the display on." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use it as a Pomodoro timer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pick a 25-minute preset, and after each completed session Flip to Focus offers a 5, 10 or 15-minute break timer before the next one." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the focus score?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every completed session gets a score out of 100. You start at 100, and picking the phone up or leaving it paused lowers the score, so you can see at a glance how focused a session really was." }
         },
         {
           "@type": "Question",
@@ -237,6 +254,7 @@
   .split { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: center; }
   .split p { font-size: 16px; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
 
+  .card-img { border-radius: 24px; box-shadow: 0 30px 60px rgba(20, 60, 45, 0.22); max-width: 300px; }
   .price { font-size: 16px; max-width: 640px; color: var(--ink-soft); }
   .price strong { color: var(--ink); font-weight: 500; }
 
@@ -325,10 +343,10 @@
   <div class="steps">
     <div class="step">
       <div class="phone"><img src="/flip-to-focus/img/home.jpg" width="540" height="1200" loading="lazy"
-           alt="Choosing a 50 minute study session with a Study tag in Flip to Focus"></div>
+           alt="Flip to Focus home screen with an exam countdown, session length and Study subject goal"></div>
       <div class="n">01</div>
-      <h3>Pick a session length</h3>
-      <p>Anywhere from 15 to 120 minutes, or tap a preset. Tag it Study, Work or Writing if you like.</p>
+      <h3>Pick a length and subject</h3>
+      <p>Anywhere from 15 to 120 minutes, or tap a preset. Choose a subject and watch your daily goal fill up.</p>
     </div>
     <div class="step">
       <div class="phone"><img src="/flip-to-focus/img/place-face-down.jpg" width="540" height="1200" loading="lazy"
@@ -365,17 +383,42 @@
       <p>Optional. Pick the phone up for more than 10 seconds and the session ends. A strong vibration warns you first.</p>
     </div>
     <div class="feature">
-      <h3>Streaks and a yearly heatmap</h3>
-      <p>See every day you focused and for how long. Your streak counts days with at least one completed session.</p>
+      <h3>Subjects and daily goals</h3>
+      <p>Add your own subjects — Biology, Math, Reading — and set a daily goal for each. A progress bar shows how close you are today.</p>
     </div>
     <div class="feature">
-      <h3>Study time tracker</h3>
-      <p>Every session is logged with its length and tag. Export the whole history as a CSV file for a spreadsheet.</p>
+      <h3>Study stats and streaks</h3>
+      <p>Minutes per day for the week and month, time by subject, a daily report, your streak and a year-long heatmap. Export it all as CSV.</p>
+    </div>
+    <div class="feature">
+      <h3>Exam countdown</h3>
+      <p>Add your exam date and the home screen shows D-12, D-11, D-10… so you always know how long is left.</p>
+    </div>
+    <div class="feature">
+      <h3>Focus score and breaks</h3>
+      <p>Every session gets a score out of 100 based on how often you picked the phone up. Then take a 5, 10 or 15-minute break, Pomodoro style.</p>
+    </div>
+    <div class="feature">
+      <h3>Share your study time</h3>
+      <p>Turn today or this week into a clean card for your Instagram story or a study group chat. Made on your phone — nothing is uploaded.</p>
     </div>
     <div class="feature">
       <h3>Easy on the battery</h3>
       <p>The proximity sensor switches the screen off while the phone lies face down, so the timer runs without lighting up the display.</p>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <div class="section-label">Share</div>
+      <h2>Show your study time, not your data.</h2>
+      <p>Turn today or this week into a clean card — minutes studied, streak, sessions and focus score — and post it to your Instagram story or study group chat.</p>
+      <p>The image is made on your phone and handed to the app you choose. Nothing is uploaded by Flip to Focus.</p>
+    </div>
+    <img class="card-img" src="/flip-to-focus/img/share-card.jpg" width="576" height="720" loading="lazy"
+         alt="Flip to Focus share card: today I studied 15 minutes with my phone face down, 1 day streak, focus score 94">
   </div>
 </section>
 
@@ -448,6 +491,14 @@
   <details>
     <summary>Does it drain the battery?</summary>
     <p>The screen switches off while the phone lies face down, so a session uses far less battery than a timer that keeps the display on.</p>
+  </details>
+  <details>
+    <summary>Can I use it as a Pomodoro timer?</summary>
+    <p>Yes. Pick a 25-minute preset, and after each completed session Flip to Focus offers a 5, 10 or 15-minute break timer before the next one.</p>
+  </details>
+  <details>
+    <summary>What is the focus score?</summary>
+    <p>Every completed session gets a score out of 100. You start at 100, and picking the phone up or leaving it paused lowers the score, so you can see at a glance how focused a session really was.</p>
   </details>
   <details>
     <summary>Can it help if I have ADHD?</summary>
