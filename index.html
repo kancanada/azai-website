@@ -53,7 +53,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 64px 48px; }
 }
 .lede h1 {
   font-size: 56px; font-weight: 400; letter-spacing: -1.2px;
-  line-height: 1.05; margin-bottom: 24px;
+  line-height: 1.05; margin-bottom: 24px; text-wrap: balance;
 }
 .lede h1 em { font-style: normal; color: var(--ink-soft); }
 .lede p {
@@ -124,7 +124,7 @@ footer .links a:hover { color: var(--ink); }
   .products, .principles-grid { grid-template-columns: 1fr; gap: 40px; }
   footer .links a { margin-left: 0; margin-right: 16px; }
 }
-@media (max-width: 420px) {
+@media (max-width: 560px) {
   .nav-right a[href^="mailto"] { display: none; }
   .brand span { display: none; }
   .nav-right { white-space: nowrap; }
@@ -147,10 +147,10 @@ footer .links a:hover { color: var(--ink); }
 <main>
 
   <section class="lede">
-    <h1>Software <em>for people who want<br>their tools to work.</em></h1>
+    <h1>Software <em>for people who want their tools to work.</em></h1>
     <p>
-      We build two kinds of products at AZAI: ones we'd be embarrassed
-      to ship without using ourselves, and none of the other kind.
+      We make a small number of apps, and we use every one of them
+      ourselves. Each one does one job well and stays out of your way.
     </p>
   </section>
 
