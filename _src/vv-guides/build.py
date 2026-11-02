@@ -6,6 +6,8 @@ OUT = os.path.join(HERE, "..", "..", "voicevault", "guides")
 SITE = "https://azai.ca/voicevault/guides/"
 PLAY = "https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dguide%26utm_campaign%3D{slug}"
 UPDATED = "2026-10-31"
+import datetime
+def nice(d): return datetime.date.fromisoformat(d).strftime("%-d %B %Y")
 
 CSS = """
 @font-face{font-family:Geist;src:url(../geist.ttf);font-weight:100 900;font-display:swap}
@@ -99,15 +101,15 @@ for g in guides:
     sources = "".join(f'<li><a href="{u}" rel="nofollow noopener">{html.escape(l)}</a></li>' for l, u in g["sources"])
     others = "".join(f'<a href="{o["slug"]}.html">{html.escape(o["h1"])}<span>{html.escape(o["description"])}</span></a>' for o in guides if o is not g)
     body = (f'<div class="crumbs"><a href="/voicevault/">VoiceVault</a> › <a href="/voicevault/guides/">Guides</a></div>'
-            f'<article><h1>{html.escape(g["h1"])}</h1><div class="meta">Updated 31 October 2026 · {g["minutes"]} min read</div>'
+            f'<article><h1>{html.escape(g["h1"])}</h1><div class="meta">Updated {nice(g.get("updated", UPDATED))} · {g["minutes"]} min read</div>'
             f'<div class="answer"><b>Short answer</b>{g["answer"]}</div>'
             + (f'<p class="disclose">{g["disclose"]}</p>' if g.get("disclose") else "")
             + g["body"].replace("<!--CTA-->", cta(g["slug"]))
             + f'<h2>Questions</h2>{faq}'
-            + (f'<h2>Sources</h2><ul class="sources">{sources}</ul><p class="note">Prices and features were checked on 31 October 2026 and change often; check each provider before you buy.</p>' if sources else "")
+            + (f'<h2>Sources</h2><ul class="sources">{sources}</ul><p class="note">{g.get("note", "Prices and features were checked on 31 October 2026 and change often; check each provider before you buy.")}</p>' if sources else "")
             + f'</article><h2 style="font-size:24px;margin-top:40px">More guides</h2><div class="more">{others}</div>')
     schema = [{"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["description"],
-               "dateModified": UPDATED, "datePublished": UPDATED, "mainEntityOfPage": url, "image": "https://azai.ca/voicevault/og.jpg",
+               "dateModified": g.get("updated", UPDATED), "datePublished": g.get("updated", UPDATED), "mainEntityOfPage": url, "image": "https://azai.ca/voicevault/og.jpg",
                "author": {"@type": "Organization", "name": "Kan Canada Trading Corp."},
                "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}},
               {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
