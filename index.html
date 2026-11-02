@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AZAI Corp. — Software for people who want their tools to work.</title>
-<meta name="description" content="AZAI Corp. builds calm, well-made software. Three products today: VoiceVault, an AI note taker that works on your phone; AZAI Oracle for stock valuation; and Toss for direct file transfer between Mac and Android.">
+<meta name="description" content="AZAI Corp. builds calm, well-made software. Four products today: VoiceVault, an AI note taker that works on your phone; AZAI Oracle for stock valuation; Toss for direct file transfer between Mac and Android; and Flip to Focus, a study timer that runs while your phone is face down.">
 <link rel="canonical" href="https://azai.ca/">
 <link rel="icon" type="image/png" href="favicon.png">
 
@@ -66,7 +66,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 64px 48px; }
 }
 
 .products {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px 72px;
   border-top: 1px solid var(--hairline); padding-top: 48px;
 }
 .product { display: block; color: inherit; }
@@ -128,7 +128,9 @@ footer .links a:hover { color: var(--ink); }
   .nav-right a[href^="mailto"] { display: none; }
   .brand span { display: none; }
   .nav-right { white-space: nowrap; }
-  .nav-right a { margin-left: 18px; }
+  .nav-right a { margin-left: 16px; }
+  .nav-right .long { display: none; }
+  .brand { white-space: nowrap; }
 }
 </style>
 </head>
@@ -140,6 +142,7 @@ footer .links a:hover { color: var(--ink); }
     <a href="/voicevault/">VoiceVault</a>
     <a href="/oracle.html">Oracle</a>
     <a href="/toss/">Toss</a>
+    <a href="/flip-to-focus/">Flip<span class="long"> to Focus</span></a>
     <a href="mailto:asoni@kancanada.com">Contact</a>
   </div>
 </nav>
@@ -187,6 +190,16 @@ footer .links a:hover { color: var(--ink); }
       <span class="arrow">Open Toss &nbsp;&rarr;</span>
     </a>
 
+    <a class="product" href="/flip-to-focus/">
+      <div class="meta">04 · Study timer</div>
+      <h2>Flip to Focus</h2>
+      <p class="blurb">
+        The study timer that starts when you flip your phone face down.
+        Pick it up and the clock stops. No ads, no account. Pay once.
+      </p>
+      <span class="arrow">Open Flip to Focus &nbsp;&rarr;</span>
+    </a>
+
   </section>
 
   <section class="principles">
@@ -222,6 +235,7 @@ footer .links a:hover { color: var(--ink); }
     <a href="/voicevault/guides/">Guides</a>
     <a href="/oracle.html">Oracle</a>
     <a href="/toss/">Toss</a>
+    <a href="/flip-to-focus/">Flip to Focus</a>
     <a href="/privacy.html">Privacy</a>
     <a href="mailto:asoni@kancanada.com">Contact</a>
   </div>
