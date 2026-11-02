@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flip to Focus — Phone face down, timer running</title>
+<meta name="description" content="A focus timer for Android that only counts while your phone lies face down. No ads, no accounts, no tracking. 30 days free, then one payment.">
+<meta name="author" content="AZAI Corp.">
+<link rel="canonical" href="https://azai.ca/flip-to-focus/">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<meta property="og:title" content="Flip to Focus — Phone face down, timer running">
+<meta property="og:description" content="Pick up your phone and the clock stops. No ads, no accounts.">
+<meta property="og:image" content="https://azai.ca/flip-to-focus/og.jpg">
+<meta property="og:url" content="https://azai.ca/flip-to-focus/">
+<meta property="og:type" content="website">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+  /* ---- Palette: matches the Flip to Focus icon ---- */
+  :root {
+    --bg:       #F4F2EE;
+    --ink:      #1A1A1A;
+    --ink-soft: #6B6B6B;
+    --hairline: #DDDAD3;
+    --accent:   #3C8F6E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  a:hover { border-bottom-color: var(--ink); }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 960px; margin: 0 auto; padding: 24px 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 500; border: 0; font-size: 14px; }
+  .brand img { width: 24px; height: 24px; border-radius: 6px; }
+  .nav-right { font-size: 13px; color: var(--ink-soft); }
+  .nav-right a { color: var(--ink-soft); border: 0; margin-left: 24px; }
+  .nav-right a:hover { color: var(--ink); }
+
+  .hero {
+    max-width: 960px; margin: 64px auto 96px; padding: 0 40px;
+    display: grid; grid-template-columns: 1fr 200px; gap: 48px; align-items: center;
+  }
+  .hero h1 {
+    font-size: 64px; font-weight: 400; letter-spacing: -1.2px;
+    line-height: 1.05; margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--ink-soft); }
+  .hero .tagline { font-size: 18px; color: var(--ink-soft); max-width: 520px; margin-bottom: 40px; }
+  .hero .icon { width: 200px; height: 200px; border-radius: 44px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; font-size: 14px; font-weight: 500;
+    border: 1px solid var(--hairline); color: var(--ink-soft);
+  }
+  .btn .meta { font-size: 11px; margin-left: 8px; color: #B5B3AE; }
+
+  section { max-width: 960px; margin: 0 auto; padding: 64px 40px; border-top: 1px solid var(--hairline); }
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--ink-soft); margin-bottom: 24px;
+  }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; }
+  .feature h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  footer {
+    max-width: 960px; margin: 0 auto; padding: 48px 40px 64px;
+    border-top: 1px solid var(--hairline);
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    font-size: 12px; color: var(--ink-soft);
+  }
+  footer .links a { color: var(--ink-soft); border: 0; margin-left: 20px; }
+  footer .links a:hover { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; gap: 24px; }
+    .hero .icon { width: 96px; height: 96px; border-radius: 22px; order: -1; }
+    .hero h1 { font-size: 44px; }
+    .grid-3 { grid-template-columns: 1fr; gap: 32px; }
+    nav { padding: 20px 24px; }
+    .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    footer .links a { margin-left: 0; margin-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/flip-to-focus/">
+    <img src="favicon.png" alt="Flip to Focus">
+    <span>flip to focus</span>
+  </a>
+  <div class="nav-right">
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Phone face down.<br><em>Timer running.</em></h1>
+    <p class="tagline">
+      A focus timer that only counts while your phone lies face down.
+      Pick it up and the clock stops. No ads, no accounts, no tracking.
+    </p>
+    <span class="btn">
+      Get on Google Play
+      <span class="meta">Coming soon</span>
+    </span>
+  </div>
+  <img class="icon" src="icon.png" alt="Flip to Focus icon">
+</header>
+
+<section>
+  <div class="section-label">What it does</div>
+  <div class="grid-3">
+    <div class="feature">
+      <h3>Flip to start</h3>
+      <p>Set 15 to 120 minutes and turn your phone over. The screen goes dark and the timer runs until you're done.</p>
+    </div>
+    <div class="feature">
+      <h3>Silence, automatically</h3>
+      <p>Do Not Disturb turns on for the session and back off when it ends. Strict Mode ends the session if you pick the phone up.</p>
+    </div>
+    <div class="feature">
+      <h3>Streaks you can see</h3>
+      <p>A year-long heatmap of your focused minutes. Everything stays on your phone, and you can export it any time.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Pricing</div>
+  <p style="font-size:15px;max-width:560px;">
+    Free for 30 days. Then one payment to keep starting new sessions —
+    no subscription. Your history and heatmap stay free either way.
+  </p>
+</section>
+
+<footer>
+  <div>© 2026 AZAI Corp.</div>
+  <div class="links">
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
+    <a href="https://azai.ca/">AZAI</a>
+  </div>
+</footer>
+
+</body>
+</html>
