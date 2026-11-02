@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AZAI Corp. — Software for people who want their tools to work.</title>
-<meta name="description" content="AZAI Corp. builds calm, well-made software. Two products today: AZAI Oracle for stock valuation, and Toss for direct file transfer between Mac and Android.">
+<meta name="description" content="AZAI Corp. builds calm, well-made software. Three products today: VoiceVault, an AI note taker that works on your phone; AZAI Oracle for stock valuation; and Toss for direct file transfer between Mac and Android.">
 <link rel="canonical" href="https://azai.ca/">
 <link rel="icon" type="image/png" href="favicon.png">
 
@@ -66,7 +66,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 64px 48px; }
 }
 
 .products {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px;
   border-top: 1px solid var(--hairline); padding-top: 48px;
 }
 .product { display: block; color: inherit; }
@@ -131,6 +131,7 @@ footer .links a:hover { color: var(--ink); }
 <nav>
   <a class="brand" href="/">azai corp.<span>// software</span></a>
   <div class="nav-right">
+    <a href="/voicevault/">VoiceVault</a>
     <a href="/oracle.html">Oracle</a>
     <a href="/toss/">Toss</a>
     <a href="mailto:asoni@kancanada.com">Contact</a>
@@ -150,8 +151,18 @@ footer .links a:hover { color: var(--ink); }
   <div class="section-label">Products</div>
   <section class="products">
 
+    <a class="product" href="/voicevault/">
+      <div class="meta">01 · Meeting notes</div>
+      <h2>VoiceVault</h2>
+      <p class="blurb">
+        Every meeting, written up. Transcripts, summaries and to-dos,
+        right on your phone. No account, no cloud. Pay once.
+      </p>
+      <span class="arrow">Open VoiceVault &nbsp;&rarr;</span>
+    </a>
+
     <a class="product" href="/oracle.html">
-      <div class="meta">01 · Investing</div>
+      <div class="meta">02 · Investing</div>
       <h2>Oracle</h2>
       <p class="blurb">
         Know what a stock is worth before you buy. AI plus discounted
@@ -161,7 +172,7 @@ footer .links a:hover { color: var(--ink); }
     </a>
 
     <a class="product" href="/toss/">
-      <div class="meta">02 · File transfer</div>
+      <div class="meta">03 · File transfer</div>
       <h2>Toss</h2>
       <p class="blurb">
         Send anything between Mac and Android. Direct over Wi-Fi.
@@ -201,6 +212,8 @@ footer .links a:hover { color: var(--ink); }
 <footer>
   <div>© 2026 AZAI Corp. · British Columbia, Canada.</div>
   <div class="links">
+    <a href="/voicevault/">VoiceVault</a>
+    <a href="/voicevault/guides/">Guides</a>
     <a href="/oracle.html">Oracle</a>
     <a href="/toss/">Toss</a>
     <a href="/privacy.html">Privacy</a>
