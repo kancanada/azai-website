@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://azai.ca/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -238,7 +238,7 @@
   </url>
   <url>
     <loc>https://azai.ca/voicevault/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -250,54 +250,63 @@
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/otter-alternative-offline.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/ai-note-taker-no-subscription.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/transcribe-meeting-android.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/offline-speech-to-text-android.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/meeting-minutes-template.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/meeting-action-items.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://azai.ca/voicevault/guides/private-ai-note-taker.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url><loc>https://azai.ca/voicevault/guides/record-meeting-canada-consent.html</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://azai.ca/voicevault/guides/record-meeting-us-consent-laws.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/record-meeting-canada-consent.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/record-meeting-us-consent-laws.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/plaud-vs-otter.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/plaud-alternative.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/plaud-note-overview.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/is-otter-ai-safe.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/fireflies-alternative.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/read-ai-overview.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/voice-recorder-with-transcription.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/one-on-one-meeting-template.html</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://azai.ca/voicevault/guides/how-to-take-meeting-notes.html</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://azai.ca/flip-to-focus/</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://azai.ca/flip-to-focus/privacy.html</loc><lastmod>2026-11-03</lastmod></url>
 </urlset>

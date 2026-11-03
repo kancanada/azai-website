@@ -61,11 +61,14 @@ def page(title, description, canonical, body, schema):
 <link rel="canonical" href="{canonical}">
 <link rel="icon" type="image/png" href="../icon.png">
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="VoiceVault">
 <meta property="og:url" content="{canonical}">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:image" content="https://azai.ca/voicevault/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{html.escape(title)}">
+<meta name="twitter:description" content="{html.escape(description)}">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <style>{CSS}</style>
 </head>
@@ -96,6 +99,9 @@ def cta(slug):
             f'<a href="{PLAY.format(slug=slug)}">Get it on Google Play</a></div>')
 
 for g in guides:
+    # Google cuts titles around 60 characters and descriptions around 155.
+    if len(g["title"]) > 60 or len(g["description"]) > 155:
+        print(f'too long: {g["slug"]} (title {len(g["title"])}, description {len(g["description"])})')
     url = SITE + g["slug"] + ".html"
     faq = "".join(f"<details><summary>{html.escape(q)}</summary><p>{a}</p></details>" for q, a in g["faq"])
     sources = "".join(f'<li><a href="{u}" rel="nofollow noopener">{html.escape(l)}</a></li>' for l, u in g["sources"])
@@ -113,7 +119,11 @@ for g in guides:
                "author": {"@type": "Organization", "name": "Kan Canada Trading Corp."},
                "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}},
               {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-                  {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}} for q, a in g["faq"]]}]
+                  {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}} for q, a in g["faq"]]},
+              {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+                  {"@type": "ListItem", "position": 1, "name": "VoiceVault", "item": "https://azai.ca/voicevault/"},
+                  {"@type": "ListItem", "position": 2, "name": "Guides", "item": SITE},
+                  {"@type": "ListItem", "position": 3, "name": g["h1"], "item": url}]}]
     open(os.path.join(OUT, g["slug"] + ".html"), "w").write(page(g["title"], g["description"], url, body, schema))
 
 items = "".join(f'<a href="{g["slug"]}.html">{html.escape(g["h1"])}<span>{html.escape(g["description"])}</span></a>' for g in guides)
