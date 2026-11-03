@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Oracle — Tarot Card of the Day, Stoic Quote &amp; Moon Phase (Android)</title>
+<meta name="description" content="A one-minute daily ritual for Android: one tarot card from the classic 1909 Rider-Waite-Smith deck, one Stoic quote, one small action, and the real moon phase and moon sign, calculated offline. Free, no account.">
+<meta name="keywords" content="tarot card of the day, daily tarot, moon phase today, moon sign today, Rider-Waite-Smith, Stoic quote of the day, Marcus Aurelius, daily reflection, journaling prompt, Android">
+<meta name="author" content="AZAI Corp.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://azai.ca/daily-oracle/">
+<link rel="icon" type="image/png" href="/daily-oracle/favicon.png">
+<link rel="apple-touch-icon" href="/daily-oracle/apple-touch-icon.png">
+<meta name="theme-color" content="#0F0E17">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AZAI">
+<meta property="og:title" content="Daily Oracle — tarot and the real moon, every day">
+<meta property="og:description" content="One card, one Stoic line, one small step, and the moon as it really is tonight. Free on Android, no account.">
+<meta property="og:image" content="https://azai.ca/daily-oracle/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://azai.ca/daily-oracle/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daily Oracle — tarot card of the day and moon phase">
+<meta name="twitter:description" content="One card, one Stoic line, one small step, and the real moon. Free on Android.">
+<meta name="twitter:image" content="https://azai.ca/daily-oracle/og.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://azai.ca/daily-oracle/#app",
+      "name": "Daily Oracle: Tarot & Moon",
+      "alternateName": "Daily Oracle",
+      "description": "A daily reflection app for Android: one tarot card from the 1909 Rider-Waite-Smith deck, one Stoic quote from Marcus Aurelius or Epictetus, one small action, and the moon phase, illumination and moon sign calculated on the phone. Free with ads, no account.",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Tarot and moon phase",
+      "operatingSystem": "Android 8.0 or later",
+      "url": "https://azai.ca/daily-oracle/",
+      "image": "https://azai.ca/daily-oracle/icon.png",
+      "screenshot": [
+        "https://azai.ca/daily-oracle/img/today.jpg",
+        "https://azai.ca/daily-oracle/img/meaning.jpg",
+        "https://azai.ca/daily-oracle/img/spread.jpg",
+        "https://azai.ca/daily-oracle/img/share.jpg",
+        "https://azai.ca/daily-oracle/img/history.jpg"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free, supported by ads. No purchases and no subscription."
+      },
+      "featureList": [
+        "Tarot card of the day, the same for everyone on a given date",
+        "Classic 1909 Rider-Waite-Smith card art (public domain)",
+        "A reflection and a journaling question for every card",
+        "365 Stoic quotes from Marcus Aurelius and Epictetus",
+        "A small action for each day",
+        "Moon phase, illumination, age and moon sign, calculated offline",
+        "Next full moon, next new moon and the time of the next sign change",
+        "Personal 3-card spread",
+        "Share images for stories and posts",
+        "History of every card drawn, with a streak",
+        "One optional daily reminder",
+        "No account"
+      ],
+      "publisher": { "@id": "https://azai.ca/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://azai.ca/#org",
+      "name": "AZAI Corp.",
+      "url": "https://azai.ca/",
+      "logo": "https://azai.ca/logo.png",
+      "email": "asoni@kancanada.com",
+      "address": { "@type": "PostalAddress", "addressRegion": "BC", "addressCountry": "CA" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AZAI", "item": "https://azai.ca/" },
+        { "@type": "ListItem", "position": 2, "name": "Daily Oracle", "item": "https://azai.ca/daily-oracle/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does everyone get the same tarot card of the day?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everyone who opens Daily Oracle on the same local date draws the same card, so you can share it and reflect on the same thing as a friend. The cards follow a fixed shuffle for each year, so a card comes back about every 78 days, and never sooner than 40." }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the moon phase?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The app calculates the Moon's position on your phone with the formulas in Jean Meeus's Astronomical Algorithms. Checked against all 99 new moons, full moons and quarters the U.S. Naval Observatory lists for 2026 and 2027, every phase time is within a few minutes. The moon sign is the Moon's tropical zodiac sign, with the time it enters the next one." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work offline?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The cards, quotes, actions and moon calculations are all on your phone. Ads need a connection; without one the app simply shows none, and the 3-card spread opens anyway." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Daily Oracle free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, every feature is free. The app shows a small banner ad, a short optional video before the 3-card spread, and at most one full-screen ad a day after you share. There are no purchases and no subscription." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it fortune telling?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Daily Oracle uses tarot as a prompt for reflection, the way you might use a journaling card. It doesn't predict the future and isn't advice of any kind." }
+        },
+        {
+          "@type": "Question",
+          "name": "What data does the app collect?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Your card history, actions and reminder time stay on your phone and are never sent to us. There is no account. The ads come from Google AdMob, and the Google Mobile Ads SDK collects your advertising ID, approximate location from your IP address and ad interactions to show and measure ads. In the EU, UK and Switzerland the app asks for your consent first, and you can change your choices in Settings." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the cards and quotes come from?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The card art is scans of the original 1909 Rider-Waite-Smith deck illustrated by Pamela Colman Smith, which is in the public domain. The quotes are George Long's public-domain translations of Marcus Aurelius's Meditations and Epictetus's Enchiridion and Discourses. The card reflections and daily actions were written for the app." }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it remind me every day?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only if you want it to. You can turn on one daily reminder at a time you choose. It is a local notification scheduled on your phone, it never gives away the card, and it skips the day once you have drawn." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an iPhone version?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Daily Oracle is available for Android 8.0 and later." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+  /* ---- Palette: matches the Daily Oracle app ---- */
+  :root {
+    --bg:       #0F0E17;
+    --bg-2:     #17152A;
+    --ink:      #F3EBDD;
+    --ink-soft: #A9A1B8;
+    --ink-faint:#6E6880;
+    --hairline: #2A2740;
+    --gold:     #D9B26F;
+    --phone:    #05050A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { background: radial-gradient(1200px 700px at 20% -10%, #2D2750 0%, var(--bg) 60%) no-repeat, var(--bg); }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  a:hover { border-bottom-color: var(--gold); }
+  img { display: block; max-width: 100%; height: auto; }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1080px; margin: 0 auto; padding: 24px 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 500; border: 0; font-size: 14px; }
+  .brand img { width: 24px; height: 24px; border-radius: 6px; }
+  .nav-right { font-size: 13px; color: var(--ink-soft); }
+  .nav-right a { color: var(--ink-soft); border: 0; margin-left: 24px; }
+  .nav-right a:hover { color: var(--ink); }
+
+  /* ---- Hero ---- */
+  .hero {
+    max-width: 1080px; margin: 48px auto 96px; padding: 0 40px;
+    display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: center;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 1.6px; color: var(--gold); margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 68px; font-weight: 500; letter-spacing: -0.5px;
+    line-height: 1.02; margin-bottom: 20px; text-wrap: balance;
+  }
+  .hero h1 em { color: var(--gold); }
+  .hero .tagline { font-size: 18px; color: var(--ink-soft); max-width: 540px; margin-bottom: 32px; }
+  .checks { list-style: none; margin-bottom: 36px; display: grid; gap: 8px; }
+  .checks li { font-size: 15px; padding-left: 26px; position: relative; }
+  .checks li::before { content: "☾"; position: absolute; left: 2px; top: 0; color: var(--gold); }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; font-size: 14px; font-weight: 500;
+    border: 1px solid var(--hairline); color: var(--ink-soft); border-radius: 999px;
+  }
+  .btn .meta { font-size: 11px; color: var(--ink-faint); margin-left: 6px; }
+  .btn.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+  .btn.primary .meta { color: #5A4A2E; }
+  .btn.soon { cursor: default; }
+  .cta small { font-size: 13px; color: var(--ink-soft); }
+
+  .phone {
+    border-radius: 36px; border: 8px solid var(--phone); background: var(--phone);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--hairline); overflow: hidden;
+  }
+  .phone img { border-radius: 28px; }
+
+  /* ---- Sections ---- */
+  section { max-width: 1080px; margin: 0 auto; padding: 72px 40px; border-top: 1px solid var(--hairline); }
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 1.6px; color: var(--gold); margin-bottom: 12px;
+  }
+  section h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 44px; font-weight: 500; letter-spacing: -0.3px; line-height: 1.1;
+    margin-bottom: 16px; max-width: 720px;
+  }
+  section .intro { font-size: 16px; color: var(--ink-soft); max-width: 640px; margin-bottom: 48px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step .phone { margin-bottom: 24px; border-width: 6px; border-radius: 30px; }
+  .step .phone img { border-radius: 24px; }
+  .step .n { font-size: 12px; color: var(--gold); font-weight: 500; margin-bottom: 6px; }
+  .step h3 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+  .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 56px; }
+  .feature h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  .split { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: center; }
+  .split p { font-size: 16px; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
+  .split p strong { color: var(--ink); font-weight: 500; }
+
+  blockquote {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+    font-size: 28px; line-height: 1.3; max-width: 720px; color: var(--ink);
+    border-left: 2px solid var(--gold); padding-left: 24px; margin: 8px 0 12px;
+  }
+  .cite { font-size: 13px; color: var(--ink-soft); padding-left: 26px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  th { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ink-soft); }
+  td:first-child { color: var(--ink-soft); width: 32%; }
+  .table-wrap { overflow-x: auto; }
+
+  .price { font-size: 16px; max-width: 640px; color: var(--ink-soft); }
+  .price strong { color: var(--ink); font-weight: 500; }
+
+  details { border-bottom: 1px solid var(--hairline); padding: 18px 0; max-width: 760px; }
+  summary { font-size: 17px; font-weight: 500; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; float: right; color: var(--ink-soft); font-weight: 400; }
+  details[open] summary::after { content: "–"; }
+  details p { font-size: 15px; color: var(--ink-soft); margin-top: 10px; max-width: 680px; }
+
+  footer {
+    max-width: 1080px; margin: 0 auto; padding: 48px 40px 64px;
+    border-top: 1px solid var(--hairline);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; color: var(--ink-soft);
+  }
+  footer a { color: var(--ink-soft); border: 0; }
+  footer .links a { margin-left: 20px; }
+  footer .links a:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; }
+    .hero .phone { max-width: 260px; }
+    .steps, .grid-3 { grid-template-columns: 1fr; gap: 40px; }
+    .step .phone { max-width: 260px; }
+    .split { grid-template-columns: 1fr; gap: 32px; }
+    .split .phone { max-width: 240px; }
+  }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 48px; }
+    section h2 { font-size: 34px; }
+    blockquote { font-size: 23px; }
+    nav { padding: 20px 24px; }
+    .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    section { padding-top: 56px; padding-bottom: 56px; }
+    th, td { padding: 12px 10px; }
+    footer .links a { margin-left: 0; margin-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <a class="brand" href="/daily-oracle/">
+    <img src="/daily-oracle/favicon.png" alt="" width="24" height="24">
+    <span>daily oracle</span>
+  </a>
+  <div class="nav-right">
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="/">AZAI</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">Tarot card of the day · Moon phase · Android</div>
+    <h1>One card, one line, and <em>the moon as it really is.</em></h1>
+    <p class="tagline">
+      Daily Oracle is a one-minute morning ritual: a tarot card to reflect on,
+      a line of Stoic wisdom, one small action for the day, and tonight's moon,
+      calculated on your phone.
+    </p>
+    <ul class="checks">
+      <li>The classic 1909 Rider-Waite-Smith deck</li>
+      <li>Moon phase and moon sign, accurate and offline</li>
+      <li>The same card for everyone today</li>
+      <li>Free, with no account and no sign-up</li>
+    </ul>
+    <div class="cta">
+      <!-- Replace with the Play link once the app is live:
+           https://play.google.com/store/apps/details?id=com.kancanada.dailyoracle -->
+      <span class="btn primary soon">Coming soon to Google Play</span>
+      <small>Android 8.0+</small>
+    </div>
+  </div>
+  <div class="phone">
+    <img src="/daily-oracle/img/today.jpg" width="540" height="960"
+         alt="Daily Oracle today screen: Waning Crescent, 34% lit, Moon in Leo, with the Seven of Wands card">
+  </div>
+</header>
+
+<section id="how">
+  <div class="section-label">How it works</div>
+  <h2>Open it with your coffee. Done in a minute.</h2>
+  <p class="intro">No setup and no account. The day's card is waiting, face down, along with the moon for your date and time zone.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="phone"><img src="/daily-oracle/img/today.jpg" width="540" height="960" loading="lazy"
+           alt="Daily Oracle moon panel showing the phase, illumination, moon sign and next full and new moon"></div>
+      <div class="n">01</div>
+      <h3>See tonight's moon</h3>
+      <p>Phase, percent lit, the Moon's age, its zodiac sign and when it moves into the next one, plus the next full and new moon.</p>
+    </div>
+    <div class="step">
+      <div class="phone"><img src="/daily-oracle/img/meaning.jpg" width="540" height="960" loading="lazy"
+           alt="Daily Oracle card meaning with a reflection, a journaling question and a Stoic quote"></div>
+      <div class="n">02</div>
+      <h3>Draw today's card</h3>
+      <p>Tap to turn it over. Read a short reflection and a question to journal on, then a line from Marcus Aurelius or Epictetus.</p>
+    </div>
+    <div class="step">
+      <div class="phone"><img src="/daily-oracle/img/history.jpg" width="540" height="960" loading="lazy"
+           alt="Daily Oracle history of drawn cards with moon phases and a streak"></div>
+      <div class="n">03</div>
+      <h3>Take one small step</h3>
+      <p>Each day has a small, concrete action, like ten minutes outside without your phone. Tick it off and watch your history grow.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Features</div>
+  <h2>Everything for a daily practice. Nothing to sign up for.</h2>
+  <p class="intro">Made for people who like tarot as a mirror, not a forecast, and who want the moon data to be right.</p>
+  <div class="grid-3">
+    <div class="feature">
+      <h3>The same card for everyone</h3>
+      <p>Everyone who opens Daily Oracle on the same date draws the same card. Send it to a friend and you're both thinking about the same thing.</p>
+    </div>
+    <div class="feature">
+      <h3>Real astronomy, offline</h3>
+      <p>The moon is calculated on your phone with the formulas from Jean Meeus's <em>Astronomical Algorithms</em>. Phase times land within minutes of the U.S. Naval Observatory's.</p>
+    </div>
+    <div class="feature">
+      <h3>The original 1909 deck</h3>
+      <p>All 78 cards are scans of the first Rider-Waite-Smith printing, illustrated by Pamela Colman Smith, with a reflection and a question for each.</p>
+    </div>
+    <div class="feature">
+      <h3>365 Stoic quotes</h3>
+      <p>A different line every day of the year from Marcus Aurelius and Epictetus, in George Long's classic translations, quoted word for word.</p>
+    </div>
+    <div class="feature">
+      <h3>A 3-card spread</h3>
+      <p>Where you are, what to tend, a way forward. A personal spread for the day, different from everyone else's.</p>
+    </div>
+    <div class="feature">
+      <h3>Share images</h3>
+      <p>Turn today's card into an image for your Instagram story or a post. It's made on your phone and handed to the app you choose.</p>
+    </div>
+    <div class="feature">
+      <h3>History and streaks</h3>
+      <p>Every card you've drawn, with the moon that night and whether you did the day's action. Tap any day to read it again.</p>
+    </div>
+    <div class="feature">
+      <h3>A gentle reminder</h3>
+      <p>One optional notification at the time you pick. It never gives the card away, and it stays quiet once you've drawn.</p>
+    </div>
+    <div class="feature">
+      <h3>Works without internet</h3>
+      <p>Cards, quotes, actions and moon data are all on your phone, so the app works on a plane, a trail or the subway.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <div class="section-label">Three cards</div>
+      <h2>Where you are. What to tend. A way forward.</h2>
+      <p>The 3-card spread is yours alone: it's drawn from your date and a random ID kept on your phone, so it's different from everyone else's and stays the same all day.</p>
+      <p>It opens after a short optional video ad. If no ad loads, it opens anyway.</p>
+    </div>
+    <div class="phone"><img src="/daily-oracle/img/spread.jpg" width="540" height="960" loading="lazy"
+         alt="Daily Oracle 3-card spread: Where you are, What to tend, A way forward"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Stoic line of the day</div>
+  <blockquote>“Nothing happens to any man which he is not formed by nature to bear.”</blockquote>
+  <p class="cite">Marcus Aurelius, <em>Meditations</em> 5.18, translated by George Long</p>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <div class="section-label">Share</div>
+      <h2>Today's card, ready for your story.</h2>
+      <p>Pick a story (1080×1920) or a post (1080×1350) and share it from Android's share sheet. The image shows the card, the date and the moon.</p>
+      <p>Daily Oracle doesn't upload it anywhere. Where it goes is up to you.</p>
+    </div>
+    <div class="phone"><img src="/daily-oracle/img/share.jpg" width="540" height="960" loading="lazy"
+         alt="Daily Oracle share screen with a story image of the Seven of Wands"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Privacy</div>
+  <h2>Your cards stay on your phone.</h2>
+  <p class="intro">Daily Oracle has no account and no analytics. Here's what goes where.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col"></th><th scope="col">Where it lives</th></tr></thead>
+      <tbody>
+        <tr><td>Cards drawn, actions, reminder time</td><td>Only on your phone. Not uploaded, not in device backups, deleted when you uninstall.</td></tr>
+        <tr><td>Your account</td><td>There isn't one.</td></tr>
+        <tr><td>Ads</td><td>Served by Google AdMob. The Google Mobile Ads SDK collects your advertising ID, approximate location from your IP address and ad interactions to show and measure ads.</td></tr>
+        <tr><td>Ad choices</td><td>In the EU, UK and Switzerland the app asks for consent before personalised ads. You can change your choices in Settings, and reset your advertising ID in Android settings.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="price" style="margin-top:24px">Read the full <a href="/daily-oracle/privacy.html">privacy policy</a>.</p>
+</section>
+
+<section>
+  <div class="section-label">Pricing</div>
+  <h2>Free. Every feature.</h2>
+  <p class="price">
+    Daily Oracle is <strong>free and supported by ads</strong>: a small banner on the
+    Today and History screens, a short optional video before the 3-card spread, and
+    <strong>at most one full-screen ad a day</strong>, only after you share and never on
+    your first day. There are no purchases, no premium tier and no subscription.
+  </p>
+</section>
+
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2>Questions</h2>
+  <details>
+    <summary>Does everyone get the same tarot card of the day?</summary>
+    <p>Yes. Everyone who opens Daily Oracle on the same local date draws the same card, so you can share it and reflect on the same thing as a friend. The cards follow a fixed shuffle for each year, so a card comes back about every 78 days, and never sooner than 40.</p>
+  </details>
+  <details>
+    <summary>How accurate is the moon phase?</summary>
+    <p>The app calculates the Moon's position on your phone with the formulas in Jean Meeus's <em>Astronomical Algorithms</em>. Checked against all 99 new moons, full moons and quarters the U.S. Naval Observatory lists for 2026 and 2027, every phase time is within a few minutes. The moon sign is the Moon's tropical zodiac sign, with the time it enters the next one.</p>
+  </details>
+  <details>
+    <summary>Does it work offline?</summary>
+    <p>Yes. The cards, quotes, actions and moon calculations are all on your phone. Ads need a connection; without one the app simply shows none, and the 3-card spread opens anyway.</p>
+  </details>
+  <details>
+    <summary>Is Daily Oracle free?</summary>
+    <p>Yes, every feature is free. The app shows a small banner ad, a short optional video before the 3-card spread, and at most one full-screen ad a day after you share. There are no purchases and no subscription.</p>
+  </details>
+  <details>
+    <summary>Is it fortune telling?</summary>
+    <p>No. Daily Oracle uses tarot as a prompt for reflection, the way you might use a journaling card. It doesn't predict the future and isn't advice of any kind.</p>
+  </details>
+  <details>
+    <summary>What data does the app collect?</summary>
+    <p>Your card history, actions and reminder time stay on your phone and are never sent to us. There is no account. The ads come from Google AdMob, and the Google Mobile Ads SDK collects your advertising ID, approximate location from your IP address and ad interactions to show and measure ads. In the EU, UK and Switzerland the app asks for your consent first, and you can change your choices in Settings.</p>
+  </details>
+  <details>
+    <summary>Where do the cards and quotes come from?</summary>
+    <p>The card art is scans of the original 1909 Rider-Waite-Smith deck illustrated by Pamela Colman Smith, which is in the public domain. The quotes are George Long's public-domain translations of Marcus Aurelius's <em>Meditations</em> and Epictetus's <em>Enchiridion</em> and <em>Discourses</em>. The card reflections and daily actions were written for the app.</p>
+  </details>
+  <details>
+    <summary>Will it remind me every day?</summary>
+    <p>Only if you want it to. You can turn on one daily reminder at a time you choose. It is a local notification scheduled on your phone, it never gives away the card, and it skips the day once you have drawn.</p>
+  </details>
+  <details>
+    <summary>Is there an iPhone version?</summary>
+    <p>No. Daily Oracle is available for Android 8.0 and later.</p>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  <div>© 2026 <a href="/">AZAI Corp.</a> · British Columbia, Canada</div>
+  <div class="links">
+    <a href="/">All apps</a>
+    <a href="/daily-oracle/privacy.html">Privacy</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
