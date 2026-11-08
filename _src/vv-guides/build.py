@@ -95,7 +95,7 @@ os.makedirs(OUT, exist_ok=True)
 
 def cta(slug):
     return (f'<div class="cta"><div><h3>Every meeting, written up. Right on your phone.</h3>'
-            f'<p>VoiceVault for Android: transcripts, summaries and to-dos with no account, no servers and no subscription. 30 days free, then pay once.</p></div>'
+            f'<p>VoiceVault for Android: transcripts, summaries and to-dos with no account, no servers and no subscription. 7 days free, then pay once.</p></div>'
             f'<a href="{PLAY.format(slug=slug)}">Get it on Google Play</a></div>')
 
 for g in guides:
