@@ -100,7 +100,7 @@
         {
           "@type": "Question",
           "name": "What is kakeibo?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Kakeibo (家計簿, \"household ledger\") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense in one of four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Kakeibo (家計簿, \"household ledger\") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense; the popular modern version uses four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve." }
         },
         {
           "@type": "Question",
@@ -287,6 +287,7 @@
   .plan ul { list-style: none; display: grid; gap: 8px; font-size: 14px; }
   .plan li { padding-left: 20px; position: relative; }
   .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--culture); font-weight: 600; }
+  .guide-list { list-style: none; display: grid; gap: 10px; margin-bottom: 20px; max-width: 640px; font-size: 16px; }
   .price-note { font-size: 14px; color: var(--ink-soft); margin-top: 20px; max-width: 760px; }
 
   details { border-bottom: 1px solid var(--hairline); padding: 18px 0; max-width: 760px; }
@@ -342,6 +343,7 @@
   <div class="nav-right">
     <a href="#how">How it works</a>
     <a href="#faq">FAQ</a>
+    <a href="/kakeibo-ledger/guides/">Guides</a>
     <a href="/">AZAI</a>
   </div>
 </nav>
@@ -519,7 +521,7 @@
   <h2>Questions</h2>
   <details>
     <summary>What is kakeibo?</summary>
-    <p>Kakeibo (家計簿, "household ledger") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense in one of four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve.</p>
+    <p>Kakeibo (家計簿, "household ledger") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense; the popular modern version uses four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve.</p>
   </details>
   <details>
     <summary>Does Kakeibo Ledger connect to my bank?</summary>
@@ -547,12 +549,26 @@
   </details>
 </section>
 
+<section id="guides">
+  <div class="section-label">Guides</div>
+  <h2>New to kakeibo?</h2>
+  <p class="intro">Plain-English guides to the method, from the team that makes the app.</p>
+  <ul class="guide-list">
+    <li><a href="/kakeibo-ledger/guides/what-is-kakeibo.html">What is kakeibo? How to use the Japanese budgeting method</a></li>
+    <li><a href="/kakeibo-ledger/guides/kakeibo-template.html">Free kakeibo template: print it or copy and paste</a></li>
+    <li><a href="/kakeibo-ledger/guides/kakeibo-categories.html">The four kakeibo categories, with examples</a></li>
+    <li><a href="/kakeibo-ledger/guides/budget-app-without-bank-linking.html">Budget apps that don't link to your bank</a></li>
+  </ul>
+  <p><a href="/kakeibo-ledger/guides/">All guides →</a></p>
+</section>
+
 </main>
 
 <footer>
   <div>Kakeibo Ledger is made by Kan Canada Trading Corp., British Columbia, Canada · <a href="/">AZAI</a></div>
   <div class="links">
     <a href="/">All apps</a>
+    <a href="/kakeibo-ledger/guides/">Guides</a>
     <a href="/kakeibo-ledger/privacy.html">Privacy</a>
     <a href="mailto:asoni@kancanada.com">Contact</a>
   </div>
