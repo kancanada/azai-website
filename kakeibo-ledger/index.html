@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kakeibo Ledger — Kakeibo Budget Journal App for Android, Offline, No Ads</title>
+<meta name="description" content="Kakeibo Ledger is a private kakeibo budget journal for Android: plan the month, write down every expense in four boxes, and reflect at the end. No internet permission, no account, no ads. Free, or pay once for Pro.">
+<meta name="keywords" content="kakeibo app, kakeibo budget, kakeibo method, Japanese budgeting, budget journal, expense tracker offline, budget app no bank sync, money diary, monthly budget planner, Android">
+<meta name="author" content="Kan Canada Trading Corp.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://azai.ca/kakeibo-ledger/">
+<link rel="icon" type="image/png" href="/kakeibo-ledger/favicon.png">
+<link rel="apple-touch-icon" href="/kakeibo-ledger/apple-touch-icon.png">
+<meta name="theme-color" content="#F6F1E7">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AZAI">
+<meta property="og:title" content="Kakeibo Ledger — plan, write, reflect">
+<meta property="og:description" content="The Japanese kakeibo budget method as a private journal. No internet permission, no account, no ads. Free on Android, or pay once for Pro.">
+<meta property="og:image" content="https://azai.ca/kakeibo-ledger/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://azai.ca/kakeibo-ledger/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kakeibo Ledger — kakeibo budget journal for Android">
+<meta name="twitter:description" content="Plan the month, write down every expense, reflect at the end. Offline, no ads, pay once.">
+<meta name="twitter:image" content="https://azai.ca/kakeibo-ledger/og.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://azai.ca/kakeibo-ledger/#app",
+      "name": "Kakeibo Ledger: Budget Journal",
+      "alternateName": "Kakeibo Ledger",
+      "description": "A private budget journal for Android built on kakeibo, the Japanese household ledger: plan the month, write down every expense in four categories, and reflect at the end of the month. The app has no internet permission, no account and no ads. Free, with a one-time Pro purchase.",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "Budgeting",
+      "operatingSystem": "Android 8.0 or later",
+      "url": "https://azai.ca/kakeibo-ledger/",
+      "image": "https://azai.ca/kakeibo-ledger/icon.png",
+      "screenshot": [
+        "https://azai.ca/kakeibo-ledger/img/home.jpg",
+        "https://azai.ca/kakeibo-ledger/img/reveal.jpg",
+        "https://azai.ca/kakeibo-ledger/img/entry.jpg",
+        "https://azai.ca/kakeibo-ledger/img/reflect.jpg",
+        "https://azai.ca/kakeibo-ledger/img/trust.jpg"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Free: the full kakeibo method, the last 3 months of history and encrypted backups."
+        },
+        {
+          "@type": "Offer",
+          "price": "7.99",
+          "priceCurrency": "USD",
+          "description": "Kakeibo Ledger Pro, a one-time purchase: unlimited history, year in review, app lock, CSV export and themes."
+        }
+      ],
+      "featureList": [
+        "Monthly plan from income, fixed costs and savings goal",
+        "Four kakeibo categories: needs, wants, culture, unexpected",
+        "Two-tap expense entry with a large keypad",
+        "End-of-month reflection with the four kakeibo questions",
+        "Streak of reflected months",
+        "Optional Sunday check-in",
+        "20 currencies",
+        "Encrypted backup and restore (AES-256-GCM)",
+        "No internet permission, no account, no ads, no analytics",
+        "Pro: unlimited history, year in review, app lock, CSV export, Ink and Matcha themes"
+      ],
+      "publisher": { "@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/", "email": "asoni@kancanada.com" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://azai.ca/#org",
+      "name": "AZAI Corp.",
+      "url": "https://azai.ca/",
+      "logo": "https://azai.ca/logo.png",
+      "email": "asoni@kancanada.com",
+      "address": { "@type": "PostalAddress", "addressRegion": "BC", "addressCountry": "CA" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AZAI", "item": "https://azai.ca/" },
+        { "@type": "ListItem", "position": 2, "name": "Kakeibo Ledger", "item": "https://azai.ca/kakeibo-ledger/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is kakeibo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Kakeibo (家計簿, \"household ledger\") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense in one of four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Kakeibo Ledger connect to my bank?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. There is no bank sync, receipt scanning or import. You type each expense yourself, which is the point of kakeibo: writing it down is what makes you notice where the money goes." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the app really not go online?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Kakeibo Ledger doesn't ask Android for the internet permission, so it can't open a network connection. You can check this in the app's permission details on Google Play. Purchases still work, because the app asks the Google Play app on your phone, and Google Play does the talking to Google." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I back up my ledger?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In Settings, choose Backup and pick a passphrase. The app encrypts your whole ledger with AES-256-GCM and opens Android's share sheet, so you can save the file to Google Drive, email it to yourself or keep it in Files. Restore reads the file back on any phone. Backups are free. Without the passphrase nobody can open the file, including us." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kakeibo Ledger free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The whole method is free, with the last 3 months of history and encrypted backups. Pro is a single one-time purchase of US$7.99, not a subscription. It adds unlimited history, a year in review, app lock, CSV export and two extra themes. There are no ads." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which currencies does it support?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Twenty, including the US, Canadian, Australian and New Zealand dollars, the euro, the pound, the yen and the rupee. You pick one when you start and can change it in Settings." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an iPhone version?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Kakeibo Ledger is available for Android 8.0 and later." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@300;400;500;600&display=swap');
+
+  /* ---- Palette: matches the Kakeibo Ledger "Paper" theme ---- */
+  :root {
+    --bg:       #F6F1E7;
+    --bg-2:     #FFFDF8;
+    --ink:      #2B2722;
+    --ink-soft: #6F665B;
+    --ink-faint:#9A8F82;
+    --hairline: #E3D9C7;
+    --accent:   #C2452D;
+    --needs:    #3F6E9E;
+    --wants:    #D0822F;
+    --culture:  #5E8C4E;
+    --unexp:    #A3536B;
+    --phone:    #1E1B17;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  a:hover { border-bottom-color: var(--accent); }
+  img { display: block; max-width: 100%; height: auto; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1080px; margin: 0 auto; padding: 24px 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 500; border: 0; font-size: 14px; }
+  .brand img { width: 24px; height: 24px; border-radius: 6px; }
+  .nav-right { font-size: 13px; color: var(--ink-soft); }
+  .nav-right a { color: var(--ink-soft); border: 0; margin-left: 24px; }
+  .nav-right a:hover { color: var(--ink); }
+
+  /* ---- Hero ---- */
+  .hero {
+    max-width: 1080px; margin: 48px auto 96px; padding: 0 40px;
+    display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: center;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 64px; font-weight: 600; letter-spacing: -1px;
+    line-height: 1.04; margin-bottom: 20px; text-wrap: balance;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero .tagline { font-size: 18px; color: var(--ink-soft); max-width: 540px; margin-bottom: 32px; }
+  .checks { list-style: none; margin-bottom: 36px; display: grid; gap: 8px; }
+  .checks li { font-size: 15px; padding-left: 26px; position: relative; }
+  .checks li::before {
+    content: ""; position: absolute; left: 4px; top: 7px;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+  }
+  .checks li:nth-child(2)::before { background: var(--needs); }
+  .checks li:nth-child(3)::before { background: var(--wants); }
+  .checks li:nth-child(4)::before { background: var(--culture); }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; font-size: 14px; font-weight: 500;
+    border: 1px solid var(--hairline); color: var(--ink-soft); border-radius: 999px;
+  }
+  .btn .meta { font-size: 11px; color: var(--ink-faint); margin-left: 6px; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary .meta { color: #F4CFC6; }
+  .btn.soon { cursor: default; background: var(--bg-2); }
+  .cta small { font-size: 13px; color: var(--ink-soft); }
+
+  .phone {
+    border-radius: 36px; border: 8px solid var(--phone); background: var(--phone);
+    box-shadow: 0 30px 60px rgba(60, 45, 25, 0.22), 0 0 0 1px rgba(0,0,0,0.04); overflow: hidden;
+  }
+  .phone img { border-radius: 28px; }
+
+  /* ---- Sections ---- */
+  section { max-width: 1080px; margin: 0 auto; padding: 72px 40px; border-top: 1px solid var(--hairline); }
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 1.6px; color: var(--accent); margin-bottom: 12px;
+  }
+  section h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 42px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.12;
+    margin-bottom: 16px; max-width: 720px;
+  }
+  section .intro { font-size: 16px; color: var(--ink-soft); max-width: 640px; margin-bottom: 48px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step .phone { margin-bottom: 24px; border-width: 6px; border-radius: 30px; }
+  .step .phone img { border-radius: 24px; }
+  .step .n { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+  .step h3 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+  .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  .boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .box { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 16px; padding: 20px; }
+  .box .glyph { font-family: 'Source Serif 4', Georgia, serif; font-size: 30px; line-height: 1; margin-bottom: 12px; }
+  .box h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .box p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .box.needs .glyph { color: var(--needs); }
+  .box.wants .glyph { color: var(--wants); }
+  .box.culture .glyph { color: var(--culture); }
+  .box.unexp .glyph { color: var(--unexp); }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 56px; }
+  .feature h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  .split { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: center; }
+  .split p { font-size: 16px; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
+  .split p strong { color: var(--ink); font-weight: 500; }
+
+  .questions { list-style: none; counter-reset: q; display: grid; gap: 10px; margin: 8px 0 20px; max-width: 560px; }
+  .questions li {
+    counter-increment: q; font-family: 'Source Serif 4', Georgia, serif; font-size: 21px;
+    padding-left: 40px; position: relative; color: var(--ink);
+  }
+  .questions li::before {
+    content: counter(q); position: absolute; left: 0; top: 3px;
+    width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  th { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ink-soft); }
+  td:first-child { color: var(--ink-soft); width: 32%; }
+  .table-wrap { overflow-x: auto; }
+
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; }
+  .plan { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 18px; padding: 28px; }
+  .plan.pro { border-color: var(--accent); }
+  .plan .name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ink-soft); }
+  .plan .amount { font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; font-weight: 600; margin: 6px 0 2px; }
+  .plan .sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; }
+  .plan ul { list-style: none; display: grid; gap: 8px; font-size: 14px; }
+  .plan li { padding-left: 20px; position: relative; }
+  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--culture); font-weight: 600; }
+  .price-note { font-size: 14px; color: var(--ink-soft); margin-top: 20px; max-width: 760px; }
+
+  details { border-bottom: 1px solid var(--hairline); padding: 18px 0; max-width: 760px; }
+  summary { font-size: 17px; font-weight: 500; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; float: right; color: var(--ink-soft); font-weight: 400; }
+  details[open] summary::after { content: "–"; }
+  details p { font-size: 15px; color: var(--ink-soft); margin-top: 10px; max-width: 680px; }
+
+  footer {
+    max-width: 1080px; margin: 0 auto; padding: 48px 40px 64px;
+    border-top: 1px solid var(--hairline);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; color: var(--ink-soft);
+  }
+  footer a { color: var(--ink-soft); border: 0; }
+  footer .links a { margin-left: 20px; }
+  footer .links a:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; }
+    .hero .phone { max-width: 260px; }
+    .steps, .grid-3 { grid-template-columns: 1fr; gap: 40px; }
+    .step .phone { max-width: 260px; }
+    .boxes { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; gap: 32px; }
+    .split .phone { max-width: 240px; }
+    .plans { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 44px; }
+    section h2 { font-size: 32px; }
+    .questions li { font-size: 18px; }
+    nav { padding: 20px 24px; }
+    .nav-right a { margin-left: 16px; }
+    .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    section { padding-top: 56px; padding-bottom: 56px; }
+    th, td { padding: 12px 10px; }
+    footer .links a { margin-left: 0; margin-right: 16px; }
+  }
+  @media (max-width: 420px) {
+    .boxes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <a class="brand" href="/kakeibo-ledger/">
+    <img src="/kakeibo-ledger/favicon.png" alt="" width="24" height="24">
+    <span>kakeibo ledger</span>
+  </a>
+  <div class="nav-right">
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="/">AZAI</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">Kakeibo budget journal · Android</div>
+    <h1>Know where the money went. <em>Write it down.</em></h1>
+    <p class="tagline">
+      Kakeibo Ledger is a private money journal built on kakeibo (家計簿), the
+      Japanese household ledger from 1904. Plan the month, write down every
+      expense in four boxes, and look back honestly at the end.
+    </p>
+    <ul class="checks">
+      <li>No internet permission: it can't go online</li>
+      <li>No bank sync, no account, no ads</li>
+      <li>Encrypted backups you keep wherever you like</li>
+      <li>Free, or pay once for Pro. No subscription</li>
+    </ul>
+    <div class="cta">
+      <span class="btn soon">Google Play <span class="meta">Coming soon</span></span>
+      <small>Android 8.0+</small>
+    </div>
+  </div>
+  <div class="phone">
+    <img src="/kakeibo-ledger/img/home.jpg" width="540" height="1200"
+         alt="Kakeibo Ledger home screen: a ring showing what's left this month and the four boxes needs, wants, culture and unexpected">
+  </div>
+</header>
+
+<section id="how">
+  <div class="section-label">How it works</div>
+  <h2>Plan. Write. Reflect.</h2>
+  <p class="intro">The three steps of kakeibo, and nothing else. Setup takes about a minute and there's nothing to link.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="phone"><img src="/kakeibo-ledger/img/reveal.jpg" width="540" height="1200" loading="lazy"
+           alt="Kakeibo Ledger monthly plan: what's left to spend after fixed costs and savings, split across four boxes"></div>
+      <div class="n">01</div>
+      <h3>Plan the month</h3>
+      <p>Enter your take-home pay, your fixed costs and what you want to save. The app works out what's left to spend and suggests a split across the four boxes. Next month starts from this one.</p>
+    </div>
+    <div class="step">
+      <div class="phone"><img src="/kakeibo-ledger/img/entry.jpg" width="540" height="1200" loading="lazy"
+           alt="Kakeibo Ledger entry screen with a large keypad, the wants box picked, and Today and Yesterday shortcuts"></div>
+      <div class="n">02</div>
+      <h3>Write it down</h3>
+      <p>Tap a box, type the amount, tap Save. Two taps for most expenses, with an optional note. Typing it yourself is the point: it's what makes you notice.</p>
+    </div>
+    <div class="step">
+      <div class="phone"><img src="/kakeibo-ledger/img/reflect.jpg" width="540" height="1200" loading="lazy"
+           alt="Kakeibo Ledger month-end reflection with the four kakeibo questions and the numbers filled in"></div>
+      <div class="n">03</div>
+      <h3>Reflect at month end</h3>
+      <p>The four kakeibo questions, with the numbers already filled in. You write the one thing you'll change, and your streak of reflected months grows.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Four boxes</div>
+  <h2>Every expense goes in one of four boxes.</h2>
+  <p class="intro">No sub-categories to manage. Each box shows what you've spent against what you planned, so you can see at a glance which one is running hot.</p>
+  <div class="boxes">
+    <div class="box needs"><div class="glyph">必</div><h3>Needs</h3><p>Rent, groceries, bills, transport. What you'd pay for in any month.</p></div>
+    <div class="box wants"><div class="glyph">欲</div><h3>Wants</h3><p>Eating out, shopping, fun. Nice to have, and where most months go over.</p></div>
+    <div class="box culture"><div class="glyph">文</div><h3>Culture</h3><p>Books, courses, museums, hobbies. Spending that makes you more you.</p></div>
+    <div class="box unexp"><div class="glyph">臨</div><h3>Unexpected</h3><p>Repairs, medical, gifts. The things no plan sees coming.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <div class="section-label">Month-end reflection</div>
+      <h2>Four questions. One honest look back.</h2>
+      <ol class="questions">
+        <li>How much did you have?</li>
+        <li>How much did you want to save?</li>
+        <li>How much did you spend?</li>
+        <li>How can you improve?</li>
+      </ol>
+      <p>When a month ends, Kakeibo Ledger asks you to close it. It fills in the first three answers from your plan and your entries; <strong>the fourth is yours</strong>. Next month, your note is right there when you plan.</p>
+    </div>
+    <div class="phone"><img src="/kakeibo-ledger/img/reflect.jpg" width="540" height="1200" loading="lazy"
+         alt="Kakeibo Ledger reflection screen"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Features</div>
+  <h2>A ledger, not a dashboard.</h2>
+  <p class="intro">Made for people who want to understand their spending, not outsource it to an app that reads their bank account.</p>
+  <div class="grid-3">
+    <div class="feature">
+      <h3>A plan in a minute</h3>
+      <p>Income, fixed costs and savings in, a spending budget out. Adjust the split between boxes if the suggestion doesn't fit your life.</p>
+    </div>
+    <div class="feature">
+      <h3>Big, fast keypad</h3>
+      <p>Built for one hand at the till. Today and Yesterday shortcuts, any past day in the month, and a note if you want one.</p>
+    </div>
+    <div class="feature">
+      <h3>Sunday check-in</h3>
+      <p>An optional weekly reminder shows your week against the plan, so a bad week doesn't become a bad month.</p>
+    </div>
+    <div class="feature">
+      <h3>Streaks that mean something</h3>
+      <p>The streak counts months you've reflected on, not days you opened the app.</p>
+    </div>
+    <div class="feature">
+      <h3>20 currencies</h3>
+      <p>Dollars, euros, pounds, yen, rupees and more, with the right decimals for each.</p>
+    </div>
+    <div class="feature">
+      <h3>Encrypted backups, free</h3>
+      <p>Your whole ledger in one file, encrypted with a passphrase you choose. Save it to Drive, email or Files, and restore it on any phone.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div>
+      <div class="section-label">Privacy</div>
+      <h2>No internet permission. Check for yourself.</h2>
+      <p>Most budget apps want your bank login. Kakeibo Ledger doesn't even ask Android for <strong>permission to use the internet</strong>, so it can't send your numbers anywhere. You can see this in the app's permission details on Google Play.</p>
+      <p>There's no account, no analytics and no ads. Your ledger is stored in the app's private storage, kept out of Android's cloud backup, and deleted if you uninstall.</p>
+      <p>Read the full <a href="/kakeibo-ledger/privacy.html">privacy policy</a>.</p>
+    </div>
+    <div class="phone"><img src="/kakeibo-ledger/img/trust.jpg" width="540" height="1200" loading="lazy"
+         alt="Kakeibo Ledger 'no fine print' screen: no internet, no account, no ads"></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Pricing</div>
+  <h2>Free to use. Pay once if you want more.</h2>
+  <p class="intro">The whole kakeibo method is free. Pro is a single purchase, not a subscription, and there are no ads in either.</p>
+  <div class="plans">
+    <div class="plan">
+      <div class="name">Free</div>
+      <div class="amount">$0</div>
+      <div class="sub">Forever</div>
+      <ul>
+        <li>Monthly plan and four boxes</li>
+        <li>Unlimited entries</li>
+        <li>Month-end reflection and streak</li>
+        <li>Sunday check-in</li>
+        <li>Last 3 months of history</li>
+        <li>Encrypted backup and restore</li>
+      </ul>
+    </div>
+    <div class="plan pro">
+      <div class="name">Pro</div>
+      <div class="amount">US$7.99</div>
+      <div class="sub">One time, yours to keep</div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>Unlimited history</li>
+        <li>Year in review</li>
+        <li>App lock with fingerprint, face or PIN</li>
+        <li>Spreadsheet (CSV) export</li>
+        <li>Ink (dark) and Matcha themes</li>
+      </ul>
+    </div>
+  </div>
+  <p class="price-note">Prices are set in US dollars; Google Play shows the price in your local currency. New users see a first-day price for 24 hours after installing.</p>
+</section>
+
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2>Questions</h2>
+  <details>
+    <summary>What is kakeibo?</summary>
+    <p>Kakeibo (家計簿, "household ledger") is a Japanese budgeting method first published by Hani Motoko in 1904. At the start of the month you note your income, fixed costs and savings goal. During the month you write down every expense in one of four categories: needs, wants, culture and unexpected. At the end of the month you answer four questions: how much you had, how much you wanted to save, how much you spent, and how you can improve.</p>
+  </details>
+  <details>
+    <summary>Does Kakeibo Ledger connect to my bank?</summary>
+    <p>No. There is no bank sync, receipt scanning or import. You type each expense yourself, which is the point of kakeibo: writing it down is what makes you notice where the money goes.</p>
+  </details>
+  <details>
+    <summary>Can the app really not go online?</summary>
+    <p>Yes. Kakeibo Ledger doesn't ask Android for the internet permission, so it can't open a network connection. You can check this in the app's permission details on Google Play. Purchases still work, because the app asks the Google Play app on your phone, and Google Play does the talking to Google.</p>
+  </details>
+  <details>
+    <summary>How do I back up my ledger?</summary>
+    <p>In Settings, choose Backup and pick a passphrase. The app encrypts your whole ledger with AES-256-GCM and opens Android's share sheet, so you can save the file to Google Drive, email it to yourself or keep it in Files. Restore reads the file back on any phone. Backups are free. Without the passphrase nobody can open the file, including us.</p>
+  </details>
+  <details>
+    <summary>Is Kakeibo Ledger free?</summary>
+    <p>The whole method is free, with the last 3 months of history and encrypted backups. Pro is a single one-time purchase of US$7.99, not a subscription. It adds unlimited history, a year in review, app lock, CSV export and two extra themes. There are no ads.</p>
+  </details>
+  <details>
+    <summary>Which currencies does it support?</summary>
+    <p>Twenty, including the US, Canadian, Australian and New Zealand dollars, the euro, the pound, the yen and the rupee. You pick one when you start and can change it in Settings.</p>
+  </details>
+  <details>
+    <summary>Is there an iPhone version?</summary>
+    <p>No. Kakeibo Ledger is available for Android 8.0 and later.</p>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  <div>Kakeibo Ledger is made by Kan Canada Trading Corp., British Columbia, Canada · <a href="/">AZAI</a></div>
+  <div class="links">
+    <a href="/">All apps</a>
+    <a href="/kakeibo-ledger/privacy.html">Privacy</a>
+    <a href="mailto:asoni@kancanada.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
