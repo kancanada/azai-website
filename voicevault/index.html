@@ -4,28 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VoiceVault: AI Note Taker for Android Meetings</title>
-<meta name="description" content="Meeting notes, summaries and to-dos, made on your Android phone. No account, no servers. 7 days free, then pay once or go yearly.">
+<meta name="description" content="Meeting notes, summaries and to-dos, made on your Android phone. No account, no servers. Free, no card, no trial.">
 <link rel="canonical" href="https://azai.ca/voicevault/">
 <link rel="icon" type="image/png" href="icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://azai.ca/voicevault/">
 <meta property="og:title" content="VoiceVault: every meeting, written up">
-<meta property="og:description" content="Meeting notes, summaries and to-dos, made on your phone. Free for 7 days.">
+<meta property="og:description" content="Be in the meeting, not your notes. Free meeting notes, made on your phone.">
 <meta property="og:image" content="https://azai.ca/voicevault/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   @font-face { font-family:Geist; src:url(geist.ttf); font-weight:100 900; font-display:swap; }
   :root {
-    --bg:#F4F2FA; --ink:#121214; --ink2:#4A4A57; --ink3:#8A8A98;
-    --violet:#6D4AFF; --red:#E5392F; --card:#fff; --line:rgba(18,18,20,.08);
+    --bg:#FAFAF8; --ink:#111111; --ink2:#55554F; --ink3:#6F6F69;
+    --violet:#8E8E87; --red:#E5392F; --card:#fff; --line:rgba(18,18,20,.08);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body {
     font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif; color:var(--ink); line-height:1.55;
     -webkit-font-smoothing:antialiased;
-    background:radial-gradient(1100px 900px at 0% 0%,#E4DCFF 0%,transparent 65%),
-      radial-gradient(1000px 900px at 100% 20%,#D3E4FF 0%,transparent 65%),var(--bg) no-repeat;
+    background:var(--bg);
   }
   a { color:inherit; }
   .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
@@ -52,11 +51,11 @@
   .hero .lede { margin-bottom:30px; }
 
   .phone { width:100%; max-width:320px; margin:0 auto; padding:10px; border-radius:46px; background:#121214;
-    box-shadow:0 40px 90px rgba(40,20,120,.25); }
+    box-shadow:0 40px 90px rgba(0,0,0,.25); }
   .phone img { display:block; width:100%; border-radius:37px; }
 
   .strip { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding-bottom:90px; }
-  .strip div { background:rgba(255,255,255,.7); border-radius:22px; padding:22px 24px; font-size:15px; color:var(--ink2); }
+  .strip div { background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 24px; font-size:15px; color:var(--ink2); }
   .strip b { display:block; color:var(--ink); font-size:17px; margin-bottom:4px; }
 
   section.row { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:60px 0; }
@@ -64,10 +63,10 @@
   section.row h2 { font-size:clamp(34px,4.4vw,52px); margin-bottom:18px; }
   section.row .phone { max-width:300px; }
 
-  .dark { background:#0E0E14; color:#fff; border-radius:36px; margin:60px 0; padding:64px 56px;
+  .dark { background:#111111; color:#fff; border-radius:36px; margin:60px 0; padding:64px 56px;
     background:radial-gradient(700px 500px at 0% 0%,#3B2A8C 0%,transparent 70%),radial-gradient(700px 600px at 100% 100%,#123A7A 0%,transparent 70%),#0E0E14; }
   .dark h2 { font-size:clamp(34px,4.6vw,56px); margin-bottom:18px; }
-  .dark em { color:#B9A8FF; }
+  .dark em { color:#9A9A93; }
   .dark .eyebrow { color:#B9A8FF; }
   .dark .lede { color:#C9C9D6; max-width:620px; }
   .checks { display:grid; grid-template-columns:1fr 1fr; gap:18px 40px; margin-top:40px; }
@@ -109,7 +108,7 @@
     .links a.hide { display:none; }
   }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "VoiceVault: AI Note Taker", "operatingSystem": "Android 13 or newer", "applicationCategory": "BusinessApplication", "url": "https://azai.ca/voicevault/", "downloadUrl": "https://play.google.com/store/apps/details?id=com.azai.voicevault", "description": "Meeting notes, summaries and to-dos, made on your Android phone. No account, no servers. Pay once or yearly.", "offers": {"@type": "Offer", "price": "49.99", "priceCurrency": "USD", "description": "7 days free, then US$29.99 a year or US$49.99 once"}, "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "VoiceVault: AI Note Taker", "operatingSystem": "Android 13 or newer", "applicationCategory": "BusinessApplication", "url": "https://azai.ca/voicevault/", "downloadUrl": "https://play.google.com/store/apps/details?id=com.azai.voicevault", "description": "Meeting notes, summaries and to-dos, made on your Android phone. No account, no servers. Free.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free. Optional one-time unlock for unlimited use, US$19.99"}, "publisher": {"@type": "Organization", "name": "Kan Canada Trading Corp.", "url": "https://azai.ca/"}}</script>
 </head>
 <body>
 <div class="wrap">
@@ -127,18 +126,18 @@
 <header class="hero">
   <div>
     <div class="eyebrow">VoiceVault</div>
-    <h1>Every meeting, <em>written up.</em></h1>
-    <p class="lede">Tap Record. VoiceVault writes the transcript, names who said what, and turns it into a short summary and a to-do list. All of it happens on your phone: no account, no VoiceVault servers, and it even works in airplane mode.</p>
+    <h1>Be in the meeting. <em>Not in your notes.</em></h1>
+    <p class="lede">You lead the room, you listen, you make the call. VoiceVault writes it all up: the transcript, a short summary and the to-dos, with who owns what. All of it happens on your phone: no account, no VoiceVault servers, and it even works in airplane mode.</p>
     <a class="play" href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dlanding"><img src="icon.png" alt=""><span><small>Get it on</small>Google Play</span></a>
-    <p class="note">Android · 7 days free · then pay once or go yearly</p>
+    <p class="note">Android · Free · No card, no trial</p>
   </div>
-  <div class="phone"><img src="img/02-live-words.jpg" alt="VoiceVault recording a meeting, with the words appearing as they're spoken"></div>
+  <div class="phone"><img src="img/v110-home.jpg" alt="VoiceVault's Meetings list, with the to-dos due this week at the top"></div>
 </header>
 
 <div class="strip">
   <div><b>Right on your phone</b>Transcripts, summaries and to-dos, made on the device. Works in airplane mode.</div>
   <div><b>No account, no servers</b>We never receive your recordings, so we can't read, share or sell them.</div>
-  <div><b>Pay once, or yearly</b>No minute limits, no AI credits.</div>
+  <div><b>Free</b>No card, no trial. Pay once for unlimited use.</div>
 </div>
 
 <section class="row">
@@ -147,16 +146,16 @@
     <h2>Summary and to-dos, <em>done.</em></h2>
     <p class="lede">Get the decisions in a few lines, plus a to-do list that says who owns what. Add a due date and VoiceVault reminds you once, on the day.</p>
   </div>
-  <div class="phone"><img src="img/04-summary-todos.jpg" alt="A meeting summary with to-dos and their owners" loading="lazy"></div>
+  <div class="phone"><img src="img/v110-notes.jpg" alt="A meeting's notes: to-dos with owners and due dates, then the summary" loading="lazy"></div>
 </section>
 
 <section class="row flip">
   <div class="text">
-    <div class="eyebrow">Who said what</div>
-    <h2>Every voice, <em>named.</em></h2>
-    <p class="lede">Each line of the transcript has a name and a time. Tap any line to hear that moment again. Mark important moments while you record and they're highlighted in your notes.</p>
+    <div class="eyebrow">Every word</div>
+    <h2>The whole meeting, <em>word for word.</em></h2>
+    <p class="lede">Each line of the transcript has a time. Tap any line to hear that moment again. Mark important moments while you record and they're highlighted in your notes.</p>
   </div>
-  <div class="phone"><img src="img/05-who-said-what.jpg" alt="A transcript with each line labelled by speaker and time" loading="lazy"></div>
+  <div class="phone"><img src="img/v110-transcript.jpg" alt="A meeting transcript with a time on each line" loading="lazy"></div>
 </section>
 
 <section class="row">
@@ -165,7 +164,7 @@
     <h2>Ask anything <em>you've recorded.</em></h2>
     <p class="lede">“What did I promise this week?” “What did we decide on pricing?” Ask in plain words and get answers from your own recordings, with the source.</p>
   </div>
-  <div class="phone"><img src="img/06-ask.jpg" alt="Asking what was promised this week, answered from recordings" loading="lazy"></div>
+  <div class="phone"><img src="img/v110-ask.jpg" alt="Ask, with suggested questions about your meetings" loading="lazy"></div>
 </section>
 
 <section class="dark" id="private">
@@ -181,12 +180,12 @@
 </section>
 
 <section class="price" id="price">
-  <div class="eyebrow">Free for 7 days</div>
-  <h2>Then pay once, <em>or go yearly.</em></h2>
-  <p class="lede">Start your free week in Google Play. We remind you the day before it ends, and if you cancel by then you pay nothing. After that it's US$29.99 a year, or one payment of US$49.99 keeps VoiceVault for life (or the equivalent shown in Google Play). No minute limits, no AI credits.</p>
+  <div class="eyebrow">Free</div>
+  <h2>Free. <em>No card, no trial.</em></h2>
+  <p class="lede">Transcripts, summaries, to-dos and Ask, free. Want more? One payment of US$19.99 (or the equivalent shown in Google Play) unlocks unlimited use, export to PDF and Word, and Google Drive backup. No subscription.</p>
   <div class="compare">
-    <div><h3>Most AI note takers</h3><p>Monthly fees</p><p>Minute limits</p><p>Your meetings in their cloud</p><p>Account required</p></div>
-    <div class="us"><h3>VoiceVault</h3><p>Pay once for life, or yearly</p><p>Record as much as you like</p><p>Stays on your phone</p><p>No account</p></div>
+    <div><h3>Most AI note takers</h3><p>Monthly subscriptions</p><p>Credit card to start</p><p>Your meetings in their cloud</p><p>Account required</p></div>
+    <div class="us"><h3>VoiceVault</h3><p>Free, no card</p><p>Pay once for unlimited use</p><p>Stays on your phone</p><p>No account</p></div>
   </div>
 </section>
 
@@ -200,17 +199,17 @@
     <p>VoiceVault records what your phone's microphone hears, so it's made for meetings in the room and calls on speaker. It doesn't join Zoom or Teams as a bot.</p></details>
   <details><summary>Can people see that I'm recording?</summary>
     <p>VoiceVault shows a recording notification, and Android shows the microphone indicator. Always tell people when you're recording, and follow the consent rules where you are.</p></details>
-  <details><summary>What happens after the 7 days?</summary>
-    <p>If you keep it, Google Play charges US$29.99 for the year. Rather not subscribe? Pay US$49.99 once for life and cancel the yearly plan in Google Play before the week is up. Either way, everything you've recorded stays on your phone.</p></details>
+  <details><summary>Is it really free?</summary>
+    <p>Yes. No card and no trial. If you want more, one payment of US$19.99 unlocks unlimited use, export to PDF and Word, and Google Drive backup. There's no subscription, and everything you record stays on your phone.</p></details>
   <details><summary>Is there an iPhone version?</summary>
     <p>Not yet. VoiceVault is Android only for now.</p></details>
   <p style="margin-top:22px;color:var(--ink2)">More in our guides: <a href="guides/otter-alternative-offline.html">an Otter alternative without the cloud</a>, <a href="guides/ai-note-taker-no-subscription.html">AI note takers without a subscription</a>, <a href="guides/transcribe-meeting-android.html">transcribing an in-person meeting on Android</a> and <a href="guides/offline-speech-to-text-android.html">speech-to-text without internet</a>.</p>
 </section>
 
 <section class="end">
-  <h2>Record. Transcribe. <em>Keep it.</em></h2>
+  <h2>Look at your people, <em>not your notepad.</em></h2>
   <a class="play" href="https://play.google.com/store/apps/details?id=com.azai.voicevault&amp;referrer=utm_source%3Dazai.ca%26utm_medium%3Dlanding"><img src="icon.png" alt=""><span><small>Get it on</small>Google Play</span></a>
-  <p class="note">7 days free · then pay once or go yearly</p>
+  <p class="note">Android · Free · No card, no trial</p>
 </section>
 
 <footer>
