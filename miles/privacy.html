@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — AZAI Miles: Mileage Tracker</title>
-<meta name="description" content="Privacy Policy for AZAI Miles: Mileage Tracker by Kan Canada Trading Corp. Your location never leaves your phone.">
+<meta name="description" content="Privacy Policy for AZAI Miles: Mileage Tracker by Kan Canada Trading Corp. No account, no ads, no analytics. Your trips are stored on your phone; street names, maps and search go online.">
 <link rel="canonical" href="https://azai.ca/miles/privacy.html">
 <link rel="icon" type="image/png" href="/miles/favicon.png">
 <style>
@@ -72,15 +72,22 @@
 <main>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: 25 November 2026 (version 1.0)</p>
+<p class="updated">Last updated: 26 November 2026 (version 1.2, for app version 1.2.0 and later)</p>
 
 <h2>The short version</h2>
 <p>
-  AZAI Miles records your drives so you can keep a mileage log. Your
-  location, trips, places and spoken notes are stored <strong>only on your
-  phone</strong>. The app has no account, no analytics and no ads, we run no
-  servers, and the app doesn't even have permission to use the internet. We
-  never see your data.
+  AZAI Miles records your drives so you can keep a mileage log. Your trips,
+  places, purposes and settings are <strong>stored on your phone</strong>.
+  The app has no account, no analytics and no ads, and we run no servers, so
+  we never receive your trips.
+</p>
+<p>
+  The app goes online for four things: to show the <strong>street
+  name</strong> where each trip started and ended, to load <strong>map
+  images</strong> for your trips and places, to look up a <strong>place or
+  address</strong> when you search for one, and to let <strong>Google
+  Play</strong> handle the Pro purchase. Each is described below. Your trip
+  log itself is never uploaded.
 </p>
 
 <h2>Who we are</h2>
@@ -100,46 +107,113 @@
 </p>
 <ul>
   <li>Location is used only to measure each trip's distance and its start and
-      end points, and to recognise places you visit often.</li>
+      end points, to show the street name of where each trip started and
+      ended, to recognise places you visit often, and for the map and address
+      features below.</li>
   <li>While a trip is being recorded, Android shows a "Recording a trip"
       notification.</li>
-  <li>Location is stored only on your phone. It is never sent to us, sold or
-      shared with anyone.</li>
-  <li>Routes are drawn from your phone's own GPS points. No map is loaded,
-      and coordinates are not turned into street addresses, so no location is
-      sent to a map or address service.</li>
+  <li>The GPS points of your trips are stored on your phone. We never receive
+      them, and we never sell or share your location.</li>
   <li>You can turn automatic tracking off at any time in the app's Settings,
       or remove the location permission in Android Settings.</li>
 </ul>
 
-<h2>What stays on your phone</h2>
+<h2>When the app goes online</h2>
+<ul>
+  <li><strong>Street names.</strong> When a trip ends, the app sends the
+      exact spots where it started and stopped (their coordinates) to your
+      phone's built-in address service (Android's Geocoder, provided by
+      Google Play services on most Android phones) to get the street and
+      town, such as "Main Street, Springfield". This happens automatically,
+      also when the app is closed, and for older stops the app hasn't looked
+      up yet while the app is open. Only the coordinates are sent: no trip,
+      name, account or ID. Google handles these requests under the
+      <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
+      You can turn this off in <strong>Settings &rarr; Show street
+      names</strong>; streets already looked up stay on your phone.</li>
+  <li><strong>Maps.</strong> The app shows maps of your trips and places: on a
+      trip, on the Places screen, in small map pictures next to each trip and
+      place in your lists, and when you pick a spot on the map. It loads the
+      map images for those areas from
+      <a href="https://openfreemap.org/">OpenFreeMap</a>, a free map service.
+      Like any website, OpenFreeMap receives your phone's IP address and which
+      map areas are being shown, which can reveal the approximate area of your
+      trips and places. Your trips themselves are not sent. If you're offline,
+      the app draws the route from your phone's GPS points instead. When you
+      move the pin on a map, the street under the pin is looked up with your
+      phone's address service, as for street names.</li>
+  <li><strong>Place and address search.</strong> When you type a place or
+      address in a search box (for example "Costco"), the app sends the text
+      you typed and your approximate location (your last known position,
+      rounded to about 1 km) to two services, so it can show results near you:
+      <a href="https://photon.komoot.io/">Photon</a>, a place search built on
+      OpenStreetMap data and run by Komoot, and your phone's built-in address
+      service (Android's Geocoder, provided by Google Play services on most
+      Android phones), which receives a rough area around that position. Like
+      any website, Photon also receives your phone's IP address. No account,
+      name or ID is sent. Komoot handles these requests under the
+      <a href="https://www.komoot.com/privacy">Komoot Privacy Policy</a>, and
+      Google under the
+      <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
+      Search results are © OpenStreetMap contributors.</li>
+  <li><strong>"Name where I am now", "Use the street name" and "Find its
+      address".</strong> When you ask the app to name a spot or find its
+      address, that spot's coordinates are looked up by your phone's address
+      service (Google, as above). The search also looks up the name of your town this way, to
+      find businesses near you.</li>
+  <li><strong>Email to your accountant.</strong> If you use "Email to my
+      accountant", the app hands the log files and the address you typed to
+      your own email app, and your email app sends them. The app itself sends
+      nothing, and we don't see the email.</li>
+  <li><strong>Pro purchase.</strong> Handled by Google Play (see
+      Purchases).</li>
+</ul>
+<p>
+  These requests are sent over encrypted connections (HTTPS). We don't
+  operate these services and receive nothing from them.
+</p>
+
+<h2>What is stored on your phone</h2>
 <ul>
   <li>Your trips: times, distances, the GPS points of each route, start and
-      end places, business or personal, purposes and vehicle.</li>
-  <li>Places you name, and any "always business" rules you set.</li>
-  <li>Your vehicles and odometer readings, your country and tax-rate
-      settings, and the optional name you put on reports.</li>
+      end places, business or personal, purposes, parking and tolls, and
+      vehicle.</li>
+  <li>Places you name or add, their street names and addresses, and any
+      "always business", route or working-hours rules you set.</li>
+  <li>Your vehicles, licence plates and odometer readings, your country and
+      tax-rate settings, the optional report details you put on your log
+      (your name, business or employer, employee ID) and your accountant's
+      email address if you add it.</li>
+  <li>Small map pictures of your trips and places, kept so lists load
+      quickly.</li>
   <li>Whether you've bought Pro, as reported by Google Play.</li>
 </ul>
 <p>
-  None of this is sent to us or any third party. Uninstalling the app deletes
-  it, and <strong>Settings → Delete all data</strong> deletes it at any time.
+  We have no copy of any of this. Uninstalling the app deletes it, and
+  <strong>Settings &rarr; Delete all data</strong> deletes it at any time.
 </p>
 
 <h2>Spoken purposes</h2>
 <p>
   When you hold the microphone button, Android's on-device speech recognizer
   turns what you say into text on your phone. Only the text is saved, as the
-  trip's purpose. The audio is not stored and is not sent to us. The
-  microphone is never used in the background.
+  trip's purpose. The audio is not kept and is not sent to us. The microphone
+  is never used in the background.
 </p>
 
 <h2>Physical activity</h2>
 <p>
   The app uses Android's activity recognition (provided by Google Play
   services on your phone) to notice when you start and stop driving, so it
-  can begin and end a trip. The result is used only to start and stop trip
-  recording.
+  can begin and end a trip. The signal is read on your phone and is used only
+  to start and stop trip recording.
+</p>
+
+<h2>Notifications</h2>
+<p>
+  When a trip ends, the app can show a "Trip logged" notification so you can
+  mark it business or personal without opening the app. It is created on
+  your phone and can be turned off in Settings &rarr; Ask after each trip.
 </p>
 
 <h2>Reports and backups</h2>
@@ -152,15 +226,18 @@
 
 <h2>Purchases</h2>
 <p>
-  The Pro unlock is a one-time purchase handled entirely by Google Play. We
-  never see your payment details; Google Play only tells the app whether you
-  own Pro.
+  The Pro unlock is a one-time purchase handled entirely by Google Play,
+  using Google's Play Billing library. We never see your payment details;
+  Google Play tells the app whether you own Pro and when it was bought.
+  Google handles purchase information under the
+  <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
 </p>
 
 <h2>No analytics, no ads, no selling</h2>
 <p>
-  The app has no analytics or advertising SDK and shows no ads. We don't sell
-  or share personal information, and we don't receive any data from the app.
+  The app has no analytics or advertising SDK, no advertising ID, and shows
+  no ads. We don't sell or share personal information, and we don't receive
+  any data from the app.
 </p>
 
 <h2>Permissions</h2>
@@ -171,16 +248,17 @@
       including when the app is closed.</li>
   <li><strong>Foreground service (location)</strong>: to keep recording a
       drive, with a visible notification, until it ends.</li>
-  <li><strong>Notifications</strong>: the "Recording a trip" notification,
-      the evening "trips to sort" reminder and the monthly "your log is ready"
-      reminder.</li>
+  <li><strong>Notifications</strong>: the "Recording a trip" and "Trip
+      logged" notifications, the evening "trips to sort" reminder and the
+      monthly "your log is ready" reminder.</li>
   <li><strong>Run at startup</strong>: to restart drive detection after your
       phone restarts.</li>
   <li><strong>Microphone</strong>: only while you hold the button to speak a
       trip's purpose.</li>
+  <li><strong>Internet and network state</strong>: to look up street names
+      and addresses, load map images, and tell you when you're offline.</li>
   <li><strong>Billing</strong>: lets Google Play handle the Pro purchase.</li>
 </ul>
-<p>The app does not request internet access.</p>
 
 <h2>Children</h2>
 <p>
@@ -191,15 +269,20 @@
 <h2>Changes</h2>
 <p>
   If this policy changes, the updated version will be posted at this address
-  with a new "Last updated" date.
+  with a new "Last updated" date. Version 1.0 of this policy covered app
+  version 1.0.0, which had no map or address features. Version 1.1 covered
+  app version 1.1.0, which looked up places and addresses only when you
+  searched or asked.
 </p>
 
 <h2>Your rights</h2>
 <p>
   Under PIPEDA (Canada), US state privacy laws, GDPR (EU/EEA) and similar
   laws, you have the right to access, correct or delete personal data we
-  hold about you. We don't hold any personal data about you: everything the
-  app records stays on your phone, under your control. Questions:
+  hold about you. We don't hold any personal data about you: your trips stay
+  on your phone, under your control. For street names, map and address
+  lookups, the providers named above handle requests under their own
+  policies. Questions:
   <a href="mailto:asoni@kancanada.com">asoni@kancanada.com</a>.
 </p>
 
